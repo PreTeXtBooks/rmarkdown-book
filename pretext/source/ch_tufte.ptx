@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-tufte" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Tufte Handouts</title>
+
+  <p>
+    This chapter covers Tufte-style handouts and documents using the tufte package.
+    Content to be filled in from the original RMD book (Chapter 6).
+  </p>
+
+</chapter>

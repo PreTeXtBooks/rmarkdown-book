@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-community" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Community Formats</title>
+
+  <p>
+    This chapter covers R Markdown output formats created and maintained by
+    the broader R community.
+    Content to be filled in from the original RMD book (Chapter 9).
+  </p>
+
+</chapter>

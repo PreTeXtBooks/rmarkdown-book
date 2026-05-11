@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-templates" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Document Templates</title>
+
+  <p>
+    This chapter covers creating custom document templates for R Markdown.
+    Content to be filled in from the original RMD book (Chapter 17).
+  </p>
+
+</chapter>

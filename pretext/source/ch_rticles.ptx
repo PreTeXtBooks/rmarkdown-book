@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-rticles" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Journals</title>
+
+  <p>
+    This chapter covers creating journal articles with the rticles package,
+    which provides templates for many academic journals.
+    Content to be filled in from the original RMD book (Chapter 13).
+  </p>
+
+</chapter>

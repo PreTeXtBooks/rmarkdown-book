@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-installation" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Installation</title>
+
+  <p>
+    This chapter covers installation of R Markdown and its dependencies.
+    Content to be filled in from the original RMD book (Chapter 1).
+  </p>
+
+</chapter>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-revealjs" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>reveal.js Presentations</title>
+
+  <p>
+    This chapter covers HTML5 presentations using the revealjs package based on reveal.js.
+    Content to be filled in from the original RMD book (Chapter 8).
+  </p>
+
+</chapter>

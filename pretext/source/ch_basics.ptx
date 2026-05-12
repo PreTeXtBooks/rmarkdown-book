@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-basics" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Basics</title>
+
+  <p>
+    This chapter introduces the basics of R Markdown.
+    Content to be filled in from the original RMD book (Chapter 2).
+  </p>
+
+</chapter>

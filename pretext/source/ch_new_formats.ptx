@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-new-formats" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Creating New Formats</title>
+
+  <p>
+    This chapter covers creating entirely new output formats for R Markdown.
+    Content to be filled in from the original RMD book (Chapter 18).
+  </p>
+
+</chapter>

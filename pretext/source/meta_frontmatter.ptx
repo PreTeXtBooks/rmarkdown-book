@@ -2,14 +2,16 @@
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-front">
   <bibinfo>
     <author>
-      <personname>NAME</personname>
-      <website>
-      </website>
+      <personname>Yihui Xie</personname>
+      <institution>RStudio</institution>
     </author>
     <author>
-      <personname>NAME</personname>
-      <website>
-      </website>
+      <personname>J. J. Allaire</personname>
+      <institution>RStudio</institution>
+    </author>
+    <author>
+      <personname>Garrett Grolemund</personname>
+      <institution>RStudio</institution>
     </author>
     <date>
       <today/>
@@ -22,7 +24,68 @@
 
   <abstract>
     <p>
-      ABSTRACT
+      The first official book authored by the core R Markdown developers that provides
+      a comprehensive and accurate reference to the R Markdown ecosystem. With R Markdown,
+      you can easily create reproducible data analysis reports, presentations, dashboards,
+      interactive applications, books, dissertations, websites, and journal articles,
+      while enjoying the simplicity of Markdown and the great power of R and other languages.
     </p>
   </abstract>
+
+  <preface xml:id="preface">
+    <title>Preface</title>
+    <p>
+      The document format <q>R Markdown</q> was first introduced in the <em>knitr</em> package
+      in early 2012. The idea was to embed code chunks (of R or other languages) in Markdown
+      documents. Looking back over the years, it seems fair to say that Markdown has become
+      the most popular document format, which is what we expected. The simplicity of Markdown
+      clearly stands out among these document formats.
+    </p>
+    <p>
+      In a nutshell, R Markdown stands on the shoulders of <em>knitr</em> and Pandoc. The former
+      executes the computer code embedded in Markdown, and converts R Markdown to Markdown. The
+      latter renders Markdown to the output format you want (such as PDF, HTML, Word, and so on).
+    </p>
+    <p>
+      The <em>rmarkdown</em> package was first created in early 2014. During the past years, it
+      has steadily evolved into a relatively complete ecosystem for authoring documents. At this
+      point, there are a large number of tasks that you could do with R Markdown:
+    </p>
+    <ul>
+      <li><p>Compile a single R Markdown document to a report in different formats, such as PDF, HTML, or Word.</p></li>
+      <li><p>Create notebooks in which you can directly run code chunks interactively.</p></li>
+      <li><p>Make slides for presentations (HTML5, LaTeX Beamer, or PowerPoint).</p></li>
+      <li><p>Produce dashboards with flexible, interactive, and attractive layouts.</p></li>
+      <li><p>Build interactive applications based on Shiny.</p></li>
+      <li><p>Write journal articles.</p></li>
+      <li><p>Author books of multiple chapters.</p></li>
+      <li><p>Generate websites and blogs.</p></li>
+    </ul>
+  </preface>
+
+  <preface xml:id="about-authors">
+    <title>About the Authors</title>
+    <p>
+      This book is primarily put together by Yihui Xie, making use of the existing R documentation
+      of the <em>rmarkdown</em> package and the <em>rmarkdown</em> website, which were mainly
+      contributed by J.J. Allaire and Garrett Grolemund.
+    </p>
+    <p>
+      <em>Yihui Xie</em> (<url href="https://yihui.name"/>) is a software engineer at RStudio.
+      He earned his PhD from the Department of Statistics, Iowa State University. He is interested
+      in interactive statistical graphics and statistical computing. As an active R user, he has
+      authored several R packages, such as <em>knitr</em>, <em>bookdown</em>, <em>blogdown</em>,
+      <em>xaringan</em>, and <em>tinytex</em>, among others.
+    </p>
+    <p>
+      <em>J.J. Allaire</em> is the founder of RStudio and the creator of the RStudio IDE. J.J. is
+      an author of several packages in the R Markdown ecosystem including <em>rmarkdown</em>,
+      <em>flexdashboard</em>, <em>learnr</em>, and <em>radix</em>.
+    </p>
+    <p>
+      <em>Garrett Grolemund</em> is the co-author of <em>R for Data Science</em> and author of
+      <em>Hands-On Programming with R</em>. He wrote the <em>lubridate</em> R package and works
+      for RStudio as an advocate who trains engineers to do data science with R and the Tidyverse.
+    </p>
+  </preface>
 </frontmatter>

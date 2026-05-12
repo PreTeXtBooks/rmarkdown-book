@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-dashboards" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Dashboards</title>
+
+  <p>
+    This chapter covers dashboards based on the flexdashboard package.
+    Content to be filled in from the original RMD book (Chapter 5).
+  </p>
+
+</chapter>

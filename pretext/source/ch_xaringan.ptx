@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-xaringan" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>xaringan Presentations</title>
+
+  <p>
+    This chapter covers HTML5 presentations using the xaringan package based on remark.js.
+    Content to be filled in from the original RMD book (Chapter 7).
+  </p>
+
+</chapter>

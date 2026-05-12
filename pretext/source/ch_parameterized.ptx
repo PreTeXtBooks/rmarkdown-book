@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-parameterized" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Parameterized Reports</title>
+
+  <p>
+    This chapter covers parameterized reports, which allow users to specify parameters
+    to customize the analysis in an R Markdown document.
+    Content to be filled in from the original RMD book (Chapter 15).
+  </p>
+
+</chapter>

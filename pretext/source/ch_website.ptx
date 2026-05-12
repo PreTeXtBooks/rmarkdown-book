@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-website" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Websites</title>
+
+  <p>
+    This chapter covers building websites with R Markdown, including the blogdown package
+    and the built-in R Markdown site generator.
+    Content to be filled in from the original RMD book (Chapter 10).
+  </p>
+
+</chapter>

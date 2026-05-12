@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch-widgets" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>HTML Widgets</title>
+
+  <p>
+    This chapter covers HTML widgets, which provide a framework for creating
+    R bindings to JavaScript libraries using the htmlwidgets package.
+    Content to be filled in from the original RMD book (Chapter 16).
+  </p>
+
+</chapter>

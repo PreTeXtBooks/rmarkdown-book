@@ -2,9 +2,513 @@
 <chapter xml:id="ch-xaringan" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>xaringan Presentations</title>
 
-  <p>
-    This chapter covers HTML5 presentations using the xaringan package based on remark.js.
-    Content to be filled in from the original RMD book (Chapter 7).
-  </p>
+  <p>We have introduced a few HTML5 presentation formats in Chapter <xref ref="ch-presentations"/>. The **xaringan** package (R-xaringan)\index{xaringan} is an R Markdown extension based on the JavaScript library remark.js (<url href="https://remarkjs.com"/>) to generate HTML5 presentations\index{HTML5 slides} of a different style. See <xref ref="fig-xaringan-sample"/> for two sample slides.</p>
 
+  <program language="r">
+    <input>```{r xaringan-sample, echo=FALSE, fig.cap='Two sample slides created from the xaringan package.', out.width='49%', fig.show='hold'}
+knitr::include_graphics(c('images/xaringan-1.png', 'images/xaringan-2.png'), dpi = NA)
+```</input>
+  </program>
+
+  <figure xml:id="fig-xaringan-sample">
+    <image source="images/xaringan-1.png"/>
+    <image source="images/xaringan-2.png"/>
+    <caption><p>Two sample slides created from the xaringan package.</p></caption>
+  </figure>
+
+  <p>The name "xaringan" came from Sharingan (<url href="http://naruto.wikia.com/wiki/Sharingan"/>) in the Japanese manga and anime "Naruto". The word was deliberately chosen to be difficult to pronounce for most people (unless you have watched the anime), because its author (me) loved the style very much, and was concerned that it would become too popular.<fn>The main reason I stopped using LaTeX Beamer slides was because of its popularity: when you attend academic conferences, you see Beamer slides everywhere.</fn> The concern was somewhat naive, because the style is actually very customizable, and users started to contribute more themes to the package later.</p>
+
+  <p>The **xaringan** package is based on the JavaScript library remark.js (<url href="https://remarkjs.com"/>); remark.js only supports Markdown, and **xaringan** added the support for R Markdown as well as other utilities to make it easier to build and preview slides.</p>
+
+  <p>You can learn more about the background stories and the usage of the **xaringan** package from the documentation at <url href="http://slides.yihui.name/xaringan/"/>, which is actually a set of slides generated from **xaringan**. You may also read a potentially biased blog post of mine to know why I preferred **xaringan** / remark.js for HTML5 presentations: <url href="https://yihui.name/en/2017/08/why-xaringan-remark-js/"/>.</p>
+
+  <section xml:id="xaringan-start">
+    <title>Get started</title>
+
+    <p>You can install either the CRAN version or the development version on GitHub (<url href="https://github.com/yihui/xaringan"/>):</p>
+
+    <program language="r">
+      <input># install from CRAN
+install.packages('xaringan')
+
+# or GitHub
+devtools::install_github('yihui/xaringan')</input>
+    </program>
+
+    <p>If you use RStudio, it is easy to get started from the menu <c>File -&gt; New File -&gt; R Markdown -&gt; From Template -&gt; Ninja Presentation</c>, and you will see an R Markdown example in the editor. Press the <c>Knit</c> button to compile it, or use the RStudio addin <c>Infinite Moon Reader</c> to live preview the slides: every time you update and save the Rmd document, the slides will be automatically reloaded.</p>
+
+    <p>The main R Markdown output format in this package is <c>moon_reader()</c>. See the R help page <c>?xaringan::moon_reader</c> for all possible configurations. Below is a quick example:</p>
+
+    <program language="yaml">
+      <input>---
+title: "Presentation Ninja"
+subtitle: "with xaringan"
+author: "Yihui Xie"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+One slide.
+
+---
+
+Another slide.</input>
+    </program>
+  </section>
+
+  <section xml:id="xaringan-key">
+    <title>Keyboard shortcuts</title>
+
+    <p>After opening slides generated from **xaringan** or remark.js, you may press the key <c>h</c> (Help) or <c>?</c> on your keyboard to learn all possible keyboard shortcuts, which may help you better present your slides.</p>
+
+    <ul>
+      <li><p>To go the previous slide, you may press <c>Up</c>/<c>Left</c> arrows, <c>PageUp</c>, or <c>k</c>.</p></li>
+      <li><p>To go the next slide, you may press <c>Right</c>/<c>Down</c> arrows, <c>PageDown</c>, <c>Space</c>, or <c>j</c>.</p></li>
+      <li><p>You may press <c>Home</c> to go to the first slide, or <c>End</c> to go to the last slide, if you have these keys.</p></li>
+      <li><p>Typing a number and pressing <c>Return</c> (or <c>Enter</c>), you can jump to a specific slide with that page number.</p></li>
+      <li><p>Press <c>b</c> to black out a slide, and <c>m</c> to "mirror" a slide (reverse everything on the slide). These techniques can be useful when you do not want the audience to read the slide, e.g., when you have solutions on a slide but do not want to show them to your students immediately. I encourage you to try <c>m</c>; it can be a lot of fun. You can press these keys again to resume the normal slide.</p></li>
+      <li><p>Press <c>f</c> to toggle the fullscreen mode.</p></li>
+      <li><p>Press <c>c</c> to clone the slides to a new browser window; slides in the two windows will be in sync as you navigate through them. Press <c>p</c> to toggle the presenter mode. The presenter mode shows thumbnails of the current slide and the next slide on the left, presenter notes on the right (see Section <xref ref="xaringan-notes"/>), and also a timer on the top right. The keys <c>c</c> and <c>p</c> can be very useful when you present with your own computer connected to a second screen (such as a projector). On the second screen, you can show the normal slides, while cloning the slides to your own computer screen and using the presenter mode. Only you can see the presenter mode, which means only you can see presenter notes and the time, and preview the next slide. You may press <c>t</c> to restart the timer at any time.</p></li>
+      <li><p>Press <c>h</c> or <c>?</c> again to exit the help page.</p></li>
+    </ul>
+  </section>
+
+  <section xml:id="xaringan-format">
+    <title>Slide formatting</title>
+
+    <p>The <url href="https://github.com/gnab/remark/wiki">remark.js Wiki</url> contains detailed documentation about how to format slides and use the presentation (keyboard shortcuts). The **xaringan** package has simplified several things compared to the official remark.js guide, e.g., you do not need a boilerplate HTML file, you can set the autoplay mode via an option of <c>moon_reader()</c>, and LaTeX math basically just works.</p>
+
+    <p>Please note that remark.js has its own Markdown interpreter that is <em>not compatible</em> with Pandoc's Markdown converter, so you will not be able to use any advanced Pandoc Markdown features (e.g., the citation syntax <c>[@key]</c>). You may use raw HTML when there is something you desire that is not supported by remark.js. For example, you can generate an HTML table via <c>knitr::kable(head(iris), 'html')</c>.</p>
+
+    <subsection>
+      <title>Slides and properties</title>
+
+      <p>Every new slide is created under three dashes (<c>---</c>). The dashes must be directly followed by a line break, and there must not be any other characters after the dashes (not even white spaces). When you see that you new slide appear on the previous slide after a horizontal rule, <url href="https://yihui.org/en/2018/07/yue-jiang/">you might have white spaces after the three dashes</url> (if so, you have to delete them).</p>
+
+      <p>The content of the slide can be arbitrary, e.g., it does not have to have a slide title, and if it does, the title can be of any level you prefer (<c>#</c>, <c>##</c>, or <c>###</c>).</p>
+
+      <p>A slide can have a few properties, including <c>class</c> and <c>background-image</c>, etc. Properties are written in the beginning of a slide, e.g.,</p>
+
+      <program language="markdown">
+        <input>---
+
+class: center, inverse
+background-image: url("images/cool.png")
+
+# A new slide
+
+Content.</input>
+      </program>
+
+      <p>The <c>class</c> property assigns class names to the HTML tag of the slide, so that you can use CSS to style specific slides. For example, for a slide with the <c>inverse</c> class, you may define the CSS rules (to render text in white on a dark background):</p>
+
+      <program language="css">
+        <input>.inverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}</input>
+      </program>
+
+      <p>Then include the CSS file (say, <c>my-style.css</c>) via the <c>css</c> option of <c>xaringan::moon_reader</c>:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    css: "my-style.css"
+---</input>
+      </program>
+
+      <p>Actually the style for the <c>inverse</c> class has been defined in the default theme of **xaringan**, so you do not really need to define it again unless you want to override it.</p>
+
+      <p>Other available class names are <c>left</c>, <c>center</c>, and <c>right</c> for the horizontal alignment of all elements on a slide, and <c>top</c>, <c>middle</c>, and <c>bottom</c> for the vertical alignment.</p>
+
+      <p>Background images can be set via the <c>background-image</c> property. The image can be either a local file or an online image. The path should be put inside <c>url()</c>, which is the CSS syntax. You can also set the background image size and position, e.g.,</p>
+
+      <program language="yaml">
+        <input>background-image: url("`r '\x60r xaringan:::karl\x60'`")
+background-position: center
+background-size: contain</input>
+      </program>
+
+      <p>All these properties require you to understand CSS.<fn>There are many tutorials online if you search for "CSS background", e.g., <url href="https://www.w3schools.com/cssref/css3_pr_background.asp"/>.</fn> In the above example, we actually used an inline expression <c>xaringan::karl</c> to return a URL of an image of Karl Broman (<url href="http://kbroman.org"/>), which is one of the highlights of the **xaringan** package.</p>
+    </subsection>
+
+    <subsection>
+      <title>The title slide</title>
+
+      <p>There is a special slide, the title slide, that is automatically generated from the YAML metadata of your Rmd document. It contains the title, subtitle, author, and date (all are optional). This slide has the classes <c>inverse</c>, <c>center</c>, <c>middle</c>, and <c>title-slide</c> by default, which looks like the left image in <xref ref="fig-xaringan-sample"/>. If you do not like the default style, you may either customize the <c>.title-slide</c> class, or provide a custom vector of classes via the <c>titleSlideClass</c> option under the <c>nature</c> option, e.g.,</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    nature:
+      titleSlideClass: ["right", "top", "my-title"]
+---</input>
+      </program>
+
+      <p>You can also disable the automatic title slide via the <c>seal</c> option and create one manually by yourself:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    seal: false
+---
+
+# My Own Title
+
+### Author
+
+Whatever you want to put on the title slide.</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Content classes</title>
+
+      <p>You can assign classes to any elements on a slide, too. The syntax is <c>.className[content]</c>. This is a very powerful feature of remark.js, and one of very few features not available in Pandoc. Basically it makes it possible to style any elements on a slide via CSS. There are a few built-in content classes, <c>.left[ ]</c>, <c>.center[ ]</c>, and <c>.right[ ]</c>, to align elements horizontally on a slide, e.g., you may center an image:</p>
+
+      <program language="markdown">
+        <input>.center[![description of the image](images/foo.png)]</input>
+      </program>
+
+      <p>The content inside <c>[ ]</c> can be anything, such as several paragraphs, or lists. The default theme of **xaringan** has provided four more content classes:</p>
+
+      <ul>
+        <li><p><c>.left-column[ ]</c> and <c>.right-column[ ]</c> provide a sidebar layout. The left sidebar is narrow (20% of the slide width), and the right column is the main column (75% of the slide width). If you have multiple level-2 (<c>##</c>) or level-3 (<c>###</c>) headings in the left column, the last heading will be highlighted, with previous headings being grayed out.</p></li>
+        <li><p><c>.pull-left[ ]</c> and <c>.pull-right[ ]</c> provide a two-column layout, and the two columns are of the same width. Below is an example:</p>
+          <program language="markdown">
+            <input>.pull-left[
+- One bullet.
+
+- Another bullet.
+]
+
+.pull-right[
+![an image](foo.png)
+]</input>
+          </program>
+        </li>
+      </ul>
+
+      <p>You can design your own content classes if you know CSS, e.g., if you want to make text red via <c>.red[ ]</c>, you may define this in CSS:</p>
+
+      <program language="css">
+        <input>.red { color: red; }</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Incremental slides</title>
+
+      <p>When you want to show content incrementally on a slide (e.g., holding a funny picture until the last moment), you can use two dashes to separate the content. The two dashes can appear anywhere except inside content classes, so you can basically split your content in any way you like, e.g.,</p>
+
+      <program language="markdown">
+        <input>---
+
+# Two dashes
+
+The easiest way to build incremental slides is...
+--
+ to use two dashes `--` to separate content on a slide.
+
+--
+
+You can divide a slide in _any way you want_.
+
+--
+
+- One bullet
+
+- Another bullet
+
+--
+
+- And one more
+
+--
+
+.center[
+![Saw](https://slides.yihui.name/gif/saw-branch.gif)
+
+Don't saw your slides too hard.
+]</input>
+      </program>
+
+      <p>There are a few other advanced ways to build incremental slides documented in the presentation at <url href="https://slides.yihui.name/xaringan/incremental.html"/>.</p>
+    </subsection>
+
+    <subsection xml:id="xaringan-notes">
+      <title>Presenter notes</title>
+
+      <p>You can write notes for yourself to read in the presenter mode (press the keyboard shortcut <c>p</c>). These notes are written under three question marks <c>???</c> after a slide, and the syntax is also Markdown, which means you can write any elements supported by Markdown, such as paragraphs, lists, images, and so on. For example:</p>
+
+      <program language="markdown">
+        <input>---
+
+The holy passion of Friendship is of so sweet and steady
+and loyal and enduring a nature that it will last through
+a whole lifetime...
+
+???
+
+_if not asked to lend money_.
+
+--- Mark Twain</input>
+      </program>
+
+      <p>A common mistake in presentations, especially for presenters without much experience, is to stuff a slide with too much content. The consequence is either a speaker, out of breath, reading the so many words out loud, or the audience starting to read the slides quietly by themselves without listening. Slides are not papers or books, so you should try to be brief in the visual content of slides but verbose in verbal narratives. If you have a lot to say about a slide, but cannot remember everything, you may consider using presenter notes.</p>
+
+      <p>I want to mention a technical note about the presenter mode: when connecting to a projector, you should make sure not to mirror the two screens. Instead, separate the two displays, so you can drag the window with the normal view of slides to the second screen. <xref ref="fig-mirror-display"/> shows how to do it from the "System Preferences" on macOS (do not check the box "Mirror Displays").</p>
+
+      <program language="r">
+        <input>```{r mirror-display, echo=FALSE, fig.cap='Separate the current display from the external display.', out.width='100%'}
+knitr::include_graphics('images/mirror-display.png', dpi = NA)
+```</input>
+      </program>
+
+      <figure xml:id="fig-mirror-display">
+        <image source="images/mirror-display.png"/>
+        <caption><p>Separate the current display from the external display.</p></caption>
+      </figure>
+    </subsection>
+
+    <subsection>
+      <title>yolo: true</title>
+
+      <p>Inspired by a random feature request from <url href="https://twitter.com/_inundata/status/798970002992873472">a tweet by Karthik Ram</url>, the output format <c>xaringan::moon_reader</c> provided an option named <c>yolo</c> (an acronym of "you only live once"). If you set it to true, a photo of Karl Broman\index{Karl Broman} (with a mustache) will be inserted into a random slide in your presentation.<fn>For the full story behind the mustache, see Karl's post at <url href="http://kbroman.org/blog/2014/08/28/the-mustache-photo/"/>.</fn></p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    yolo: true
+---</input>
+      </program>
+
+      <p>The **xaringan** package is probably best known for this feature. I want to thank Karl for letting me use this photo. It always makes me happy for mysterious reasons.</p>
+
+      <p>A less well-known feature is that you can actually replace Karl's picture with other pictures,<fn>In case you are also interested in Karl's great grandfather's mustache, you can find a picture at <url href="https://twitter.com/kwbroman/status/1199142650185691137"/>.</fn> and/or specify how many times you want a picture to randomly show up in your presentation. For example:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    yolo:
+      img: kangaroo.jpg
+      times: 5
+---</input>
+      </program>
+
+      <p>Developing software is fun, isn't it?</p>
+    </subsection>
+  </section>
+
+  <section xml:id="xaringan-preview">
+    <title>Build and preview slides</title>
+
+    <p>You can knit the source document like other Rmd documents to view the output, but it may be tedious to have to knit it over and over again whenever you make changes. The other way to preview the slides is the RStudio addin "Infinite Moon Reader" or the function <c>xaringan::inf_mr()</c>, as mentioned in Section <xref ref="compile"/>. With this way, you can continuously preview your slides just by saving the source document. The continuous preview is achieved via a local web server launched by the **servr** package (R-servr).</p>
+
+    <p>One distinction of <c>xaringan::moon_reader</c> when compared to other R Markdown output formats is that it does not generate self-contained HTML documents by default (see Section <xref ref="document-dependencies"/>). This means none of the external dependencies such as images or JavaScript libraries will be embedded in the HTML output file by default. You can turn the self-contained mode on via:</p>
+
+    <program language="yaml">
+      <input>output:
+  xaringan::moon_reader:
+    self_contained: true</input>
+    </program>
+
+    <p>Due to technical difficulties (remark.js does not use Pandoc but renders Markdown in real time in the browser), it is challenging to implement the self-contained mode really well. Currently, most JavaScript libraries (including remark.js) and CSS files should be correctly embedded in the self-contained mode. Images in slides should also be embedded. The paths of images in slides are identified from <c>![](PATH)</c> (Markdown syntax), <c>&lt;img src="PATH" /&gt;</c> (HTML syntax), and <c>background-image: url(PATH)</c> (remark.js syntax for background images). Other types of images will not be discovered or embedded.</p>
+
+    <p>If you have to publish the slides to a web server, but **xaringan**'s self-contained mode fails to identify certain resources and embed them, please feel free to file an issue to the GitHub repository at <url href="https://github.com/yihui/xaringan"/>. If you publish slides to GitHub Pages or Netlify, this may not be a problem, because you can commit or upload all resources files generated or required by the slides.</p>
+  </section>
+
+  <section>
+    <title>CSS and themes</title>
+
+    <p>The format <c>xaringan::moon_reader</c> has a <c>css</c> option, to which you can pass a vector of CSS\index{CSS} file paths, e.g.,</p>
+
+    <program language="yaml">
+      <input>---
+output:
+  xaringan::moon_reader:
+    css: ["default", "extra.css"]
+---</input>
+    </program>
+
+    <p>In theory, the file path should contain the extension <c>.css</c>. If a path does not contain a filename extension, it is assumed to be a built-in CSS file in the **xaringan** package. For example, <c>default</c> in the above example means <c>default.css</c> in the package under the path <c>xaringan:::pkg_resource()</c>. To see all built-in CSS files, call <c>xaringan:::list_css()</c> in R.</p>
+
+    <p>When you only want to override a few CSS rules in the default theme, you do not have to copy the whole file <c>default.css</c>; instead, create a new (and hopefully smaller) CSS file that only provides new CSS rules.</p>
+
+    <p>Users have contributed a few themes to **xaringan**. For example, you can use the <c>metropolis</c> theme (<url href="https://github.com/pat-s/xaringan-metropolis"/>):</p>
+
+    <program language="yaml">
+      <input>---
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+---</input>
+    </program>
+
+    <p>To see all possible themes:</p>
+
+    <program language="r">
+      <input>names(xaringan:::list_css())</input>
+    </program>
+
+    <p>If you also want to contribute themes, please read the guide at <url href="https://yihui.name/en/2017/10/xaringan-themes"/>.</p>
+  </section>
+
+  <section>
+    <title>Some tips</title>
+
+    <p>Lastly, we present a few tips that may help you make better presentations.</p>
+
+    <subsection>
+      <title>Autoplay slides</title>
+
+      <p>Slides can be automatically played if you set the <c>autoplay</c> option under <c>nature</c> (in milliseconds). For example, the next slide can be displayed automatically every 30 seconds in a lightning talk:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    nature:
+      autoplay: 30000
+---</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Countdown timer</title>
+
+      <p>A countdown timer can be added to every page of the slides using the <c>countdown</c> option under <c>nature</c>. For example, if you want to spend one minute on every page when you give the talk, you can set:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    nature:
+      countdown: 60000
+---</input>
+      </program>
+
+      <p>Then you will see a timer counting down from <c>01:00</c>, to <c>00:59</c>, <c>00:58</c>, ... When the time is out, the timer will continue but the time turns red.</p>
+    </subsection>
+
+    <subsection>
+      <title>Highlight code lines</title>
+
+      <p>The option <c>highlightLines: true</c> of <c>nature</c> will highlight code lines that start with <c>*</c>, or are wrapped in <c>{{ }}</c>, or have trailing comments <c>#&lt;&lt;</c>:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  xaringan::moon_reader:
+    nature:
+      highlightLines: true
+---</input>
+      </program>
+
+      <p>Below are a few examples:</p>
+
+      <program language="markdown">
+        <input>```r
+if (TRUE) {
+* message("Very important!")
+}
+```
+
+`r ''````{r tidy=FALSE}
+if (TRUE) {
+{{ message("Very important!") }}
+}
+```
+
+`r ''````{r tidy=FALSE}
+library(ggplot2)
+ggplot(mtcars) +
+  aes(mpg, disp) +
+  geom_point() +   #&lt;&lt;
+  geom_smooth()    #&lt;&lt;
+```
+````</input>
+      </program>
+
+      <p>Note that the first way does not give you valid R code in the source document, but the latter two ways provide syntactically valid R code, and in the output slides, you will not see the tokens <c>{{ }}</c> or <c>#&lt;&lt;</c>. The lines will be highlighted with a yellow background by default.</p>
+    </subsection>
+
+    <subsection>
+      <title>Working offline</title>
+
+      <p>To make slides work offline, you need to download a copy of remark.js in advance, because **xaringan** uses the online version by default. You can use <c>xaringan::summon_remark()</c> to download the latest or a specified version of remark.js. By default, it is downloaded to <c>libs/remark-latest.min.js</c>.</p>
+
+      <p>Then change the <c>chakra</c> option in the YAML metadata to point to this file, e.g.,</p>
+
+      <program language="yaml">
+        <input>output:
+  xaringan::moon_reader:
+    chakra: libs/remark-latest.min.js</input>
+      </program>
+
+      <p>Making the slides work offline can be tricky, since you may have other dependencies. The remark.js dependency is easy to deal with because it is a single JavaScript file; other dependencies such as MathJax can be extremely tricky. If you used Google web fonts in slides (the default theme uses <em>Yanone Kaffeesatz</em>, <em>Droid Serif</em>, and <em>Source Code Pro</em>), they will not work offline unless you download or install them locally. The Heroku app <url href="https://google-webfonts-helper.herokuapp.com/fonts">google-webfonts-helper</url> can help you download fonts and generate the necessary CSS.</p>
+    </subsection>
+
+    <subsection>
+      <title>Macros</title>
+
+      <p>The Markdown syntax of remark.js can be amazingly extensible, because it allows users to define custom macros (JavaScript functions) that can be applied to Markdown text using the syntax <c>![:macroName arg1, arg2, ...]</c> or <c>![:macroName arg1, arg2](this)</c>. For example, you can define a macro named <c>scale</c> to set the width of an image:</p>
+
+      <program language="js">
+        <input>remark.macros.scale = function(w) {
+  var url = this;
+  return '&lt;img src="' + url + '" style="width: ' + w + '" /&gt;';
+};</input>
+      </program>
+
+      <p>Then the Markdown text</p>
+
+      <program language="markdown">
+        <input>![:scale 50%](image.jpg)</input>
+      </program>
+
+      <p>will be translated to:</p>
+
+      <program language="html">
+        <input>&lt;img src="image.jpg" style="width: 50%" /&gt;</input>
+      </program>
+
+      <p>Now you should see that you can use cleaner pseudo-Markdown syntax to generate HTML.</p>
+
+      <p>To insert macros in **xaringan** slides, you can save your macros in a file (e.g., <c>macros.js</c>), and use the option <c>beforeInit</c> under the option <c>nature</c>, e.g.,</p>
+
+      <program language="yaml">
+        <input>output:
+  xaringan::moon_reader:
+    nature:
+      beforeInit: "macros.js"</input>
+      </program>
+
+      <p>The <c>beforeInit</c> option can be used to insert arbitrary JavaScript code before remark.js initializes the slides. Inserting macros is just one of its possible applications. For example, when you embed tweets from Twitter in slides, usually you need to load <c>https://platform.twitter.com/widgets.js</c>, which can be loaded via the <c>beforeInit</c> option.</p>
+    </subsection>
+
+    <subsection>
+      <title>Disadvantages</title>
+
+      <p>The **xaringan** package was originally designed for "ninja", meaning that if you know CSS, you will be able to freely customize the style, otherwise you can only accept the default themes. Playing with CSS can be fun and rewarding, but it can also easily waste your time. Your aesthetic standards and taste may change from time to time, and you could end up tweaking the styles all the time.</p>
+
+      <p>The HTML output file generated from **xaringan** is not self-contained by default, as we mentioned in Section <xref ref="xaringan-preview"/>. The self-contained mode of **xaringan** may not work perfectly.</p>
+
+      <p>HTML widgets may not work well in **xaringan**. This might be improved in the future, but it is a little tricky technically.</p>
+
+      <p>When printing the slides to PDF from Google Chrome (see Section <xref ref="printing-and-pdf-output"/>), I recommend that you open the slides and go through all pages at least once, to make sure all content has been rendered in the browser. Without navigating through all slides manually once, some content may not be printed correctly (such as MathJax expressions and HTML widgets).</p>
+    </subsection>
+  </section>
 </chapter>

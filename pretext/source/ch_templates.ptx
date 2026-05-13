@@ -2,9 +2,103 @@
 <chapter xml:id="ch-templates" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Document Templates</title>
 
-  <p>
-    This chapter covers creating custom document templates for R Markdown.
-    Content to be filled in from the original RMD book (Chapter 17).
-  </p>
+  <p>When you create a new R Markdown document in RStudio, a default example document is inserted. You can create custom document templates to speed up repeated reporting workflows and standardize output.</p>
+
+  <p>Examples include company-branded templates, customized default YAML fields, and additional metadata fields (for example, a department on the title page).</p>
+
+  <section xml:id="template-structure">
+    <title>Template structure</title>
+
+    <p>R Markdown templates live inside an R package under <c>inst/rmarkdown/templates</c>. A minimal template directory such as <c>inst/rmarkdown/templates/my_template</c> should contain:</p>
+
+    <program language="text">
+      <input>template.yaml
+skeleton/skeleton.Rmd</input>
+    </program>
+
+    <p>The <c>template.yaml</c> file controls how the template appears in RStudio and must include <c>name</c> and <c>description</c> fields:</p>
+
+    <program language="yaml">
+      <input>name: My Template
+description: This is my template</input>
+    </program>
+
+    <p>The <c>skeleton.Rmd</c> file is the starter document opened when the template is selected, and can include preferred YAML defaults and section structure.</p>
+
+    <program language="yaml">
+      <input>---
+title: "Untitled"
+author: "Your Name"
+output:
+  bookdown::html_document2:
+    toc: true
+    fig_caption: true
+    template: flatly
+---
+
+## Introduction
+
+## Analysis
+
+## Conclusions</input>
+    </program>
+  </section>
+
+  <section xml:id="template-support">
+    <title>Supporting files</title>
+
+    <p>Templates may include supporting assets (images, CSS files, LaTeX style files) in the <c>skeleton</c> directory. These files are copied automatically when a new document is created from the template.</p>
+
+    <program language="text">
+      <input>template.yaml
+skeleton/skeleton.Rmd
+skeleton/logo.png
+skeleton/styles.css</input>
+    </program>
+
+    <p>These assets can be referenced directly in <c>skeleton.Rmd</c>.</p>
+  </section>
+
+  <section xml:id="template-pandoc">
+    <title>Custom Pandoc templates</title>
+
+    <p>R Markdown is first knit to Markdown, then converted by Pandoc to output formats (HTML, PDF, Word) using Pandoc templates. You can provide your own template for deeper output customization.</p>
+
+    <p>Pandoc template variables are written as <c>$variable$</c> and can use metadata from YAML, conditionals, and loops.</p>
+
+    <program language="html">
+      <input>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;$title$&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  $body$
+  &lt;/body&gt;
+&lt;/html&gt;</input>
+    </program>
+
+    <p>To use a custom template in R Markdown:</p>
+
+    <program language="yaml">
+      <input>output:
+  html_document:
+    template: template.html</input>
+    </program>
+
+    <p>Reference: <url href="https://pandoc.org/MANUAL.html#using-variables-in-templates">https://pandoc.org/MANUAL.html#using-variables-in-templates</url>.</p>
+  </section>
+
+  <section xml:id="template-share">
+    <title>Sharing your templates</title>
+
+    <p>Because templates are packaged in R packages, they can be distributed via CRAN or GitHub. Example GitHub install flow:</p>
+
+    <program language="r">
+      <input>if (!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github("username/packagename")</input>
+    </program>
+
+    <p>Examples of template-providing packages include <c>tufte</c>, <c>prettydoc</c>, <c>rticles</c>, <url href="https://github.com/hebrewseniorlife/memor">memor</url>, and <url href="https://github.com/bblodfon/rtemps">rtemps</url>.</p>
+  </section>
 
 </chapter>

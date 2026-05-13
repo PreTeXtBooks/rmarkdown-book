@@ -4,7 +4,7 @@
 
   <p>R has a built-in HTML help system that can be accessed via <c>help.start()</c>. From this system, you can see the HTML help pages of functions and objects in all packages, as well as other information about packages such as the <c>DESCRIPTION</c> file and package vignettes. However, this system is usually dynamically launched (via a local web server), and it is not straightforward to turn it into a static website that can be viewed without starting R.</p>
 
-  <p>The <em>pkgdown</em> package\index{pkgdown} (R-pkgdown) makes it easy to build a documentation website for an R package, which can help you organize different pieces of the package documentation (e.g., README, help pages, vignettes, and news) with a more visually pleasant style. The navigation can also be easier for users than R's built-in help system. This website can be published to any web server (e.g., GitHub Pages or Netlify). An example is <em>pkgdown</em>'s own website: <url href="https://pkgdown.r-lib.org">https://pkgdown.r-lib.org</url> (see <xref ref="fig-pkgdown"/>).</p>
+  <p>The <em>pkgdown</em> package (R-pkgdown) makes it easy to build a documentation website for an R package, which can help you organize different pieces of the package documentation (e.g., README, help pages, vignettes, and news) with a more visually pleasant style. The navigation can also be easier for users than R's built-in help system. This website can be published to any web server (e.g., GitHub Pages or Netlify). An example is <em>pkgdown</em>'s own website: <url href="https://pkgdown.r-lib.org">https://pkgdown.r-lib.org</url> (see <xref ref="fig-pkgdown"/>).</p>
 
   <figure xml:id="fig-pkgdown">
     <image source="images/pkgdown.png"/>

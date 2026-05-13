@@ -26,15 +26,15 @@
 
     <program language="r">
       <input>library(sigma)
-d &lt;- system.file("examples/ediaspora.gexf.xml", package = "sigma")
-sigma(d)</input>
+gexf_file &lt;- system.file("examples/ediaspora.gexf.xml", package = "sigma")
+sigma(gexf_file)</input>
     </program>
 
     <subsection>
       <title>File layout</title>
       <program language="text">
         <input>R/
-| sigma.R
+|-- sigma.R
 
 inst/
 |-- htmlwidgets/

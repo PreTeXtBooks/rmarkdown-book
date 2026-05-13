@@ -32,8 +32,7 @@ sigma(gexf_file)</input>
 
     <subsection>
       <title>File layout</title>
-      <program language="text">
-        <input>R/
+      <pre>R/
   sigma.R
 
 inst/
@@ -44,8 +43,7 @@ inst/
       sigma-1.0.3/
         sigma.min.js
         plugins/
-          sigma.parsers.gexf.min.js</input>
-      </program>
+          sigma.parsers.gexf.min.js</pre>
     </subsection>
 
     <subsection>
@@ -67,7 +65,8 @@ inst/
       <program language="r">
         <input>sigma &lt;- function(gexf, drawEdges = TRUE, drawNodes = TRUE,
                   width = NULL, height = NULL) {
-  data &lt;- paste(readLines(gexf), collapse = "\n")
+  gexf_path &lt;- normalizePath(gexf, mustWork = TRUE)
+  data &lt;- paste(readLines(gexf_path), collapse = "\n")
   settings &lt;- list(drawEdges = drawEdges, drawNodes = drawNodes)
   x &lt;- list(data = data, settings = settings)
   htmlwidgets::createWidget("sigma", x, width = width, height = height)
@@ -251,7 +250,7 @@ devtools::install()</input>
       name = "blink",
       version = "0.1",
       src = c(href = ""),
-      head = "&lt;script&gt;/* widget binding */&lt;/script&gt;"
+      head = "&lt;script&gt;window.HTMLWidgets.widget({name:'blink',type:'output',factory:function(el){return {renderValue:function(x){el.innerText=x.text;},resize:function(){}};}});&lt;/script&gt;"
     )
   )
 }</input>

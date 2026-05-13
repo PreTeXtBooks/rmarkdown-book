@@ -2,10 +2,216 @@
 <chapter xml:id="ch-shiny" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Shiny Documents</title>
 
-  <p>
-    This chapter covers Shiny documents, which allow readers to interactively
-    change parameters and see updated results in real time.
-    Content to be filled in from the original RMD book (Chapter 19).
-  </p>
+  <p>Shiny is a powerful framework for building interactive web applications with R. Shiny R Markdown documents let readers change parameters and immediately see updated results, instead of reading only fixed static output.</p>
+
+  <section xml:id="shiny-start">
+    <title>Getting started</title>
+
+    <p>To make an R Markdown document interactive, add <c>runtime: shiny</c> as a top-level YAML field.</p>
+
+    <program language="yaml">
+      <input>---
+title: "Shiny Document"
+output: html_document
+runtime: shiny
+---</input>
+    </program>
+
+    <p>The output format must be HTML-oriented (for example <c>html_document</c>, <c>ioslides_presentation</c>, or <c>slidy_presentation</c>). Non-HTML formats such as PDF and Word are not supported by the Shiny runtime.</p>
+
+    <p>In RStudio, use <c>Run Document</c>. From the console, run <c>rmarkdown::run("file.Rmd")</c>.</p>
+
+    <p>Shiny inputs and outputs can be embedded directly in document chunks. In this example, changing the numeric input updates the rendered table.</p>
+
+    <program language="r">
+      <input>numericInput("rows", "How many cars?", 5)
+
+renderTable({
+  head(cars, input$rows)
+})</input>
+    </program>
+
+    <p>Similarly, render functions like <c>renderPlot()</c> can generate dynamic graphics from user input.</p>
+
+    <program language="r">
+      <input>sliderInput("bins", "Number of bins:", 30, min = 1, max = 50)
+
+renderPlot({
+  x = faithful[, 2]
+  bins = seq(min(x), max(x), length.out = input$bins + 1)
+  hist(x, breaks = bins, col = "darkgray", border = "white")
+})</input>
+    </program>
+  </section>
+
+  <section xml:id="shiny-deploy">
+    <title>Deployment</title>
+
+    <p>Shiny documents require a live R session behind the scenes. To share with readers who do not run R locally, deploy to a server and share a URL.</p>
+
+    <subsection>
+      <title>ShinyApps.io</title>
+
+      <p>A simple hosted deployment path is ShinyApps: <url href="https://shinyapps.io">https://shinyapps.io</url>.</p>
+
+      <p>Install <c>rsconnect</c> and deploy from the document directory:</p>
+
+      <program language="r">
+        <input>install.packages("rsconnect")
+rsconnect::deployApp()</input>
+      </program>
+
+      <p>If <c>index.Rmd</c> is present, it is served by default. Other files can be addressed explicitly in the URL (for example <c>/test.Rmd</c>).</p>
+    </subsection>
+
+    <subsection>
+      <title>Shiny Server / RStudio Connect</title>
+
+      <p>Self-hosting is also possible with Shiny Server or RStudio Connect:</p>
+      <ul>
+        <li><p><url href="https://www.rstudio.com/products/shiny/shiny-server/">https://www.rstudio.com/products/shiny/shiny-server/</url></p></li>
+        <li><p><url href="https://www.rstudio.com/products/connect/">https://www.rstudio.com/products/connect/</url></p></li>
+      </ul>
+    </subsection>
+  </section>
+
+  <section xml:id="shiny-embedded">
+    <title>Embedded Shiny apps</title>
+
+    <p>Beyond individual inputs/outputs, you can embed a full Shiny app in a document via <c>shinyApp()</c> or <c>shinyAppDir()</c>.</p>
+
+    <subsection xml:id="shiny-embed-inline">
+      <title>Inline applications</title>
+
+      <program language="r">
+        <input>shinyApp(
+  ui = fluidPage(
+    selectInput("region", "Region:", choices = colnames(WorldPhones)),
+    plotOutput("phonePlot")
+  ),
+  server = function(input, output) {
+    output$phonePlot = renderPlot({
+      barplot(WorldPhones[, input$region] * 1000,
+              ylab = "Number of Telephones", xlab = "Year")
+    })
+  },
+  options = list(height = 500)
+)</input>
+      </program>
+
+      <p>The <c>height</c> option controls vertical space used by the embedded application.</p>
+    </subsection>
+
+    <subsection>
+      <title>External applications</title>
+
+      <program language="r">
+        <input>shinyAppDir(
+  system.file("examples/06_tabsets", package = "shiny"),
+  options = list(width = "100%", height = 700)
+)</input>
+      </program>
+
+      <p>Use <c>echo = FALSE</c> in the code chunk so the chunk source is not printed alongside UI components.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="shiny-widgets">
+    <title>Shiny widgets</title>
+
+    <p>Shiny widgets are reusable interactive components invokable with a single function call inside a document or at the R console.</p>
+
+    <subsection>
+      <title>The <c>shinyApp()</c> function</title>
+      <p>At the core, a widget is often an R function that returns a <c>shinyApp()</c> object.</p>
+    </subsection>
+
+    <subsection>
+      <title>Example: k-Means clustering</title>
+
+      <p>The <c>rmdexamples</c> package provides a widget function <c>kmeans_cluster()</c>:</p>
+
+      <program language="r">
+        <input>library(rmdexamples)
+kmeans_cluster(iris)</input>
+      </program>
+
+      <p>Its implementation defines UI and server in one function and returns a <c>shinyApp()</c>.</p>
+
+      <program language="r">
+        <input>kmeans_cluster &lt;- function(dataset) {
+  library(shiny)
+  vars &lt;- names(dataset)
+
+  shinyApp(
+    ui = fluidPage(
+      fluidRow(style = "padding-bottom: 20px;",
+        column(4, selectInput("xcol", "X Variable", vars)),
+        column(4, selectInput("ycol", "Y Variable", vars, selected = vars[2])),
+        column(4, numericInput("clusters", "Cluster count", 3, min = 1, max = 9))
+      ),
+      fluidRow(plotOutput("kmeans", height = "400px"))
+    ),
+    server = function(input, output, session) {
+      selectedData &lt;- reactive(dataset[, c(input$xcol, input$ycol)])
+      clusters &lt;- reactive(kmeans(selectedData(), input$clusters))
+      output$kmeans &lt;- renderPlot({
+        res &lt;- clusters()
+        par(mar = c(5.1, 4.1, 0, 1))
+        plot(selectedData(), col = res$cluster, pch = 20, cex = 3)
+        points(res$centers, pch = 4, cex = 4, lwd = 4)
+      })
+    },
+    options = list(height = 500)
+  )
+}</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Widget size and layout</title>
+      <p>A practical guideline is to keep total widget height at about 500px so widgets also fit common HTML presentation slide layouts.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="shiny-multiple">
+    <title>Multiple pages</title>
+
+    <p>You can link between Shiny R Markdown documents using relative Markdown links such as <c>[Another](another.Rmd)</c>. Only one document is active at a time. Basic shared initialization is possible via <c>global.R</c>.</p>
+
+    <p>The root directory for valid links is controlled by the <c>dir</c> argument to <c>rmarkdown::run()</c>.</p>
+  </section>
+
+  <section xml:id="shiny-delay">
+    <title>Delayed rendering</title>
+
+    <p>Large Shiny documents may take time to load. Use <c>rmarkdown::render_delayed()</c> to defer expensive interactive rendering until after the page appears.</p>
+
+    <program language="r">
+      <input>numericInput("rows", "How many cars?", 5)
+
+rmarkdown::render_delayed({
+  renderTable({
+    head(cars, input$rows)
+  })
+})</input>
+    </program>
+  </section>
+
+  <section xml:id="shiny-args">
+    <title>Output arguments for render functions</title>
+
+    <p>In Shiny documents, <c>renderXXX()</c> calls can implicitly create UI output containers. To pass options normally supplied to <c>xxxOutput()</c>, use <c>outputArgs</c> where supported.</p>
+
+    <program language="r">
+      <input>renderPlot({
+  plot(yourData)
+}, outputArgs = list(width = "200px", height = "100px"))</input>
+    </program>
+
+    <p><c>outputArgs</c> must be a list. Unsupported names produce an error indicating invalid output arguments.</p>
+
+    <p>This mechanism is intended for embedded Shiny snippets in <c>runtime: shiny</c> R Markdown documents. In full Shiny apps, set output arguments directly in UI output functions.</p>
+  </section>
 
 </chapter>

@@ -34,17 +34,17 @@ sigma(gexf_file)</input>
       <title>File layout</title>
       <program language="text">
         <input>R/
-|-- sigma.R
+  sigma.R
 
 inst/
-|-- htmlwidgets/
-|   |-- sigma.js
-|   |-- sigma.yaml
-|   |-- lib/
-|   |   |-- sigma-1.0.3/
-|   |   |   |-- sigma.min.js
-|   |   |   |-- plugins/
-|   |   |   |   |-- sigma.parsers.gexf.min.js</input>
+  htmlwidgets/
+    sigma.js
+    sigma.yaml
+    lib/
+      sigma-1.0.3/
+        sigma.min.js
+        plugins/
+          sigma.parsers.gexf.min.js</input>
       </program>
     </subsection>
 
@@ -247,7 +247,12 @@ devtools::install()</input>
   htmlwidgets::createWidget(
     "blink",
     list(text = text, interval = interval),
-    dependencies = htmltools::htmlDependency(...)
+    dependencies = htmltools::htmlDependency(
+      name = "blink",
+      version = "0.1",
+      src = c(href = ""),
+      head = "&lt;script&gt;/* widget binding */&lt;/script&gt;"
+    )
   )
 }</input>
       </program>

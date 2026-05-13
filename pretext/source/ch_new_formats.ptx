@@ -2,9 +2,79 @@
 <chapter xml:id="ch-new-formats" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Creating New Formats</title>
 
-  <p>
-    This chapter covers creating entirely new output formats for R Markdown.
-    Content to be filled in from the original RMD book (Chapter 18).
-  </p>
+  <p>The <c>rmarkdown</c> package includes many built-in document and presentation formats. These formats are R functions. When you specify an output format in YAML metadata, you are specifying a format function and the parameters passed to it.</p>
+
+  <p>You can create new formats to customize output options or reference external files. This is especially useful when pairing custom templates (Chapter <xref ref="ch-templates" />) with reusable package-based workflows.</p>
+
+  <section xml:id="format-derive">
+    <title>Deriving from built-in formats</title>
+
+    <p>The easiest way to create a new format is to write a function that calls an existing built-in format and adjusts defaults.</p>
+
+    <program language="r">
+      <input>quarterly_report = function(toc = TRUE) {
+  # locations of resource files in the package
+  pkg_resource = function(...) {
+    system.file(..., package = "mypackage")
+  }
+
+  css    = pkg_resource("reports/styles.css")
+  header = pkg_resource("reports/quarterly/header.html")
+
+  # call the base html_document function
+  rmarkdown::html_document(
+    toc = toc, fig_width = 6.5, fig_height = 4,
+    theme = NULL, css = css,
+    includes = rmarkdown::includes(before_body = header)
+  )
+}</input>
+    </program>
+
+    <p>This example forwards a table-of-contents option, sets default figure dimensions, disables the default Bootstrap theme and applies custom CSS, and injects a shared header file. External resources are resolved with <c>system.file()</c> from the package containing the format.</p>
+  </section>
+
+  <section xml:id="format-custom">
+    <title>Fully custom formats</title>
+
+    <p>A lower-level approach is to define a format directly with explicit <c>knitr</c> options and Pandoc arguments. At a high level, a format combines: (1) knitr options for Rmd-to-Markdown, (2) Pandoc options for Markdown-to-final-output, and (3) optional flags/filters for supporting files.</p>
+
+    <p>You can define a format with <c>rmarkdown::output_format()</c>:</p>
+
+    <program language="r">
+      <input>#' @importFrom rmarkdown output_format knitr_options pandoc_options
+simple_html_format = function() {
+  # if you don't use roxygen2 (see above), you need to either
+  # library(rmarkdown) or use rmarkdown::
+  output_format(
+    knitr = knitr_options(opts_chunk = list(dev = 'png')),
+    pandoc = pandoc_options(to = "html"),
+    clean_supporting = FALSE
+  )
+}</input>
+    </program>
+
+    <p>The <c>clean_supporting = FALSE</c> option preserves supporting artifacts (such as plot files) for non-self-contained outputs. You can also supply a <c>base_format</c> to inherit behavior and customize only selected options.</p>
+
+    <p>If your format needs files that cannot be handled via <c>includes</c> (Section <xref ref="includes" />), use other <c>output_format()</c> hooks such as <c>intermediates_generator</c> to place supporting files where needed.</p>
+
+    <p>To learn more, inspect built-in format implementations such as <c>html_document</c> and <c>pdf_document</c>: <url href="https://github.com/rstudio/rmarkdown/tree/master/R">https://github.com/rstudio/rmarkdown/tree/master/R</url>. Custom formats may also define Pandoc templates (Section <xref ref="template-pandoc" />).</p>
+  </section>
+
+  <section xml:id="format-use">
+    <title>Using a new format</title>
+
+    <p>Store new formats in an installed package so they can be referenced from document YAML. If <c>quarterly_report</c> is in package <c>mypackage</c>:</p>
+
+    <program language="yaml">
+      <input>---
+title: "Habits"
+output:
+  mypackage::quarterly_report:
+    toc: true
+---</input>
+    </program>
+
+    <p>This uses <c>mypackage::quarterly_report()</c> as the output format and passes <c>toc = TRUE</c> to the function.</p>
+  </section>
 
 </chapter>

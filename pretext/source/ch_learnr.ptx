@@ -66,11 +66,11 @@
       <program language="markdown">
         <input>```{r filter, exercise=TRUE}
 # Change the filter to select February rather than January
-nycflights &lt;- filter(nycflights, month == 1)
+nycflights_filtered &lt;- filter(nycflights, month == 1)
 ```
 
 ```{r filter-solution}
-nycflights &lt;- filter(nycflights, month == 2)
+nycflights_filtered &lt;- filter(nycflights, month == 2)
 ```</input>
       </program>
 
@@ -185,7 +185,7 @@ plotOutput("distPlot")
 ```
 
 ```{r, context="server"}
-output$distPlot = renderPlot({
+output$distPlot &lt;- renderPlot({
   x = faithful[, 2]  # Old Faithful Geyser data
   bins = seq(min(x), max(x), length.out = input$bins + 1)
   hist(x, breaks = bins, col = 'darkgray', border = 'white')

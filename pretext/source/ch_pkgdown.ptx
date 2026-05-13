@@ -66,7 +66,7 @@ devtools::install_github("r-lib/pkgdown")</input>
       - ugh_oh</input>
       </program>
 
-      <p>As you can see from the above example, you may list the names of functions in the <c>contents</c> field, or provide a pattern to let <em>pkgdown</em> match the names. There are three ways to match function names: <c>starts_with()</c> to match names that start with a string, <c>ends_width()</c> for an ending pattern, and <c>matches()</c> for an arbitrary regular expression.</p>
+      <p>As you can see from the above example, you may list the names of functions in the <c>contents</c> field, or provide a pattern to let <em>pkgdown</em> match the names. There are three ways to match function names: <c>starts_with()</c> to match names that start with a string, <c>ends_with()</c> for an ending pattern, and <c>matches()</c> for an arbitrary regular expression.</p>
     </subsection>
 
     <subsection>

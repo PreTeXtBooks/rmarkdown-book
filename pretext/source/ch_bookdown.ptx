@@ -2,7 +2,7 @@
 <chapter xml:id="ch-bookdown" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Books</title>
 
-  <p>We have introduced the basics of R Markdown in Chapter 3, which highlighted how HTML, PDF, and Word documents can be produced from an R workflow. However, larger projects can become difficult to manage in a single R Markdown file. The <em>bookdown</em> package (xie2016; R-bookdown) addresses this limitation, and offers several key improvements:</p>
+  <p>We have introduced the basics of R Markdown in Chapter 3, which highlighted how HTML, PDF, and Word documents can be produced from an R workflow. However, larger projects can become difficult to manage in a single R Markdown file. The <em>bookdown</em> package (R-bookdown) addresses this limitation, and offers several key improvements:</p>
 
   <ul>
     <li><p>Books and reports can be built from multiple R Markdown files.</p></li>
@@ -12,7 +12,7 @@
 
   <p>This book itself was created using <em>bookdown</em>, and acts as an example of what can be achieved. Despite the name containing the word <q>book</q>, <em>bookdown</em> is not only for books, and it can be used for long reports, dissertations, or even single R Markdown documents. It also works with other computing languages such as Python and C++. If you want, you can even write documents irrelevant to computing, such as a novel.</p>
 
-  <p>In this chapter, we cover the basics of <em>bookdown</em>, and explain how to start a <em>bookdown</em> project. Much of the content is based on the work <q>bookdown: Authoring Books and Technical Documents with R Markdown</q> (<url href="https://bookdown.org/yihui/bookdown/">https://bookdown.org/yihui/bookdown/</url>) of xie2016, which provides more detailed explanations of the concepts highlighted.</p>
+  <p>In this chapter, we cover the basics of <em>bookdown</em>, and explain how to start a <em>bookdown</em> project. Much of the content is based on the work <q>bookdown: Authoring Books and Technical Documents with R Markdown</q> (<url href="https://bookdown.org/yihui/bookdown/">https://bookdown.org/yihui/bookdown/</url>) of the bookdown authors, which provides more detailed explanations of the concepts highlighted.</p>
 
   <section xml:id="bookdown-start">
     <title>Get started</title>

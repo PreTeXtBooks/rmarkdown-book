@@ -46,7 +46,7 @@ simple_html_format &lt;- function() {
   # if you don't use roxygen2 (see above), you need to either
   # library(rmarkdown) or use rmarkdown::
   output_format(
-    knitr = knitr_options(opts_chunk = list(dev = 'png')),
+    knitr = knitr_options(opts_chunk = list(dev = "png")),
     pandoc = pandoc_options(to = "html"),
     clean_supporting = FALSE
   )

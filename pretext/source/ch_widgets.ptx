@@ -252,7 +252,7 @@ devtools::install()</input>
       src = c(href = ""),
       head = paste(
         "&lt;script&gt;",
-        "window.HTMLWidgets.widget({",
+        "HTMLWidgets.widget({",
         "  name: 'blink',",
         "  type: 'output',",
         "  factory: function(el) {",

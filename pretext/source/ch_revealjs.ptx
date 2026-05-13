@@ -2,9 +2,313 @@
 <chapter xml:id="ch-revealjs" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>reveal.js Presentations</title>
 
-  <p>
-    This chapter covers HTML5 presentations using the revealjs package based on reveal.js.
-    Content to be filled in from the original RMD book (Chapter 8).
-  </p>
+  <p>The <em>revealjs</em> package (R-revealjs) provides an output format <c>revealjs::revealjs_presentation</c> that can be used to create yet another style of HTML5 slides\index{HTML5 slides} based on the JavaScript library <url href="https://revealjs.com">reveal.js</url>. You may install the R package from CRAN:</p>
 
+  <program language="r">
+    <input>install.packages("revealjs")</input>
+  </program>
+
+  <p>To create a reveal.js presentation from R Markdown, you specify the <c>revealjs_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags; you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show:</p>
+
+  <program language="markdown">
+    <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: revealjs::revealjs_presentation
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+## Going to sleep
+
+- Get in bed
+- Count sheep</input>
+  </program>
+
+  <p>See <xref ref="fig-revealjs-sample"/> for two sample slides.</p>
+
+  <figure xml:id="fig-revealjs-sample">
+    <image source="images/revealjs-1.png"/>
+    <image source="images/revealjs-2.png"/>
+    <caption><p>Two sample slides created from the revealjs package.</p></caption>
+  </figure>
+
+  <section>
+    <title>Display modes</title>
+
+    <p>The following single character keyboard shortcuts enable alternate display modes:</p>
+
+    <ul>
+      <li><p><c>'f'</c>: enable fullscreen mode.</p></li>
+      <li><p><c>'o'</c>: enable overview mode.</p></li>
+    </ul>
+
+    <p>Pressing <c>Esc</c> exits all of these modes.</p>
+  </section>
+
+  <section>
+    <title>Appearance and style</title>
+
+    <p>There are several options that control the appearance of reveal.js presentations:</p>
+
+    <ul>
+      <li><p><c>theme</c> specifies the theme to use for the presentation (available themes are <c>"default"</c>, <c>"simple"</c>, <c>"sky"</c>, <c>"beige"</c>, <c>"serif"</c>, <c>"solarized"</c>, <c>"blood"</c>, <c>"moon"</c>, <c>"night"</c>, <c>"black"</c>, <c>"league"</c>, and <c>"white"</c>).</p></li>
+      <li><p><c>highlight</c> specifies the syntax highlighting style. Supported styles include <c>"default"</c>, <c>"tango"</c>, <c>"pygments"</c>, <c>"kate"</c>, <c>"monochrome"</c>, <c>"espresso"</c>, <c>"zenburn"</c>, and <c>"haddock"</c>. Pass null to prevent syntax highlighting.</p></li>
+      <li><p><c>center</c> specifies whether you want to vertically center content on slides (this defaults to <c>false</c>).</p></li>
+      <li><p><c>smart</c> indicates whether to produce typographically correct output, converting straight quotes to curly quotes, <c>---</c> to em-dashes, <c>--</c> to en-dashes, and <c>...</c> to ellipses. Note that <c>smart</c> is enabled by default.</p></li>
+    </ul>
+
+    <p>For example:</p>
+
+    <program language="yaml">
+      <input>---
+output:
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: pygments
+    center: true
+---</input>
+    </program>
+
+    <subsection>
+      <title>Smaller text</title>
+
+      <p>If you need smaller text for certain paragraphs, you can enclose text in the <c>&lt;small&gt;</c> tag. For example:</p>
+
+      <program language="html">
+        <input>&lt;small&gt;This sentence will appear smaller.&lt;/small&gt;</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section>
+    <title>Slide transitions</title>
+
+    <p>You can use the <c>transition</c> and <c>background_transition</c> options to specify the global default slide transition style:</p>
+
+    <ul>
+      <li><p><c>transition</c> specifies the visual effect when moving between slides. Available transitions are <c>"default"</c>, <c>"fade"</c>, <c>"slide"</c>, <c>"convex"</c>, <c>"concave"</c>, <c>"zoom"</c> or <c>"none"</c>.</p></li>
+      <li><p><c>background_transition</c> specifies the background transition effect when moving between full page slides. Available transitions are <c>"default"</c>, <c>"fade"</c>, <c>"slide"</c>, <c>"convex"</c>, <c>"concave"</c>, <c>"zoom"</c> or <c>"none"</c>.</p></li>
+    </ul>
+
+    <p>For example:</p>
+
+    <program language="yaml">
+      <input>---
+output:
+  revealjs::revealjs_presentation:
+    transition: fade
+---</input>
+    </program>
+
+    <p>You can override the global transition for a specific slide by using the <c>data-transition</c> attribute. For example:</p>
+
+    <program language="markdown">
+      <input>## Use a zoom transition {data-transition="zoom"}
+
+## Use a faster speed {data-transition-speed="fast"}</input>
+    </program>
+
+    <p>You can also use different in and out transitions for the same slide. For example:</p>
+
+    <program language="markdown">
+      <input>## Fade in, Slide out {data-transition="slide-in fade-out"}
+
+## Slide in, Fade out {data-transition="fade-in slide-out"}</input>
+    </program>
+  </section>
+
+  <section>
+    <title>Slide backgrounds</title>
+
+    <p>Slides are contained within a limited portion of the screen by default to allow them to fit any display and scale uniformly. You can apply full page backgrounds outside of the slide area by adding a <c>data-background</c> attribute to your slide header element. Four different types of backgrounds are supported: <c>color</c>, <c>image</c>, <c>video</c>, and <c>iframe</c>. Below are a few examples.</p>
+
+    <program language="markdown">
+      <input>## CSS color background {data-background=#ff0000}
+
+## Full size image background {data-background="background.jpeg"}
+
+## Video background {data-background-video="background.mp4"}
+
+## A background page {data-background-iframe="https://example.com"}</input>
+    </program>
+
+    <p>Backgrounds transition using a <c>fade</c> animation by default. This can be changed to a linear sliding transition by specifying the <c>background-transition: slide</c>. Alternatively, you can set <c>data-background-transition</c> on any slide with a background to override that specific transition.</p>
+  </section>
+
+  <section>
+    <title>2-D presentations</title>
+
+    <p>You can use the <c>slide_level</c> option to specify which level of heading will be used to denote individual slides. If <c>slide_level</c> is 2 (the default), a two-dimensional layout will be produced, with level-1 headers building horizontally and level-2 headers building vertically. For example:</p>
+
+    <program language="markdown">
+      <input># Horizontal Slide 1
+
+## Vertical Slide 1
+
+## Vertical Slide 2
+
+# Horizontal Slide 2</input>
+    </program>
+
+    <p>With this layout, horizontal navigation will proceed directly from "Horizontal Slide 1" to "Horizontal Slide 2", with vertical navigation to "Vertical Slide 1" (and then "Vertical Slide 2", etc.) presented as an option on "Horizontal Slide 1". See <xref ref="fig-revealjs-sample"/> for an example (note the arrows at the bottom right on the slides).</p>
+  </section>
+
+  <section>
+    <title>Custom CSS</title>
+
+    <p>You can add your own CSS\index{CSS} to a reveal.js presentation using the <c>css</c> option:</p>
+
+    <program language="yaml">
+      <input>---
+output:
+  revealjs::revealjs_presentation:
+    css: styles.css
+---</input>
+    </program>
+
+    <p>If you want to override the appearance of particular HTML element document-wide, you need to qualify it with the <c>.reveal section</c> preface in your CSS. For example, to change the default text color in paragraphs to blue, you would use:</p>
+
+    <program language="css">
+      <input>.reveal section p {
+  color: blue;
+}</input>
+    </program>
+
+    <subsection>
+      <title>Slide IDs and classes</title>
+
+      <p>You can also target specific slides or classes of slides with custom CSS by adding IDs or classes to the slides headers within your document. For example, the following slide header</p>
+
+      <program language="markdown">
+        <input>## Next Steps {#nextsteps .emphasized}</input>
+      </program>
+
+      <p>would enable you to apply CSS to all of its content using either of the following CSS selectors:</p>
+
+      <program language="css">
+        <input>#nextsteps {
+   color: blue;
+}
+
+.emphasized {
+   font-size: 1.2em;
+}</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Styling text spans</title>
+
+      <p>You can apply classes defined in your CSS file to spans of text by using a <c>span</c> tag. For example:</p>
+
+      <program language="html">
+        <input>&lt;span class="emphasized"&gt;Pay attention to this!&lt;/span&gt;</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section>
+    <title>reveal.js options</title>
+
+    <p>Reveal.js has many additional options to configure its behavior. You can specify any of these options using <c>reveal_options</c>. For example:</p>
+
+    <program language="yaml">
+      <input>---
+title: "Habits"
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---</input>
+    </program>
+
+    <p>You can find documentation on the various available reveal.js options here: <url href="https://github.com/hakimel/reveal.js#configuration">reveal.js configuration</url>.</p>
+  </section>
+
+  <section>
+    <title>reveal.js plugins</title>
+
+    <p>You can enable various reveal.js plugins using the <c>reveal_plugins</c> option. Currently supported plugins are listed in <xref ref="tab-revealjs-plugins"/>.</p>
+
+    <table xml:id="tab-revealjs-plugins">
+      <title>The currently supported reveal.js plugins.</title>
+      <tabular>
+        <row header="yes">
+          <cell>Plugin</cell>
+          <cell>Description</cell>
+        </row>
+        <row>
+          <cell>notes</cell>
+          <cell>Present per-slide notes in a separate browser window.</cell>
+        </row>
+        <row>
+          <cell>zoom</cell>
+          <cell>Zoom in and out of selected content with Alt+Click.</cell>
+        </row>
+        <row>
+          <cell>search</cell>
+          <cell>Find a text string anywhere in the slides and show the next occurrence to the user.</cell>
+        </row>
+        <row>
+          <cell>chalkboard</cell>
+          <cell>Include handwritten notes within a presentation.</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>Note that the use of plugins requires that the <c>self_contained</c> option be set to <c>false</c>. For example, this presentation includes both the "notes" and "search" plugins:</p>
+
+    <program language="yaml">
+      <input>---
+title: "Habits"
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    reveal_plugins: ["notes", "search"]
+---</input>
+    </program>
+
+    <p>You can specify additional options for the <c>chalkboard</c> plugin using <c>reveal_options</c>. For example:</p>
+
+    <program language="yaml">
+      <input>---
+title: "Habits"
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    reveal_plugins: ["chalkboard"]
+    reveal_options:
+      chalkboard:
+        theme: whiteboard
+        toggleNotesButton: false
+---</input>
+    </program>
+  </section>
+
+  <section>
+    <title>Other features</title>
+
+    <p>Refer to the HTML document chapter for documentation of other features of reveal.js presentations, including figure options, MathJax equations, keeping Markdown, document dependencies, header and before/after body inclusions, custom templates, Pandoc arguments, and shared options. Also see Section <xref ref="incremental-bullets"/> for incremental bullets.</p>
+  </section>
 </chapter>

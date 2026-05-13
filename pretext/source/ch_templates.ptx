@@ -85,6 +85,8 @@ skeleton/styles.css</input>
     template: template.html</input>
     </program>
 
+    <p>In this example, <c>template.html</c> should be available in the same directory as the source <c>.Rmd</c> file (or referenced with an appropriate relative path).</p>
+
     <p>Reference: <url href="https://pandoc.org/MANUAL.html#using-variables-in-templates">https://pandoc.org/MANUAL.html#using-variables-in-templates</url>.</p>
   </section>
 

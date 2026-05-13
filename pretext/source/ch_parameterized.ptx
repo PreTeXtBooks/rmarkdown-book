@@ -1,11 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch-parameterized" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Parameterized Reports</title>
+  <title>Parameterized reports</title>
 
-  <p>
-    This chapter covers parameterized reports, which allow users to specify parameters
-    to customize the analysis in an R Markdown document.
-    Content to be filled in from the original RMD book (Chapter 15).
-  </p>
+  <p>One of the many benefits of working with R Markdown is that you can reproduce analysis at the click of a button. This makes it easy to update work and alter input parameters. Parameterized reports extend this one step further, and allow users to specify one or more parameters to customize the analysis.</p>
+
+  <p>This is useful when creating a reusable report template for similar scenarios, such as showing results for a specific geographic location, running a report for a specific time period, running a single analysis for different assumptions, or controlling knitr behavior such as whether code is displayed.</p>
+
+  <p>In this chapter, we discuss parameterized reports and how to define parameters interactively when compiling results.</p>
+
+  <section xml:id="params-declare">
+    <title>Declaring parameters</title>
+
+    <p>Parameters are specified using the <c>params</c> field in YAML metadata. For example:</p>
+
+    <program language="yaml">
+      <input>---
+title: My Document
+output: html_document
+params:
+  year: 2018
+  region: Europe
+  printcode: TRUE
+  data: file.csv
+---</input>
+    </program>
+
+    <p>All standard R types that can be parsed by <c>yaml::yaml.load()</c> can be included, such as <c>character</c>, <c>numeric</c>, <c>integer</c>, and <c>logical</c>. You can also use R objects by including <c>!r</c> before expressions, for example:</p>
+
+    <program language="yaml">
+      <input>---
+title: My Document
+output: html_document
+params:
+  date: !r Sys.Date()
+---</input>
+    </program>
+
+    <p>Any R expressions in parameters are executed before document code, so package dependencies must be explicitly stated using <c>package::function</c> notation (for example <c>!r lubridate::today()</c>), even if a package is loaded later in the Rmd file.</p>
+  </section>
+
+  <section xml:id="params-use">
+    <title>Using parameters</title>
+
+    <p>Within the knitting environment (and in the R console in RStudio after code is executed), parameter values are available in a read-only list named <c>params</c>. For example:</p>
+
+    <program language="r">
+      <input>params$year
+params$region</input>
+    </program>
+
+    <p>Parameters can also control knitr behavior. For example, use a parameter to set chunk <c>echo</c> globally:</p>
+
+    <program language="markdown">
+      <input>---
+params:
+  printcode: false  # or set it to true
+---
+
+```{r, setup, include=FALSE}
+# set this option in the first code chunk in the document
+knitr::opts_chunk$set(echo = params$printcode)
+```</input>
+    </program>
+  </section>
+
+  <section xml:id="params-knit">
+    <title>Knitting with parameters</title>
+
+    <p>There are three ways to knit a parameterized report:</p>
+
+    <ul>
+      <li><p>Using the <q>Knit</q> button in RStudio.</p></li>
+      <li><p>Using <c>rmarkdown::render()</c> with the <c>params</c> argument.</p></li>
+      <li><p>Using an interactive user interface to input parameter values.</p></li>
+    </ul>
+
+    <subsection>
+      <title>The <c>Knit</c> button</title>
+      <p>Using the RStudio <q>Knit</q> button (or calling <c>rmarkdown::render()</c> without overriding parameters) uses default values from YAML metadata, when provided.</p>
+    </subsection>
+
+    <subsection>
+      <title>Knit with custom parameters</title>
+
+      <p>You can override YAML defaults by supplying a custom parameter list to <c>rmarkdown::render()</c>:</p>
+
+      <program language="r">
+        <input>rmarkdown::render("MyDocument.Rmd", params = list(
+  year = 2017,
+  region = "Asia",
+  printcode = FALSE,
+  file = "file2.csv"
+))</input>
+      </program>
+
+      <p>You do not need to provide all parameters. Any omitted parameter keeps its YAML default value:</p>
+
+      <program language="r">
+        <input>rmarkdown::render("MyDocument.Rmd", params = list(
+  region = "Asia"
+))</input>
+      </program>
+
+      <p>You may wrap rendering in a function and create output filenames based on parameter combinations:</p>
+
+      <program language="r">
+        <input>render_report &lt;- function(region, year) {
+  rmarkdown::render(
+    "MyDocument.Rmd", params = list(
+      region = region,
+      year = year
+    ),
+    output_file = paste0("Report-", region, "-", year, ".pdf")
+  )
+}</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>The interactive user interface</title>
+
+      <p>You can launch a Shiny-based GUI for parameters by calling <c>rmarkdown::render("MyDocument.Rmd", params = "ask")</c>, or by selecting <q>Knit with Parameters</q> from the drop-down menu behind the <q>Knit</q> button in RStudio.</p>
+
+      <figure xml:id="fig-params-input">
+        <image source="images/params-input.png"/>
+        <caption><p>Input parameter values interactively for parameterized reports.</p></caption>
+      </figure>
+
+      <p>Input controls can be customized by adding sub-items under each parameter in YAML. You can also constrain allowed values to keep user inputs within designed limits.</p>
+
+      <p>For example:</p>
+
+      <program language="yaml">
+        <input>---
+title: My Document
+output: html_document
+params:
+  year:
+    label: "Year"
+    value: 2017
+    input: slider
+    min: 2010
+    max: 2018
+    step: 1
+    sep: ""
+  region:
+    label: "Region:"
+    value: Europe
+    input: select
+    choices: [North America, Europe, Asia, Africa]
+  printcode:
+    label: "Display Code:"
+    value: TRUE
+  data:
+    label: "Input dataset:"
+    value: results.csv
+    input: file
+---</input>
+      </program>
+
+      <figure xml:id="fig-params-controls">
+        <image source="images/params-controls.png"/>
+        <caption><p>Custom controls for parameters.</p></caption>
+      </figure>
+
+      <p>The <c>input</c> field controls which Shiny input control is used. Supported types include <c>checkbox</c> (<c>checkboxInput</c>), <c>numeric</c> (<c>numericInput</c>), <c>slider</c> (<c>sliderInput</c>), <c>date</c> (<c>dateInput</c>), <c>text</c> (<c>textInput</c>), <c>file</c> (<c>fileInput</c>), <c>radio</c> (<c>radioButtons</c>), <c>select</c> (<c>selectInput</c>), and <c>password</c> (<c>passwordInput</c>).</p>
+    </subsection>
+  </section>
+
+  <section xml:id="params-publish">
+    <title>Publishing</title>
+
+    <p>Parameterized reports are supported by RStudio Connect at <url href="https://www.rstudio.com/products/connect/">https://www.rstudio.com/products/connect/</url>. After publishing a parameterized report to an RStudio Connect server, you can compile reports interactively with different parameter values and navigate previously built reports. A video demonstration is available at <url href="https://bit.ly/rsc-params">https://bit.ly/rsc-params</url>.</p>
+  </section>
 
 </chapter>

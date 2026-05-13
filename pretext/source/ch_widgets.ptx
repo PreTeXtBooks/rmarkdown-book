@@ -250,7 +250,21 @@ devtools::install()</input>
       name = "blink",
       version = "0.1",
       src = c(href = ""),
-      head = "&lt;script&gt;window.HTMLWidgets.widget({name:'blink',type:'output',factory:function(el){return {renderValue:function(x){el.innerText=x.text;},resize:function(){}};}});&lt;/script&gt;"
+      head = paste(
+        "&lt;script&gt;",
+        "window.HTMLWidgets.widget({",
+        "  name: 'blink',",
+        "  type: 'output',",
+        "  factory: function(el) {",
+        "    return {",
+        "      renderValue: function(x) { el.innerText = x.text; },",
+        "      resize: function() {}",
+        "    };",
+        "  }",
+        "});",
+        "&lt;/script&gt;",
+        sep = "\n"
+      )
     )
   )
 }</input>

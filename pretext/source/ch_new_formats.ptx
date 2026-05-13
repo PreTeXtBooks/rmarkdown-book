@@ -55,7 +55,7 @@ simple_html_format = function() {
 
     <p>The <c>clean_supporting = FALSE</c> option preserves supporting artifacts (such as plot files) for non-self-contained outputs. You can also supply a <c>base_format</c> to inherit behavior and customize only selected options.</p>
 
-    <p>If your format needs files that cannot be handled via <c>includes</c> (Section <xref ref="includes" />), use other <c>output_format()</c> hooks such as <c>intermediates_generator</c> to place supporting files where needed.</p>
+    <p>If your format needs files that cannot be handled via <c>includes</c>, use other <c>output_format()</c> hooks such as <c>intermediates_generator</c> to place supporting files where needed.</p>
 
     <p>To learn more, inspect built-in format implementations such as <c>html_document</c> and <c>pdf_document</c>: <url href="https://github.com/rstudio/rmarkdown/tree/master/R">https://github.com/rstudio/rmarkdown/tree/master/R</url>. Custom formats may also define Pandoc templates (Section <xref ref="template-pandoc" />).</p>
   </section>

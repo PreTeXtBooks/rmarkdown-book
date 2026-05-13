@@ -2,9 +2,224 @@
 <chapter xml:id="ch-learnr" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Interactive Tutorials</title>
 
-  <p>
-    This chapter covers building interactive tutorials using the learnr package.
-    Content to be filled in from the original RMD book (Chapter 14).
-  </p>
+  <p>The <em>learnr</em> package makes it easy to turn an R Markdown document into an interactive tutorial. Tutorials combine narrative content with interactive components for practice and assessment.</p>
+
+  <p>Tutorials can include narrative text, figures, equations, editable code exercises, quiz questions, videos, and Shiny components. Work is automatically preserved so users can return later and continue where they left off.</p>
+
+  <p>This chapter is a brief summary of the learnr documentation at <url href="https://rstudio.github.io/learnr/">https://rstudio.github.io/learnr/</url>. For more advanced tutorials, consult the full documentation.</p>
+
+  <section xml:id="learnr-start">
+    <title>Get started</title>
+
+    <p>To create a learnr tutorial, first install the package:</p>
+
+    <program language="r">
+      <input>install.packages("learnr")</input>
+    </program>
+
+    <p>In RStudio, select the <q>Interactive Tutorial</q> template from the <q>New R Markdown</q> dialog.</p>
+
+    <figure xml:id="fig-learnr-template">
+      <image source="images/learnr-template.png"/>
+      <caption><p>Create an interactive tutorial in RStudio.</p></caption>
+    </figure>
+
+    <p>If you do not use RStudio, add <c>runtime: shiny_prerendered</c> and output format <c>learnr::tutorial</c> to YAML metadata, call <c>library(learnr)</c> in the document, and set <c>exercise = TRUE</c> on code chunks that should be interactive.</p>
+
+    <p>A minimal tutorial example is available in <c>examples/hello-tutorial.Rmd</c>. You can run it with the RStudio <q>Run Document</q> button or with <c>rmarkdown::run()</c>.</p>
+
+    <figure xml:id="fig-learnr-hello">
+      <image source="images/learnr-hello.png"/>
+      <caption><p>A simple example tutorial.</p></caption>
+    </figure>
+
+    <p>Use unique chunk labels for exercises, since labels are used by learnr to save and restore user work.</p>
+  </section>
+
+  <section xml:id="learnr-types">
+    <title>Tutorial types</title>
+
+    <p>There are two common styles of tutorial documents:</p>
+
+    <ol>
+      <li><p>Narrative or video-heavy tutorials that include some runnable code chunks.</p></li>
+      <li><p>Structured learning tutorials with exercises, quizzes, and tailored feedback.</p></li>
+    </ol>
+
+    <p>The first style is easier to author and often very effective. A common pattern is using <c>exercise = TRUE</c> and <c>exercise.eval = TRUE</c> so readers can both view output and experiment.</p>
+
+    <p>The second style provides richer assessment, but requires more effort. learnr supports features such as hints, solutions, automated checking, and customized quiz feedback.</p>
+  </section>
+
+  <section xml:id="learnr-exercises">
+    <title>Exercises</title>
+
+    <p>Exercises are editable R code chunks that users can execute directly in the browser.</p>
+
+    <p>Exercises can include solutions, hints, and custom checking code.</p>
+
+    <subsection>
+      <title>Solutions</title>
+
+      <p>For an exercise chunk labeled <c>foo</c>, add a solution chunk labeled <c>foo-solution</c>:</p>
+
+      <program language="markdown">
+        <input>```{r filter, exercise=TRUE}
+# Change the filter to select February rather than January
+nycflights &lt;- filter(nycflights, month == 1)
+```
+
+```{r filter-solution}
+nycflights &lt;- filter(nycflights, month == 2)
+```</input>
+      </program>
+
+      <figure xml:id="fig-learnr-solution">
+        <image source="images/learnr-solution.png"/>
+        <caption><p>A solution to an exercise.</p></caption>
+      </figure>
+    </subsection>
+
+    <subsection>
+      <title>Hints</title>
+
+      <p>Hints can be Markdown content or code snippets.</p>
+
+      <p>For a Markdown hint, use a <c>&lt;div&gt;</c> with an <c>id</c> ending in <c>-hint</c>:</p>
+
+      <program language="markdown">
+        <input>```{r filter, exercise=TRUE}
+# filter the flights table to include only United and
+# American flights
+flights
+```
+
+&lt;div id="filter-hint"&gt;
+**Hint:** You may want to use the dplyr `filter` function.
+&lt;/div&gt;</input>
+      </program>
+
+      <p>With Pandoc 2.0 or later, you can also use fenced div syntax:</p>
+
+      <program language="markdown">
+        <input>:::{#filter-hint}
+**Hint:** You may want to use the dplyr `filter` function.
+:::</input>
+      </program>
+
+      <p>For a code hint, create a chunk with the <c>-hint</c> suffix. You can provide progressive hints with <c>-hint-1</c>, <c>-hint-2</c>, and so on.</p>
+
+      <program language="markdown">
+        <input>```{r filter-hint-1}
+filter(flights, ...)
+```
+
+```{r filter-hint-2}
+filter(flights, UniqueCarrier == "AA")
+```
+
+```{r filter-hint-3}
+filter(flights, UniqueCarrier == "AA" | UniqueCarrier == "UA")
+```</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section xml:id="learnr-quiz">
+    <title>Quiz questions</title>
+
+    <p>You can include multiple-choice quiz questions (single or multiple correct answers) using <c>question()</c> and <c>answer()</c>:</p>
+
+    <program language="markdown">
+      <input>```{r letter-a, echo=FALSE}
+question("What number is the letter A in the English alphabet?",
+  answer("8"),
+  answer("14"),
+  answer("1", correct = TRUE),
+  answer("23")
+)
+```</input>
+    </program>
+
+    <figure xml:id="fig-learnr-question">
+      <image source="images/learnr-question.png"/>
+      <caption><p>A question in a tutorial.</p></caption>
+    </figure>
+
+    <p>These functions also support options such as custom messages, retries, grouped questions, and multiple-answer behavior.</p>
+  </section>
+
+  <section xml:id="learnr-videos">
+    <title>Videos</title>
+
+    <p>You can embed YouTube and Vimeo videos using normal Markdown image syntax:</p>
+
+    <program language="markdown">
+      <input>![](https://youtu.be/zNzZ1PfUDNk)
+![](https://www.youtube.com/watch?v=zNzZ1PfUDNk)
+
+![](https://vimeo.com/142172484)
+![](https://player.vimeo.com/video/142172484)</input>
+    </program>
+
+    <p>Videos default to responsive 100% width. You can override dimensions with attributes:</p>
+
+    <program language="markdown">
+      <input>![](https://youtu.be/zNzZ1PfUDNk){width="90%"}
+
+![](https://youtu.be/zNzZ1PfUDNk){width="560" height="315"}</input>
+    </program>
+  </section>
+
+  <section xml:id="learnr-shiny">
+    <title>Shiny components</title>
+
+    <p>Tutorials are Shiny documents, so you can include regular Shiny UI and server logic in addition to exercises and quizzes.</p>
+
+    <p>Write UI components in regular chunks, and use <c>context="server"</c> for server-side rendering code:</p>
+
+    <program language="markdown">
+      <input>```{r, echo=FALSE}
+sliderInput("bins", "Number of bins:", 30, min = 1, max = 50)
+plotOutput("distPlot")
+```
+
+```{r, context="server"}
+output$distPlot = renderPlot({
+  x = faithful[, 2]  # Old Faithful Geyser data
+  bins = seq(min(x), max(x), length.out = input$bins + 1)
+  hist(x, breaks = bins, col = 'darkgray', border = 'white')
+})
+```</input>
+    </program>
+
+    <p>Because tutorials are Shiny applications, they can be deployed using standard Shiny deployment methods.</p>
+  </section>
+
+  <section xml:id="learnr-nav">
+    <title>Navigation and progress tracking</title>
+
+    <p>Each learnr tutorial includes a left-side table of contents with progress tracking. Browsers remember completed sections so students can resume later where they left off.</p>
+
+    <figure xml:id="fig-learnr-progress">
+      <image source="images/learnr-progress.png"/>
+      <caption><p>Keeping track of student progress in a tutorial.</p></caption>
+    </figure>
+
+    <p>You can reveal content progressively by subsection, which can help pacing and avoid revealing answers too early. Enable this behavior in YAML metadata:</p>
+
+    <program language="yaml">
+      <input>---
+title: "Programming basics"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---</input>
+    </program>
+
+    <p>With <c>allow_skip: true</c>, students may move to the next section without completing exercises in the current section.</p>
+  </section>
 
 </chapter>

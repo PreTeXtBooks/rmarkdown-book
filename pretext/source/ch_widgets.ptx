@@ -377,6 +377,8 @@ htmlwidgets::scaffoldWidget("mywidget")
 devtools::install()</input>
     </program>
 
+    <p>In the callback example below, <c>JS(...)</c> matches the original source as a placeholder where users provide concrete JavaScript callback bodies.</p>
+
     <program language="r">
       <input>library(dygraphs)
 dyCallbacks(

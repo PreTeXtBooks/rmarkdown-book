@@ -276,7 +276,6 @@ devtools::install()</input>
   <section xml:id="htmlwidgets-source-parity">
     <title>Source parity code snippets</title>
 
-    <p>To preserve code/output parity with the canonical Rmd chapter, the original code listings are included below in their source form.</p>
 
     <program language="r">
       <input>library(sigma)
@@ -377,16 +376,14 @@ htmlwidgets::scaffoldWidget("mywidget")
 devtools::install()</input>
     </program>
 
-    <p>In the callback example below, <c>JS(...)</c> matches the original source as a placeholder where users provide concrete JavaScript callback bodies.</p>
-
     <program language="r">
       <input>library(dygraphs)
 dyCallbacks(
-  clickCallback = JS("/* click callback */"),
-  drawCallback = JS("/* draw callback */"),
-  highlightCallback = JS("/* highlight callback */"),
-  pointClickCallback = JS("/* point click callback */"),
-  underlayCallback = JS("/* underlay callback */")
+  clickCallback = JS(...)
+  drawCallback = JS(...)
+  highlightCallback = JS(...)
+  pointClickCallback = JS(...)
+  underlayCallback = JS(...)
 )</input>
     </program>
 
@@ -394,12 +391,11 @@ dyCallbacks(
       <input>datatable(head(iris, 20), options = list(
   initComplete = JS(
     "function(settings, json) {",
-    "$(this.api().table().header()).css({",
-    "  'background-color': '#000',",
-    "  'color': '#fff'",
-    "});",
-    "}"
-  )
+    "$(this.api().table().header()).css({
+      'background-color': '#000',
+      'color': '#fff'
+     });",
+    "}")
 ))</input>
     </program>
 

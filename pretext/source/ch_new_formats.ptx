@@ -80,8 +80,6 @@ output:
   <section xml:id="format-source-parity">
     <title>Source parity code snippets</title>
 
-    <p>For source parity with the original Rmd chapter, include the same assignment style used in the canonical examples:</p>
-
     <program language="r">
       <input>quarterly_report = function(toc = TRUE) {
   # locations of resource files in the package

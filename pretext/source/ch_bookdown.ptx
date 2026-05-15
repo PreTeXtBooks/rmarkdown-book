@@ -212,16 +212,16 @@ $$a^2 + b^2 = c^2$$
     <subsection>
       <title>Cross referencing</title>
 
-      <p>The <em>bookdown</em> package extends cross-referencing in R Markdown documents and allows section headers, tables, figures, equations, and theorems to be cross-referenced automatically. This only works for numbered environments. Cross-references are made in the format <c>@ref(type:label)</c>, where <c>label</c> is the chunk label and <c>type</c> is the environment being referenced.</p>
+      <p>The <em>bookdown</em> package extends cross-referencing in R Markdown documents and allows section headers, tables, figures, equations, and theorems to be cross-referenced automatically. This only works for numbered environments. Cross-references are made in the format <c>\@ref(type:label)</c>, where <c>label</c> is the chunk label and <c>type</c> is the environment being referenced.</p>
 
       <p>Examples include:</p>
 
       <ul>
-        <li><p>Headers: <c># Introduction {#intro}</c> then <c>This is Chapter @ref(intro)</c></p></li>
-        <li><p>Figures: <c>See Figure @ref(fig:cars-plot)</c></p></li>
-        <li><p>Tables: <c>See Table @ref(tab:mtcars)</c></p></li>
-        <li><p>Theorems: <c>See Theorem @ref(thm:boring)</c></p></li>
-        <li><p>Equations: <c>See equation @ref(eq:linear)</c></p></li>
+        <li><p>Headers: <c># Introduction {#intro}</c> then <c>This is Chapter \@ref(intro)</c></p></li>
+        <li><p>Figures: <c>See Figure \@ref(fig:cars-plot)</c></p></li>
+        <li><p>Tables: <c>See Table \@ref(tab:mtcars)</c></p></li>
+        <li><p>Theorems: <c>See Theorem \@ref(thm:boring)</c></p></li>
+        <li><p>Equations: <c>See equation \@ref(eq:linear)</c></p></li>
       </ul>
 
       <p>Only alphanumeric characters (<c>a-z</c>, <c>A-Z</c>, <c>0-9</c>), <c>-</c>, <c>/</c>, and <c>:</c> are allowed in these labels.</p>

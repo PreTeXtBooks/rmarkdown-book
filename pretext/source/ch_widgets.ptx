@@ -382,11 +382,11 @@ devtools::install()</input>
     <program language="r">
       <input>library(dygraphs)
 dyCallbacks(
-  clickCallback = JS(...),
-  drawCallback = JS(...),
-  highlightCallback = JS(...),
-  pointClickCallback = JS(...),
-  underlayCallback = JS(...)
+  clickCallback = JS("/* click callback */"),
+  drawCallback = JS("/* draw callback */"),
+  highlightCallback = JS("/* highlight callback */"),
+  pointClickCallback = JS("/* point click callback */"),
+  underlayCallback = JS("/* underlay callback */")
 )</input>
     </program>
 

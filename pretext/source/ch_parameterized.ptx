@@ -194,15 +194,15 @@ params:
     <program language="r">
       <input>knitr::kable(
   read.table(
-    text = "checkbox	checkboxInput
-            numeric	numericInput
-            slider	sliderInput
-            date	dateInput
-            text	textInput
-            file	fileInput
-            radio	radioButtons
-            select	selectInput
-            password	passwordInput",
+    text = "checkbox checkboxInput
+            numeric numericInput
+            slider sliderInput
+            date dateInput
+            text textInput
+            file fileInput
+            radio radioButtons
+            select selectInput
+            password passwordInput",
     col.names = c("Input Type", "Shiny Function"),
     check.names = FALSE
   ),

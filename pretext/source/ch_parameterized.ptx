@@ -174,4 +174,42 @@ params:
     <p>Parameterized reports are supported by RStudio Connect at <url href="https://www.rstudio.com/products/connect/">https://www.rstudio.com/products/connect/</url>. After publishing a parameterized report to an RStudio Connect server, you can compile reports interactively with different parameter values and navigate previously built reports. A video demonstration is available at <url href="https://bit.ly/rsc-params">https://bit.ly/rsc-params</url>.</p>
   </section>
 
+  <section xml:id="params-source-parity">
+    <title>Source parity code snippets</title>
+
+    <p>For source parity with the original Rmd chapter, include the original assignment style and table output example:</p>
+
+    <program language="r">
+      <input>render_report = function(region, year) {
+  rmarkdown::render(
+    "MyDocument.Rmd", params = list(
+      region = region,
+      year = year
+    ),
+    output_file = paste0("Report-", region, "-", year, ".pdf")
+  )
+}</input>
+    </program>
+
+    <program language="r">
+      <input>knitr::kable(
+  read.table(
+    text = "checkbox	checkboxInput
+            numeric	numericInput
+            slider	sliderInput
+            date	dateInput
+            text	textInput
+            file	fileInput
+            radio	radioButtons
+            select	selectInput
+            password	passwordInput",
+    col.names = c("Input Type", "Shiny Function"),
+    check.names = FALSE
+  ),
+  caption = "Possible input types and the associated Shiny functions for parameterized reports.",
+  booktabs = TRUE
+)</input>
+    </program>
+  </section>
+
 </chapter>

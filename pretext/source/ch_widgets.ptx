@@ -273,4 +273,163 @@ devtools::install()</input>
     </subsection>
   </section>
 
+  <section xml:id="htmlwidgets-source-parity">
+    <title>Source parity code snippets</title>
+
+    <p>To preserve code/output parity with the canonical Rmd chapter, the original code listings are included below in their source form.</p>
+
+    <program language="r">
+      <input>library(sigma)
+d = system.file("examples/ediaspora.gexf.xml", package = "sigma")
+sigma(d)</input>
+    </program>
+
+    <program language="r">
+      <input>#' @import htmlwidgets
+#' @export
+sigma = function(
+  gexf, drawEdges = TRUE, drawNodes = TRUE, width = NULL,
+  height = NULL
+) {
+
+  # read the gexf file
+  data = paste(readLines(gexf), collapse = "\n")
+
+  # create a list that contains the settings
+  settings = list(drawEdges = drawEdges, drawNodes = drawNodes)
+
+  # pass the data and settings using 'x'
+  x = list(data = data, settings = settings)
+
+  # create the widget
+  htmlwidgets::createWidget(
+    "sigma", x, width = width, height = height
+  )
+}</input>
+    </program>
+
+    <program language="r">
+      <input>#' @export
+sigmaOutput = function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(
+    outputId, "sigma", width, height, package = "sigma"
+  )
+}
+#' @export
+renderSigma = function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr = substitute(expr) } # force quoted
+  htmlwidgets::shinyRenderWidget(
+    expr, sigmaOutput, env, quoted = TRUE
+  )
+}</input>
+    </program>
+
+    <program language="r">
+      <input>library(sigma)
+library(htmlwidgets)
+library(magrittr)
+d = system.file("examples/ediaspora.gexf.xml", package = "sigma")
+sigma(d) %&gt;% onRender("function(el, x) {
+  // this.s is the sigma object
+  console.log(this.s);
+}")</input>
+    </program>
+
+    <program language="r">
+      <input>library(shiny)
+library(sigma)
+
+gexf = system.file("examples/ediaspora.gexf.xml", package = "sigma")
+
+ui = shinyUI(fluidPage(
+  checkboxInput("drawEdges", "Draw Edges", value = TRUE),
+  checkboxInput("drawNodes", "Draw Nodes", value = TRUE),
+  sigmaOutput('sigma')
+))
+
+server = function(input, output) {
+  output$sigma = renderSigma(
+    sigma(gexf,
+          drawEdges = input$drawEdges,
+          drawNodes = input$drawNodes)
+  )
+}
+
+shinyApp(ui = ui, server = server)</input>
+    </program>
+
+    <program language="r">
+      <input>library(mywidget)
+mywidget("hello, world")</input>
+    </program>
+
+    <program language="r">
+      <input># create package using devtools
+devtools::create("mywidget")
+
+# navigate to package dir
+setwd("mywidget")
+
+# create widget scaffolding
+htmlwidgets::scaffoldWidget("mywidget")
+
+# install the package so we can try it
+devtools::install()</input>
+    </program>
+
+    <program language="r">
+      <input>library(dygraphs)
+dyCallbacks(
+  clickCallback = JS(...)
+  drawCallback = JS(...)
+  highlightCallback = JS(...)
+  pointClickCallback = JS(...)
+  underlayCallback = JS(...)
+)</input>
+    </program>
+
+    <program language="r">
+      <input>datatable(head(iris, 20), options = list(
+  initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({
+      'background-color': '#000',
+      'color': '#fff'
+     });",
+    "}")
+))</input>
+    </program>
+
+    <program language="r">
+      <input>#' @param text A character string.
+#' @param interval A time interval (in seconds).
+blink = function(text, interval = 1) {
+  htmlwidgets::createWidget(
+    'blink', list(text = text, interval = interval),
+    dependencies = htmltools::htmlDependency(
+      'blink', '0.1', src = c(href = ''), head = '
+&lt;script&gt;
+HTMLWidgets.widget({
+  name: "blink",
+  type: "output",
+  factory: function(el, width, height) {
+    return {
+      renderValue: function(x) {
+        setInterval(function() {
+          el.innerText = el.innerText == "" ? x.text : "";
+        }, x.interval * 1000);
+      },
+      resize: function(width, height) {}
+    };
+  }
+});
+&lt;/script&gt;'
+    )
+  )
+}
+
+blink('Hello htmlwidgets!', .5)</input>
+    </program>
+  </section>
+
 </chapter>

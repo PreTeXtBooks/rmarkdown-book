@@ -152,7 +152,7 @@ The slope of the regression is `r b[1]`.</input>
   <subsection xml:id="examples-books">
     <title>Books</title>
 
-  <p>We will introduce the R Markdown extension **bookdown** in Chapter \@ref(books). It is an R package that allows you to write books and long-form reports with multiple Rmd files. After this package was published, a large number of books have emerged. You can find a subset of them at <url href="https://bookdown.org"/>. Some of these books have been printed, and some only have free online versions.</p>
+  <p>We will introduce the R Markdown extension **bookdown** in Chapter <xref ref="ch-bookdown"/>. It is an R package that allows you to write books and long-form reports with multiple Rmd files. After this package was published, a large number of books have emerged. You can find a subset of them at <url href="https://bookdown.org"/>. Some of these books have been printed, and some only have free online versions.</p>
 
   <p>There have also been students who wrote their dissertations/theses with **bookdown**, such as Ed Berry: <url href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown"/>. Chester Ismay has even provided an R package **thesisdown** (<url href="https://github.com/ismayc/thesisdown"/>) \index{thesisdown} that can render a thesis in various formats. Several other people have customized this package for their own institutions, such as Zhian N. Kamvar's **beaverdown** (<url href="https://github.com/zkamvar/beaverdown"/>) and Ben Marwick's **huskydown** (<url href="https://github.com/benmarwick/huskydown"/>).</p>
 
@@ -161,7 +161,7 @@ The slope of the regression is `r b[1]`.</input>
   <subsection xml:id="examples-websites">
     <title>Websites</title>
 
-  <p>The **blogdown** package to be introduced in Chapter \@ref(websites) can be used to build general-purpose websites (including blogs and personal websites) based on R Markdown. You may find tons of examples at <url href="https://github.com/rbind"/> or by searching on Twitter: <url href="https://twitter.com/search?q=blogdown"/> Here are a few impressive websites that I can quickly think of off the top of my head:</p>
+  <p>The **blogdown** package to be introduced in Chapter <xref ref="ch-website"/> can be used to build general-purpose websites (including blogs and personal websites) based on R Markdown. You may find tons of examples at <url href="https://github.com/rbind"/> or by searching on Twitter: <url href="https://twitter.com/search?q=blogdown"/> Here are a few impressive websites that I can quickly think of off the top of my head:</p>
 
   <ul>
     <li><p>Rob J Hyndman's personal website: <url href="https://robjhyndman.com"/> (a very comprehensive academic website).</p></li>
@@ -212,7 +212,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>A few R Markdown extension packages, such as **bookdown** and **blogdown**, have their own way of compiling documents, and we will introduce them later.</p>
 
-  <p>Note that it is also possible to render a series of reports instead of single one from a single R Markdown source document. You can parameterize an R Markdown document, and generate different reports using different parameters. See Chapter \@ref(parameterized-reports) for details.</p>
+  <p>Note that it is also possible to render a series of reports instead of single one from a single R Markdown source document. You can parameterize an R Markdown document, and generate different reports using different parameters. See Chapter <xref ref="ch-parameterized"/> for details.</p>
 
   </section>
 
@@ -230,7 +230,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p><c>r knitr::combine_words(grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')), value = TRUE), sep = '\n', and = '', before = '- \x60', after = '\x60')</c></p>
 
-  <p>We will document these output formats in detail in Chapters \@ref(documents) and \@ref(presentations). There are more output formats provided in other extension packages (starting from Chapter \@ref(dashboards)). For the output format names in the YAML metadata of an Rmd file, you need to include the package name if a format is from an extension package, e.g.,</p>
+  <p>We will document these output formats in detail in Chapters <xref ref="ch-documents"/> and <xref ref="ch-presentations"/>. There are more output formats provided in other extension packages (starting from Chapter <xref ref="ch-dashboards"/>). For the output format names in the YAML metadata of an Rmd file, you need to include the package name if a format is from an extension package, e.g.,</p>
 
   <program language="yaml">
     <input>output: tufte::tufte_html</input>
@@ -603,7 +603,7 @@ plot(cars, pch = 18)
 ```</input>
   </program>
 
-  <p>You can provide a figure caption using <c>fig.cap</c> in the chunk options. If the document output format supports the option <c>fig_caption: true</c> (e.g., the output format <c>rmarkdown::html_document</c>), the R plots will be placed into figure environments. In the case of PDF output, such figures will be automatically numbered. If you also want to number figures in other formats (such as HTML), please see the **bookdown** package in Chapter \@ref(books) (in particular, see Section \@ref(a-single-document)).</p>
+  <p>You can provide a figure caption using <c>fig.cap</c> in the chunk options. If the document output format supports the option <c>fig_caption: true</c> (e.g., the output format <c>rmarkdown::html_document</c>), the R plots will be placed into figure environments. In the case of PDF output, such figures will be automatically numbered. If you also want to number figures in other formats (such as HTML), please see the **bookdown** package in Chapter <xref ref="ch-bookdown"/> (in particular, see Section \@ref(a-single-document)).</p>
 
   <p>PDF documents are generated through the LaTeX files generated from R Markdown. A highly surprising fact to LaTeX beginners is that figures float by default: even if you generate a plot in a code chunk on the first page, the whole figure environment may float to the next page. This is just how LaTeX works by default. It has a tendency to float figures to the top or bottom of pages. Although it can be annoying and distracting, we recommend that you refrain from playing the "Whac-A-Mole" game in the beginning of your writing, i.e., desparately trying to position figures "correctly" while they seem to be always dodging you. You may wish to fine-tune the positions once the content is complete using the <c>fig.pos</c> chunk option (e.g., <c>fig.pos = 'h')</c>. See <url href="https://www.overleaf.com/learn/latex/Positioning_images_and_tables"/> for possible values of <c>fig.pos</c> and more general tips about this behavior in LaTeX. In short, this can be a difficult problem for PDF output.</p>
 
@@ -963,7 +963,7 @@ Test the `square()` function:
   <section>
     <title>Interactive documents</title>
 
-  <p>R Markdown documents can also generate interactive content. There are two types of interactive R Markdown documents: you can use the HTML Widgets framework, or the Shiny framework (or both). They will be described in more detail in Chapter \@ref(html-widgets) and Chapter \@ref(shiny-documents), respectively.</p>
+  <p>R Markdown documents can also generate interactive content. There are two types of interactive R Markdown documents: you can use the HTML Widgets framework, or the Shiny framework (or both). They will be described in more detail in Chapter <xref ref="ch-widgets"/> and Chapter <xref ref="ch-shiny"/>, respectively.</p>
 
   <subsection xml:id="intro-widgets">
     <title>HTML widgets</title>

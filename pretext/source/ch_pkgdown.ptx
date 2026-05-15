@@ -86,7 +86,7 @@ devtools::install_github("r-lib/pkgdown")</input>
     <subsection>
       <title>Navigation bar</title>
 
-      <p>The navigation bar in <em>pkgdown</em> is based on the <em>rmarkdown</em> site generator. You can learn how to customize it from Chapter 10 (Websites), in the section titled "Site navigation", if you are not satisfied by the default navigation bar. Please note that you need to specify the <c>navbar</c> field in <c>_pkgdown.yml</c> instead of <c>_site.yml</c>.</p>
+      <p>The navigation bar in <em>pkgdown</em> is based on the <em>rmarkdown</em> site generator. You can learn how to customize it from Chapter <xref ref="ch-website"/> (Websites), in the section titled "Site navigation", if you are not satisfied by the default navigation bar. Please note that you need to specify the <c>navbar</c> field in <c>_pkgdown.yml</c> instead of <c>_site.yml</c>.</p>
     </subsection>
   </section>
 

@@ -2,7 +2,7 @@
 <chapter xml:id="ch-bookdown" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Books</title>
 
-  <p>We have introduced the basics of R Markdown in Chapter 3, which highlighted how HTML, PDF, and Word documents can be produced from an R workflow. However, larger projects can become difficult to manage in a single R Markdown file. The <em>bookdown</em> package (R-bookdown) addresses this limitation, and offers several key improvements:</p>
+  <p>We have introduced the basics of R Markdown in Chapter <xref ref="ch-documents"/>, which highlighted how HTML, PDF, and Word documents can be produced from an R workflow. However, larger projects can become difficult to manage in a single R Markdown file. The <em>bookdown</em> package (R-bookdown) addresses this limitation, and offers several key improvements:</p>
 
   <ul>
     <li><p>Books and reports can be built from multiple R Markdown files.</p></li>

@@ -64,7 +64,7 @@ theme = "hugo-lithium-theme"</input>
 
     <p>After you serve a site using <em>blogdown</em>, your site will be continuously built to the <c>public/</c> directory by default. You can upload this folder to any web server to deploy the website. However, if you know GIT, there is an even easier way to publish your website, to be introduced in the next section.</p>
 
-    <p>Hugo is very powerful and customizable. If you want to learn more technical details about it, you may read Chapter 2 of the <em>blogdown</em> book.</p>
+    <p>Hugo is very powerful and customizable. If you want to learn more technical details about it, you may read Chapter 2 of the <em>blogdown</em> book (<url href="https://bookdown.org/yihui/blogdown/">https://bookdown.org/yihui/blogdown/</url>) [@xie2017; @R-blogdown].</p>
   </section>
 
   <section xml:id="blogdown-deploy">
@@ -86,7 +86,7 @@ theme = "hugo-lithium-theme"</input>
   <section xml:id="blogdown-other">
     <title>Other site generators</title>
 
-    <p>Currently <em>blogdown</em> has limited support for two other popular site generators: <url href="https://jekyllrb.com">Jekyll</url> and <url href="https://hexo.io">Hexo</url>. You can find detailed instructions on how to configure <em>blogdown</em> for these site generators in Chapter 5 of the <em>blogdown</em> book. Note that neither Pandoc's Markdown nor HTML widgets are supported if you use Jekyll or Hexo with <em>blogdown</em>.</p>
+    <p>Currently <em>blogdown</em> has limited support for two other popular site generators: <url href="https://jekyllrb.com">Jekyll</url> and <url href="https://hexo.io">Hexo</url>. You can find detailed instructions on how to configure <em>blogdown</em> for these site generators in Chapter 5 of the <em>blogdown</em> book (<url href="https://bookdown.org/yihui/blogdown/">https://bookdown.org/yihui/blogdown/</url>) [@xie2017; @R-blogdown]. Note that neither Pandoc's Markdown nor HTML widgets are supported if you use Jekyll or Hexo with <em>blogdown</em>.</p>
   </section>
 
   <section xml:id="rmarkdown-site">

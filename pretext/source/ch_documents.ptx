@@ -389,7 +389,7 @@ output:
 
   </subsection>
 
-  <subsection>
+  <subsection xml:id="document-dependencies">
     <title>Document dependencies</title>
 
   <p>By default, R Markdown produces standalone HTML files with no external dependencies, using <c>data:</c> URIs to incorporate the contents of linked scripts, stylesheets, images, and videos. This means you can share or publish the file just like you share Office documents or PDFs. If you would rather keep dependencies in external files, you can specify <c>self_contained: false</c>. For example:</p>
@@ -438,7 +438,7 @@ output:
 
   </subsubsection>
 
-  <subsubsection>
+  <subsubsection xml:id="includes">
     <title>Includes</title>
 
   <p>You can do more advanced customization of output by including additional HTML content or by replacing the core Pandoc template entirely. To include content in the document header or before/after the document body, you use the <c>includes</c> option as follows:</p>
@@ -1296,7 +1296,7 @@ StackOverflow|`markdown_strict+autolink_bare_uris`</input>
 
   </section>
 
-  <section>
+  <section xml:id="r-package-vignette">
     <title>R package vignette</title>
 
   <p>The <c>html_vignette</c> format provides a lightweight alternative to <c>html_document</c> suitable for inclusion in packages to be released to CRAN. It reduces the size of a basic vignette\index{R package vignette} from 600Kb to around 10Kb. The format differs from a conventional HTML document as follows:</p>

@@ -97,7 +97,7 @@ output:
       </program>
     </subsection>
 
-    <subsection>
+    <subsection xml:id="appearance-and-style">
       <title>Visual appearance</title>
 
       <subsubsection>

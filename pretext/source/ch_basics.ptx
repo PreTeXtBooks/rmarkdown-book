@@ -77,13 +77,13 @@ The slope of the regression is `r b[1]`.</input>
     <li><p>"A reproducible workflow" by Ignasi Bartomeus and Francisco Rodríguez-Sánchez (<url href="https://youtu.be/s3JldKoA0zw"/> It is a 2-min video that looks artistic but also shows very common and practical problems in data analysis.</p></li>
   </ul>
 
-  <p>Embedded video: <url href="https://www.youtube.com/embed/s3JldKoA0zw?rel=0"/></p>
+  <video youtube="s3JldKoA0zw" width="100%"/>
 
   <ul>
     <li><p>"The Importance of Reproducible Research in High-Throughput Biology" by Keith Baggerly (<url href="https://youtu.be/7gYIs7uYbMo"/> You will be impressed by both the content and the style of this lecture. Keith Baggerly and Kevin Coombes were the two notable heroes in revealing <url href="https://en.wikipedia.org/wiki/Anil_Potti">the Duke/Potti scandal</url>, which was described as "one of the biggest medical research frauds ever" by the television program "60 Minutes".</p></li>
   </ul>
 
-  <p>Embedded video: <url href="https://www.youtube.com/embed/7gYIs7uYbMo"/></p>
+  <video youtube="7gYIs7uYbMo" width="100%"/>
 
   <p>It is fine for humans to err (in computing), as long as the source code is readily available.</p>
 

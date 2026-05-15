@@ -382,10 +382,10 @@ devtools::install()</input>
     <program language="r">
       <input>library(dygraphs)
 dyCallbacks(
-  clickCallback = JS(...)
-  drawCallback = JS(...)
-  highlightCallback = JS(...)
-  pointClickCallback = JS(...)
+  clickCallback = JS(...),
+  drawCallback = JS(...),
+  highlightCallback = JS(...),
+  pointClickCallback = JS(...),
   underlayCallback = JS(...)
 )</input>
     </program>
@@ -394,11 +394,12 @@ dyCallbacks(
       <input>datatable(head(iris, 20), options = list(
   initComplete = JS(
     "function(settings, json) {",
-    "$(this.api().table().header()).css({
-      'background-color': '#000',
-      'color': '#fff'
-     });",
-    "}")
+    "$(this.api().table().header()).css({",
+    "  'background-color': '#000',",
+    "  'color': '#fff'",
+    "});",
+    "}"
+  )
 ))</input>
     </program>
 

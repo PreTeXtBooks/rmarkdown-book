@@ -2,9 +2,92 @@
 <chapter xml:id="ch-pkgdown" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>HTML Documentation for R Packages</title>
 
-  <p>
-    This chapter covers building documentation websites for R packages using the pkgdown package.
-    Content to be filled in from the original RMD book (Chapter 11).
-  </p>
+  <p>R has a built-in HTML help system that can be accessed via <c>help.start()</c>. From this system, you can see the HTML help pages of functions and objects in all packages, as well as other information about packages such as the <c>DESCRIPTION</c> file and package vignettes. However, this system is usually dynamically launched (via a local web server), and it is not straightforward to turn it into a static website that can be viewed without starting R.</p>
+
+  <p>The <em>pkgdown</em> package (R-pkgdown) makes it easy to build a documentation website for an R package, which can help you organize different pieces of the package documentation (e.g., README, help pages, vignettes, and news) with a more visually pleasant style. The navigation can also be easier for users than R's built-in help system. This website can be published to any web server (e.g., GitHub Pages or Netlify). An example is <em>pkgdown</em>'s own website: <url href="https://pkgdown.r-lib.org">https://pkgdown.r-lib.org</url> (see <xref ref="fig-pkgdown"/>).</p>
+
+  <figure xml:id="fig-pkgdown">
+    <image source="images/pkgdown.png"/>
+    <caption><p>A screenshot of the pkgdown website.</p></caption>
+  </figure>
+
+  <section xml:id="pkgdown-start">
+    <title>Get started</title>
+
+    <p>You can install <em>pkgdown</em> from CRAN, or its development version from GitHub, and find more information from its GitHub repository (<url href="https://github.com/r-lib/pkgdown">https://github.com/r-lib/pkgdown</url>).</p>
+
+    <program language="r">
+      <input>install.packages("pkgdown")
+
+# Or the development version
+devtools::install_github("r-lib/pkgdown")</input>
+    </program>
+
+    <p>After it is installed, you can call the function <c>pkgdown::build_site()</c> in the root directory of your source package. It will build a website to the <c>docs/</c> directory, which can be turned into an online website via <url href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/">GitHub Pages</url> or Netlify.</p>
+  </section>
+
+  <section xml:id="pkgdown-components">
+    <title>Components</title>
+
+    <p>A <em>pkgdown</em> website consists of these components: the home page, function reference, articles, news, and the navigation bar. You may configure these components via a file <c>_pkgdown.yml</c>.</p>
+
+    <subsection>
+      <title>Home page</title>
+
+      <p>The home page is generated from the first existing file of the following files in your source package:</p>
+
+      <ul>
+        <li><p><c>index.Rmd</c></p></li>
+        <li><p><c>README.Rmd</c></p></li>
+        <li><p><c>index.md</c></p></li>
+        <li><p><c>README.md</c></p></li>
+      </ul>
+
+      <p>Other meta information about the package, such as the package license and author names, will be displayed automatically as a sidebar on the home page.</p>
+    </subsection>
+
+    <subsection>
+      <title>Function reference</title>
+
+      <p>The reference pages look like R's own help pages. In fact, these pages are generated from the <c>*.Rd</c> files under <c>man/</c>. Compared to R's own help pages, <em>pkgdown</em> offers a few more benefits: the examples on a help page (if they exist) will be evaluated so that you can see the output, and function names are automatically linked so you can click on a name to navigate to the help page of another function. What is more, <em>pkgdown</em> allows you to organize the list of all functions into groups (e.g., by topic), which can make it easier for users to find the right function in a list. By default, all functions are listed alphabetically just like R's help system. To group functions on the list page, you need to provide a <c>reference</c> key in <c>_pkgdown.yml</c>, e.g.,</p>
+
+      <program language="yaml">
+        <input>reference:
+  - title: "One Topic"
+    desc: "These functions are awesome..."
+    contents:
+      - awesome_a
+      - awesome_b
+      - cool_c
+  - title: "Another Topic"
+    desc: "These functions are boring..."
+    contents:
+      - starts_with("boring_")
+      - ugh_oh</input>
+      </program>
+
+      <p>As you can see from the above example, you may list the names of functions in the <c>contents</c> field, or provide a pattern to let <em>pkgdown</em> match the names. There are three ways to match function names: <c>starts_with()</c> to match names that start with a string, <c>ends_with()</c> for an ending pattern, and <c>matches()</c> for an arbitrary regular expression.</p>
+    </subsection>
+
+    <subsection>
+      <title>Articles</title>
+
+      <p>Package vignettes in the R Markdown format under the <c>vignettes/</c> directories will be built as <q>articles</q> for a <em>pkgdown</em>-based website. Note that Rmd files under subdirectories will also be built. The list of articles will be displayed as a drop-down menu in the navigation bar.</p>
+
+      <p>If you have a vignette that has the same base name as the package name (e.g., a vignette <c>foo.Rmd</c> in a package <em>foo</em>), it will be displayed as the <q>Get started</q> menu item in the navigation bar.</p>
+    </subsection>
+
+    <subsection>
+      <title>News</title>
+
+      <p>If the source package has a news file <c>NEWS.md</c>, it will be parsed and rendered to HTML pages that can be accessed via the <q>Changelog</q> menu in the navigation bar.</p>
+    </subsection>
+
+    <subsection>
+      <title>Navigation bar</title>
+
+      <p>The navigation bar in <em>pkgdown</em> is based on the <em>rmarkdown</em> site generator. You can learn how to customize it from <xref ref="ch-website"/> (Websites), in the section titled "Site navigation", if you are not satisfied by the default navigation bar. Please note that you need to specify the <c>navbar</c> field in <c>_pkgdown.yml</c> instead of <c>_site.yml</c>.</p>
+    </subsection>
+  </section>
 
 </chapter>

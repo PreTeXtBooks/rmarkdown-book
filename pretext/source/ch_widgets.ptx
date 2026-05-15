@@ -2,10 +2,433 @@
 <chapter xml:id="ch-widgets" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>HTML Widgets</title>
 
-  <p>
-    This chapter covers HTML widgets, which provide a framework for creating
-    R bindings to JavaScript libraries using the htmlwidgets package.
-    Content to be filled in from the original RMD book (Chapter 16).
-  </p>
+  <p>The <c>htmlwidgets</c> package provides a framework for creating R bindings to JavaScript libraries. HTML widgets can be used at the R console for data analysis, embedded in R Markdown HTML outputs, incorporated into Shiny applications, and saved as standalone web pages.</p>
+
+  <p>This chapter focuses on developing widgets and assumes familiarity with JavaScript.</p>
+
+  <section xml:id="htmlwidgets-overview">
+    <title>Overview</title>
+
+    <p>By following a small set of conventions, an HTML widget includes three core components:</p>
+    <ol>
+      <li><p><em>Dependencies</em>: JavaScript and CSS assets.</p></li>
+      <li><p><em>R binding</em>: user-facing R functions and Shiny boilerplate.</p></li>
+      <li><p><em>JavaScript binding</em>: code that receives data/options from R and renders with the underlying JavaScript library.</p></li>
+    </ol>
+
+    <p>Widgets are hosted in an R package and should include dependency source files so rendering remains reproducible offline.</p>
+  </section>
+
+  <section xml:id="htmlwidgets-sigma">
+    <title>A widget example (sigma.js)</title>
+
+    <p>As an example, wrap <url href="https://sigmajs.org">sigma.js</url> to render interactive GEXF graphs (<url href="https://gexf.net">Graph Exchange XML Format</url>).</p>
+
+    <program language="r">
+      <input>library(sigma)
+gexf_file &lt;- system.file("examples/ediaspora.gexf.xml", package = "sigma")
+sigma(gexf_file)</input>
+    </program>
+
+    <subsection>
+      <title>File layout</title>
+      <pre>R/
+  sigma.R
+
+inst/
+  htmlwidgets/
+    sigma.js
+    sigma.yaml
+    lib/
+      sigma-1.0.3/
+        sigma.min.js
+        plugins/
+          sigma.parsers.gexf.min.js</pre>
+    </subsection>
+
+    <subsection>
+      <title>Dependencies</title>
+      <p>Dependencies are declared in a YAML file named after the widget:</p>
+      <program language="yaml">
+        <input>dependencies:
+  - name: sigma
+    version: 1.0.3
+    src: htmlwidgets/lib/sigma-1.0.3
+    script:
+      - sigma.min.js
+      - plugins/sigma.parsers.gexf.min.js</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>R binding</title>
+      <program language="r">
+        <input>sigma &lt;- function(gexf, drawEdges = TRUE, drawNodes = TRUE,
+                  width = NULL, height = NULL) {
+  gexf_path &lt;- normalizePath(gexf, mustWork = TRUE)
+  data &lt;- paste(readLines(gexf_path), collapse = "\n")
+  settings &lt;- list(drawEdges = drawEdges, drawNodes = drawNodes)
+  x &lt;- list(data = data, settings = settings)
+  htmlwidgets::createWidget("sigma", x, width = width, height = height)
+}</input>
+      </program>
+
+      <p>For Shiny support, include standard output/render wrappers:</p>
+      <program language="r">
+        <input>sigmaOutput &lt;- function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(outputId, "sigma", width, height, package = "sigma")
+}
+
+renderSigma &lt;- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) expr &lt;- substitute(expr)
+  htmlwidgets::shinyRenderWidget(expr, sigmaOutput, env, quoted = TRUE)
+}</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>JavaScript binding</title>
+      <program language="javascript">
+        <input>HTMLWidgets.widget({
+  name: "sigma",
+  type: "output",
+  factory: function(el, width, height) {
+    var sig = new sigma(el.id);
+    return {
+      renderValue: function(x) {
+        var parser = new DOMParser();
+        var data = parser.parseFromString(x.data, "application/xml");
+        for (var name in x.settings) sig.settings(name, x.settings[name]);
+        sigma.parsers.gexf(data, sig, function() { sig.refresh(); });
+      },
+      resize: function(width, height) {
+        for (var name in sig.renderers)
+          sig.renderers[name].resize(width, height);
+      },
+      s: sig
+    };
+  }
+});</input>
+      </program>
+
+      <p>The returned widget instance must provide <c>renderValue</c> and may optionally implement <c>resize</c>. Extra properties (such as <c>s</c>) can expose underlying objects for advanced customization with <c>htmlwidgets::onRender()</c>.</p>
+    </subsection>
+
+    <subsection>
+      <title>Demo</title>
+      <program language="r">
+        <input>devtools::install_github("jjallaire/sigma")
+
+library(sigma)
+sigma(system.file("examples/ediaspora.gexf.xml", package = "sigma"))</input>
+      </program>
+
+      <p>Widgets can also be used in Shiny applications with <c>sigmaOutput()</c> and <c>renderSigma()</c>.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="htmlwidgets-create">
+    <title>Creating your own widgets</title>
+
+    <subsection>
+      <title>Requirements</title>
+      <program language="r">
+        <input>install.packages("htmlwidgets")
+install.packages("devtools")</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Scaffolding</title>
+      <p>The recommended start is <c>htmlwidgets::scaffoldWidget()</c>, which creates the core <c>.R</c>, <c>.js</c>, and <c>.yaml</c> files (and can optionally fetch front-end dependencies).</p>
+      <program language="r">
+        <input>devtools::create("mywidget")
+setwd("mywidget")
+htmlwidgets::scaffoldWidget("mywidget")
+devtools::install()</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Other packages</title>
+      <p>Useful references include <url href="https://github.com/christophergandrud/networkD3">networkD3</url>, <url href="https://github.com/rstudio/dygraphs/">dygraphs</url>, and <url href="https://github.com/htmlwidgets/sparkline">sparkline</url>.</p>
+      <p>For development questions: <url href="https://github.com/ramnathv/htmlwidgets/issues">https://github.com/ramnathv/htmlwidgets/issues</url>.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="htmlwidgets-size">
+    <title>Widget sizing</title>
+
+    <p><c>htmlwidgets</c> sizing policy maps widget size to context (RStudio Viewer, R Markdown, browser, and Shiny). In practice, widget sizing has two steps: define a <c>sizingPolicy</c>, then forward the computed width/height in JavaScript.</p>
+
+    <subsection>
+      <title>Specifying a sizing policy</title>
+      <program language="r">
+        <input>htmlwidgets::createWidget(
+  "sigma",
+  x,
+  width = width,
+  height = height,
+  sizingPolicy = htmlwidgets::sizingPolicy(
+    viewer.padding = 0,
+    viewer.paneHeight = 500,
+    browser.fill = TRUE
+  )
+)</input>
+      </program>
+
+      <p>Important options include defaults (<c>defaultWidth</c>, <c>defaultHeight</c>, <c>padding</c>) and context-specific controls for viewer/browser/knitr such as <c>fill</c>, <c>suppress</c>, and context default sizes.</p>
+    </subsection>
+
+    <subsection>
+      <title>JavaScript resize method</title>
+      <p>The framework passes computed dimensions to both <c>factory(el, width, height)</c> and <c>resize(width, height)</c>; behavior depends on the wrapped library.</p>
+      <program language="javascript">
+        <input>HTMLWidgets.widget({
+  name: "demo",
+  type: "output",
+  factory: function(el, width, height) {
+    return {
+      renderValue: function(x) {},
+      resize: function(width, height) {}
+    };
+  }
+});</input>
+      </program>
+    </subsection>
+  </section>
+
+  <section xml:id="htmlwidgets-advanced">
+    <title>Advanced topics</title>
+
+    <p>Advanced topics include data transformation, passing JavaScript functions, custom widget HTML, and creating a widget without first creating an R package.</p>
+
+    <subsection>
+      <title>Data transformation</title>
+      <p>R objects are JSON-serialized before reaching JavaScript. Helper functions convert structures as needed:</p>
+      <ul>
+        <li><p><c>HTMLWidgets.dataframeToD3()</c> converts data-frame columns (long form) to D3-friendly row objects.</p></li>
+        <li><p><c>HTMLWidgets.transposeArray2D()</c> transposes 2D arrays when needed by a library.</p></li>
+      </ul>
+
+      <p>Serialization can be customized by attaching <c>TOJSON_ARGS</c> and/or <c>TOJSON_FUNC</c> attributes to widget data passed to <c>createWidget()</c>.</p>
+    </subsection>
+
+    <subsection>
+      <title>Passing JavaScript functions</title>
+      <p>Use <c>htmlwidgets::JS()</c> to mark character strings that should be evaluated as JavaScript on the client:</p>
+      <program language="r">
+        <input>datatable(head(iris, 20), options = list(
+  initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+    "}"
+  )
+))</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Custom widget HTML</title>
+      <p>Widgets default to a <c>&lt;div&gt;</c> container, but you can define <c>widgetname_html</c> to use another element type (for example, <c>&lt;span&gt;</c>).</p>
+      <program language="r">
+        <input>sparkline_html &lt;- function(id, style, class, ...) {
+  htmltools::tags$span(id = id, class = class)
+}</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Create a widget without an R package</title>
+      <p>It is possible to define a widget directly with inline dependencies and JavaScript binding:</p>
+      <program language="r">
+        <input>blink &lt;- function(text, interval = 1) {
+  htmlwidgets::createWidget(
+    "blink",
+    list(text = text, interval = interval),
+    dependencies = htmltools::htmlDependency(
+      name = "blink",
+      version = "0.1",
+      src = c(href = ""),
+      head = paste(
+        "&lt;script&gt;",
+        "HTMLWidgets.widget({",
+        "  name: 'blink',",
+        "  type: 'output',",
+        "  factory: function(el) {",
+        "    return {",
+        "      renderValue: function(x) { el.innerText = x.text; },",
+        "      resize: function() {}",
+        "    };",
+        "  }",
+        "});",
+        "&lt;/script&gt;",
+        sep = "\n"
+      )
+    )
+  )
+}</input>
+      </program>
+      <p>This approach is useful for lightweight prototyping.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="htmlwidgets-source-parity">
+    <title>Source parity code snippets</title>
+
+
+    <program language="r">
+      <input>library(sigma)
+d = system.file("examples/ediaspora.gexf.xml", package = "sigma")
+sigma(d)</input>
+    </program>
+
+    <program language="r">
+      <input>#' @import htmlwidgets
+#' @export
+sigma = function(
+  gexf, drawEdges = TRUE, drawNodes = TRUE, width = NULL,
+  height = NULL
+) {
+
+  # read the gexf file
+  data = paste(readLines(gexf), collapse = "\n")
+
+  # create a list that contains the settings
+  settings = list(drawEdges = drawEdges, drawNodes = drawNodes)
+
+  # pass the data and settings using 'x'
+  x = list(data = data, settings = settings)
+
+  # create the widget
+  htmlwidgets::createWidget(
+    "sigma", x, width = width, height = height
+  )
+}</input>
+    </program>
+
+    <program language="r">
+      <input>#' @export
+sigmaOutput = function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(
+    outputId, "sigma", width, height, package = "sigma"
+  )
+}
+#' @export
+renderSigma = function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr = substitute(expr) } # force quoted
+  htmlwidgets::shinyRenderWidget(
+    expr, sigmaOutput, env, quoted = TRUE
+  )
+}</input>
+    </program>
+
+    <program language="r">
+      <input>library(sigma)
+library(htmlwidgets)
+library(magrittr)
+d = system.file("examples/ediaspora.gexf.xml", package = "sigma")
+sigma(d) %&gt;% onRender("function(el, x) {
+  // this.s is the sigma object
+  console.log(this.s);
+}")</input>
+    </program>
+
+    <program language="r">
+      <input>library(shiny)
+library(sigma)
+
+gexf = system.file("examples/ediaspora.gexf.xml", package = "sigma")
+
+ui = shinyUI(fluidPage(
+  checkboxInput("drawEdges", "Draw Edges", value = TRUE),
+  checkboxInput("drawNodes", "Draw Nodes", value = TRUE),
+  sigmaOutput('sigma')
+))
+
+server = function(input, output) {
+  output$sigma = renderSigma(
+    sigma(gexf,
+          drawEdges = input$drawEdges,
+          drawNodes = input$drawNodes)
+  )
+}
+
+shinyApp(ui = ui, server = server)</input>
+    </program>
+
+    <program language="r">
+      <input>library(mywidget)
+mywidget("hello, world")</input>
+    </program>
+
+    <program language="r">
+      <input># create package using devtools
+devtools::create("mywidget")
+
+# navigate to package dir
+setwd("mywidget")
+
+# create widget scaffolding
+htmlwidgets::scaffoldWidget("mywidget")
+
+# install the package so we can try it
+devtools::install()</input>
+    </program>
+
+    <program language="r">
+      <input>library(dygraphs)
+dyCallbacks(
+  clickCallback = JS(...)
+  drawCallback = JS(...)
+  highlightCallback = JS(...)
+  pointClickCallback = JS(...)
+  underlayCallback = JS(...)
+)</input>
+    </program>
+
+    <program language="r">
+      <input>datatable(head(iris, 20), options = list(
+  initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({
+      'background-color': '#000',
+      'color': '#fff'
+     });",
+    "}")
+))</input>
+    </program>
+
+    <program language="r">
+      <input>#' @param text A character string.
+#' @param interval A time interval (in seconds).
+blink = function(text, interval = 1) {
+  htmlwidgets::createWidget(
+    'blink', list(text = text, interval = interval),
+    dependencies = htmltools::htmlDependency(
+      'blink', '0.1', src = c(href = ''), head = '
+&lt;script&gt;
+HTMLWidgets.widget({
+  name: "blink",
+  type: "output",
+  factory: function(el, width, height) {
+    return {
+      renderValue: function(x) {
+        setInterval(function() {
+          el.innerText = el.innerText == "" ? x.text : "";
+        }, x.interval * 1000);
+      },
+      resize: function(width, height) {}
+    };
+  }
+});
+&lt;/script&gt;'
+    )
+  )
+}
+
+blink('Hello htmlwidgets!', .5)</input>
+    </program>
+  </section>
 
 </chapter>

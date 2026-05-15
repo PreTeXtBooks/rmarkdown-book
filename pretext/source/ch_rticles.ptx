@@ -2,10 +2,162 @@
 <chapter xml:id="ch-rticles" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Journals</title>
 
-  <p>
-    This chapter covers creating journal articles with the rticles package,
-    which provides templates for many academic journals.
-    Content to be filled in from the original RMD book (Chapter 13).
-  </p>
+  <p>Academic journals often have strict formatting guidelines for submitted articles. Few journals directly support R Markdown submissions, but many support LaTeX. While R Markdown can be converted to LaTeX, journals have different typesetting requirements and styles, and it can be slow and frustrating to adapt a manuscript manually.</p>
+
+  <p>The <em>rticles</em> package is designed to simplify the creation of documents that conform to submission standards. It provides a suite of R Markdown templates for popular journals.</p>
+
+  <figure xml:id="fig-rticles-plos">
+    <image source="images/rticles-plos.png"/>
+    <caption><p>PLOS journal template in the <em>rticles</em> package.</p></caption>
+  </figure>
+
+  <figure xml:id="fig-rticles-springer">
+    <image source="images/rticles-springer.png"/>
+    <caption><p>Springer journal template in the <em>rticles</em> package.</p></caption>
+  </figure>
+
+  <p>Understanding LaTeX is recommended, but not essential, when using this package. Templates may include some raw LaTeX, but in many cases Markdown and <em>knitr</em> syntax is enough for figures, tables, and equations.</p>
+
+  <section xml:id="rticles-start">
+    <title>Get started</title>
+
+    <p>You can install and use <em>rticles</em> from CRAN as follows:</p>
+
+    <program language="r">
+      <input># Install from CRAN
+install.packages("rticles")
+
+# Or install development version from GitHub
+devtools::install_github("rstudio/rticles")</input>
+    </program>
+
+    <p>The development version from GitHub is often recommended because it includes newer templates and updates.</p>
+
+    <p>If you are using RStudio, you can access templates through <c>File -&gt; New File -&gt; R Markdown</c>. This opens a dialog where you can select from available templates.</p>
+
+    <figure xml:id="fig-rticles-setup">
+      <image source="images/rticles-templates.png"/>
+      <caption><p>The R Markdown template window in RStudio showing available <em>rticles</em> templates.</p></caption>
+    </figure>
+
+    <p>If you are using the command line, you can use <c>rmarkdown::draft()</c> with a journal short name, for example:</p>
+
+    <program language="r">
+      <input>rmarkdown::draft(
+  "MyJSSArticle.Rmd", template = "jss", package = "rticles"
+)</input>
+    </program>
+  </section>
+
+  <section>
+    <title>rticles templates</title>
+
+    <p>The <em>rticles</em> package provides templates for various journals and publishers, including:</p>
+
+    <ul>
+      <li><p>JSS articles (Journal of Statistical Software)</p></li>
+      <li><p>R Journal articles</p></li>
+      <li><p>CTeX documents</p></li>
+      <li><p>ACM articles (Association of Computing Machinery)</p></li>
+      <li><p>ACS articles (American Chemical Society)</p></li>
+      <li><p>AMS articles (American Meteorological Society)</p></li>
+      <li><p>PeerJ articles</p></li>
+      <li><p>Elsevier journal submissions</p></li>
+      <li><p>AEA journal submissions (American Economic Association)</p></li>
+      <li><p>IEEE Transaction journal submissions</p></li>
+      <li><p>Statistics in Medicine journal submissions</p></li>
+      <li><p>Royal Society Open Science journal submissions</p></li>
+      <li><p>Bulletin de l'AMQ journal submissions</p></li>
+      <li><p>MDPI journal submissions</p></li>
+      <li><p>Springer journal submissions</p></li>
+    </ul>
+
+    <p>The full list is available in the R Markdown templates window in RStudio, or through <c>rticles::journals()</c>:</p>
+
+    <program language="r">
+      <input>rticles::journals()</input>
+    </program>
+  </section>
+
+  <section xml:id="rticles-usage">
+    <title>Using a template</title>
+
+    <p>Templates have an extended YAML section compared to a basic R Markdown template, allowing additional journal-specific metadata. Below is an example YAML section for the Springer template:</p>
+
+    <program language="yaml">
+      <input>title: Title here
+subtitle: Do you have a subtitle? If so, write it here
+titlerunning: Short form of title (if too long for head)
+authorrunning:
+  Short form of author list if too long for running head
+thanks: |
+  Grants or other notes about the article that should go
+  on the front page should be placed here. General
+  acknowledgments should be placed at the end of the article.
+authors:
+  - name: Author 1
+    address: Department of YYY, University of XXX
+    email: abc@def
+  - name: Author 2
+    address: Department of ZZZ, University of WWW
+    email: djf@wef
+keywords:
+  - key
+  - dictionary
+  - word
+MSC:
+  - MSC code 1
+  - MSC code 2
+abstract: |
+  The text of your abstract.  150 -- 250 words.
+bibliography: bibliography.bib
+output: rticles::springer_article</input>
+    </program>
+
+    <p>Because these templates use customized output formats, not all YAML options from standard PDF documents are available unless explicitly supported by the template. For example, adding <c>toc: true</c> may not add a table of contents. Build-related options such as <c>keep_tex: true</c> and knitr chunk options can still be used.</p>
+  </section>
+
+  <section xml:id="rticles-latex">
+    <title>LaTeX content</title>
+
+    <p>The rticles output formats are PDF-focused, so document content may include raw LaTeX formatting. For example:</p>
+
+    <program language="latex">
+      <input>\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{foo}
+\caption{An example image.}
+\label{fig:foo}
+\end{figure}</input>
+    </program>
+
+    <p>Unless you have specific LaTeX requirements, it is usually better to use R Markdown syntax because it is easier to read and less error-prone. The same figure could be written as:</p>
+
+    <program language="markdown">
+      <input>```{r foo, out.width="100%", fig.cap="An example image."}
+knitr::include_graphics("foo.png")
+```</input>
+    </program>
+  </section>
+
+  <section xml:id="rticles-bookdown">
+    <title>Linking with bookdown</title>
+
+    <p><em>bookdown</em> provides useful Markdown extensions for academic writing, including cross-referencing. All rticles output formats are based on <c>rmarkdown::pdf_document</c>, and can be used as base formats for <c>bookdown::pdf_book</c>, for example:</p>
+
+    <program language="yaml">
+      <input>output:
+  bookdown::pdf_book:
+    base_format: rticles::peerj_article</input>
+    </program>
+
+    <p>You can substitute <c>rticles::peerj_article</c> with the template you intend to use.</p>
+  </section>
+
+  <section xml:id="rticles-contrib">
+    <title>Contributing templates</title>
+
+    <p>The <em>rticles</em> GitHub repository at <url href="https://github.com/rstudio/rticles">https://github.com/rstudio/rticles</url> includes many templates contributed by the R community. If you want to improve existing templates or add new journal templates, you can build custom templates by translating Pandoc variables from YAML frontmatter and document body into LaTeX.</p>
+  </section>
 
 </chapter>

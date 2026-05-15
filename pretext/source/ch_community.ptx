@@ -2,10 +2,121 @@
 <chapter xml:id="ch-community" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Community Formats</title>
 
-  <p>
-    This chapter covers R Markdown output formats created and maintained by
-    the broader R community.
-    Content to be filled in from the original RMD book (Chapter 9).
-  </p>
+  <p>Most output formats introduced in this book are created and maintained by the RStudio team. In fact, other members in the R community have also created a number of R Markdown output formats.\index{output formats} We mention those formats that we are aware of in this chapter. If you have developed or know other formats, please feel free to suggest that we add them to the page <url href="https://rmarkdown.rstudio.com/formats.html">https://rmarkdown.rstudio.com/formats.html</url>.</p>
+
+  <section>
+    <title>Lightweight Pretty HTML Documents</title>
+
+    <p>When designing the <em>rmarkdown</em> package, we wished it could produce output documents that look pleasant by default, especially for HTML documents. Pandoc does not really style the HTML documents when converting Markdown to HTML, but <em>rmarkdown</em> does. As we mentioned in <xref ref="appearance-and-style"/>, the themes of HTML documents are based on Bootswatch, which actually relies on the Bootstrap library (<url href="https://getbootstrap.com">https://getbootstrap.com</url>). Although these themes look pretty, the major disadvantage is that their file sizes are relatively large. The size of an HTML document created from an empty R Markdown document with the <c>html_document</c> format is about 600Kb, which is roughly the total size of all CSS, JavaScript, and font files in the default theme.</p>
+
+    <p>If you are concerned about the file size but still want a fancy theme, you may consider the <em>prettydoc</em> package (R-prettydoc), which has bundled a few pretty themes (yet small in size). This package provides an output format <c>prettydoc::html_pretty</c>. An empty R Markdown document with this format generates an HTML file of about 70Kb.</p>
+
+    <subsection>
+      <title>Usage</title>
+
+      <p>The usage of <c>prettydoc::html_pretty</c> is very similar to <c>html_document</c>, with two major differences:</p>
+
+      <ul>
+        <li><p>The <c>theme</c> option takes different values. The currently supported themes are <c>"cayman"</c>, <c>"tactile"</c>, <c>"architect"</c>, <c>"leonids"</c>, and <c>"hpstr"</c>. <xref ref="fig-prettydoc"/> shows the appearance of the <c>leonids</c> theme. See <url href="https://github.com/yixuan/prettydoc">https://github.com/yixuan/prettydoc</url> for screenshots of more themes.</p></li>
+        <li><p>The <c>highlight</c> option takes <c>null</c>, <c>"github"</c>, or <c>"vignette"</c>.</p></li>
+      </ul>
+
+      <p>Below is an example of the YAML metadata of an R Markdown document that uses the <c>prettydoc::html_pretty</c> output format:</p>
+
+      <program language="yaml">
+        <input>---
+title: "Your Document Title"
+author: "Document Author"
+date: "2018-04-16"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---</input>
+      </program>
+
+      <figure xml:id="fig-prettydoc">
+        <image source="images/prettydoc.png"/>
+        <caption><p>The leonids theme of the prettydoc package.</p></caption>
+      </figure>
+    </subsection>
+
+    <subsection>
+      <title>Package vignettes</title>
+
+      <p>The <c>prettydoc::html_pretty</c> can be particularly useful for R package vignettes.\index{R package vignette} We have mentioned the <c>html_vignette</c> format in <xref ref="r-package-vignette"/> that also aims at smaller file sizes, but that format is not as stylish. To apply the <c>prettydoc::html_pretty</c> format to a package vignette, you may use the YAML metadata below:</p>
+
+      <program language="yaml">
+        <input>---
+title: "Vignette Title"
+author: "Vignette Author"
+output: prettydoc::html_pretty
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---</input>
+      </program>
+
+      <p>Do not forget to change the vignette title, author, and the index entry. You should also add <c>prettydoc</c> to the <c>Suggests</c> field of your package <c>DESCRIPTION</c> file, and the two package names <c>knitr, rmarkdown</c> to the <c>VignetteBuilder</c> field.</p>
+    </subsection>
+  </section>
+
+  <section>
+    <title>The rmdformats package</title>
+
+    <p>The <em>rmdformats</em> package (R-rmdformats) provides several HTML output formats of unique and attractive styles, including:</p>
+
+    <ul>
+      <li><p><c>material</c>: A format based on the <url href="https://github.com/FezVrasta/bootstrap-material-design">Material design theme for Bootstrap 3</url>. With this format, every first-level section will become a separate page. See <xref ref="fig-rmdformats-material"/> for what this format looks like ("Introduction" and "Including Plots" are two first-level sections).</p></li>
+      <li><p><c>readthedown</c>: It features a sidebar layout. The table of contents is displayed in the sidebar on the left. As you scroll on the page, the current section header will be automatically highlighted (and expanded if necessary) in the sidebar.</p></li>
+      <li><p><c>html_clean</c>: A simple and clean HTML template, with a dynamic table of contents at the top-right of the page.</p></li>
+      <li><p><c>html_docco</c>: A simple template inspired by <url href="https://github.com/jashkenas/docco">the Docco project</url>.</p></li>
+    </ul>
+
+    <p>Do not forget the <c>rmdformats::</c> prefix when you use these formats, e.g.,</p>
+
+    <program language="yaml">
+      <input>---
+output: rmdformats::material
+---</input>
+    </program>
+
+    <figure xml:id="fig-rmdformats-material">
+      <image source="images/rmdformats-material.png"/>
+      <caption><p>The Material Design theme in the rmdformats package.</p></caption>
+    </figure>
+
+    <p>These output formats have some additional features such as responsiveness and code folding. Please refer to the GitHub repository of the <em>rmdformats</em> package for more information: <url href="https://github.com/juba/rmdformats">https://github.com/juba/rmdformats</url>.</p>
+  </section>
+
+  <section>
+    <title>Shower presentations</title>
+
+    <p>Shower (<url href="https://github.com/shower/shower">https://github.com/shower/shower</url>) is a popular and customizable HTML5 presentation\index{HTML5 slides} framework. See <xref ref="fig-shower"/> for what it looks like.</p>
+
+    <figure xml:id="fig-shower">
+      <image source="images/shower.png"/>
+      <caption><p>A few sample slides created via the Shower presentation framework.</p></caption>
+    </figure>
+
+    <p>The R package <em>rmdshower</em> (<url href="https://github.com/mangothecat/rmdshower">https://github.com/mangothecat/rmdshower</url>) is built on top of Shower. You may install it from GitHub:</p>
+
+    <program language="r">
+      <input>devtools::install_github("mangothecat/rmdshower")</input>
+    </program>
+
+    <p>You can create a Shower presentation with the output format <c>rmdshower::shower_presentation</c>, e.g.,</p>
+
+    <program language="yaml">
+      <input>---
+title: "Hello Shower"
+author: "John Doe"
+output: rmdshower::shower_presentation
+---</input>
+    </program>
+
+    <p>See the help page <c>?rmdshower::shower_presentation</c> for all possible options of this format.</p>
+  </section>
 
 </chapter>

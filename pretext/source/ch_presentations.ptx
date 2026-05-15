@@ -2,9 +2,691 @@
 <chapter xml:id="ch-presentations" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Presentations</title>
 
-  <p>
-    This chapter covers R Markdown presentation formats built into the rmarkdown package.
-    Content to be filled in from the original RMD book (Chapter 4).
-  </p>
+  <p>For documents, the basic units are often sections. For presentations, the basic units are slides. A section in the Markdown source document often indicates a new slide in the presentation formats. In this chapter, we introduce the built-in presentation formats in the **rmarkdown** package.</p>
 
+  <section xml:id="ioslides-presentation">
+    <title>ioslides presentation</title>
+
+    <p>To create an ioslides presentation\index{ioslides} from R Markdown, you specify the <c>ioslides_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example here is a simple slide show (see Figure \@ref(fig:ioslides) for two sample slides):</p>
+
+    <program language="markdown">
+      <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: ioslides_presentation
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+---
+
+`r ''````{r, cars, fig.cap="A scatterplot.", echo=FALSE}
+plot(cars)
+```
+
+## Going to sleep
+
+- Get in bed
+- Count sheep</input>
+    </program>
+
+    <figure>
+      <image source="images/ioslides-1.png"/>
+      <image source="images/ioslides-2.png"/>
+      <caption><p>Two sample slides in an ioslides presentation.</p></caption>
+    </figure>
+
+    <p>You can add a subtitle to a slide or section by including text after the pipe (<c>|</c>) character. For example:</p>
+
+    <program language="markdown">
+      <input>## Getting up | What I like to do first thing</input>
+    </program>
+
+    <subsection>
+      <title>Display modes</title>
+
+      <p>The following single character keyboard shortcuts enable alternate display modes:</p>
+
+      <ul>
+        <li><p><c>'f'</c>: enable fullscreen mode</p></li>
+        <li><p><c>'w'</c>: toggle widescreen mode</p></li>
+        <li><p><c>'o'</c>: enable overview mode</p></li>
+        <li><p><c>'h'</c>: enable code highlight mode</p></li>
+        <li><p><c>'p'</c>: show presenter notes</p></li>
+      </ul>
+
+      <p>Pressing <c>Esc</c> exits all of these modes. See the sections below on <em>Code Highlighting</em> and <em>Presenter Mode</em> for additional detail on those modes.</p>
+    </subsection>
+
+    <subsection xml:id="incremental-bullets">
+      <title>Incremental bullets</title>
+
+      <p>You can render bullets incrementally by adding the <c>incremental</c> option:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  ioslides_presentation:
+    incremental: true
+---</input>
+      </program>
+
+      <p>If you want to render bullets incrementally for some slides but not others you can (ab)use this syntax for blockquotes:</p>
+
+      <program language="markdown">
+        <input>&gt; - Eat eggs
+&gt; - Drink coffee</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="appearance-and-style">
+      <title>Visual appearance</title>
+
+      <subsubsection>
+        <title>Presentation size</title>
+
+        <p>You can display the presentation using a wider form factor using the <c>widescreen</c> option. You can specify that smaller text be used with the <c>smaller</c> option. For example:</p>
+
+        <program language="yaml">
+          <input>---
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+---</input>
+        </program>
+
+        <p>You can also enable the <c>smaller</c> option on a slide-by-slide basis by adding the <c>.smaller</c> attribute to the slide header:</p>
+
+        <program language="markdown">
+          <input>## Getting up {.smaller}</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection>
+        <title>Transition speed</title>
+
+        <p>You can customize the speed of slide transitions using <c>transition</c> option. This can be <c>"default"</c>, <c>"slower"</c>, <c>"faster"</c>, or a numeric value with a number of seconds (e.g., <c>0.5</c>) . For example:</p>
+
+        <program language="yaml">
+          <input>---
+output:
+  ioslides_presentation:
+    transition: slower
+---</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection>
+        <title>Build slides</title>
+
+        <p>Slides can also have a <c>.build</c> attribute that indicate that their content should be displayed incrementally. For example:</p>
+
+        <program language="markdown">
+          <input>## Getting up {.build}</input>
+        </program>
+
+        <p>Slide attributes can be combined if you need to specify more than one. For example:</p>
+
+        <program language="markdown">
+          <input>## Getting up {.smaller .build}</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection>
+        <title>Background images</title>
+
+        <p>You can specify a background image for a slide using the attribute <c>data-background</c>, and use other attributes including <c>data-background-size</c>, <c>data-background-position</c>, and <c>data-background-repeat</c> to tweak the style of the image. You need to be familiar with CSS to fully understand these four attributes, and they correspond to <url href="https://www.w3schools.com/cssref/css3_pr_background.asp"/> <c>background</c>, <c>background-size</c>, <c>background-position</c>, and <c>background-repeat</c>, respectively. For example:</p>
+
+        <program language="markdown">
+          <input>## Getting up {data-background=foo.png data-background-size=cover}</input>
+        </program>
+      </subsubsection>
+
+      <subsubsection xml:id="custom-css-ioslides">
+        <title>Custom CSS</title>
+
+        <p>You can add your own CSS\index{CSS} to an ioslides presentation using the <c>css</c> option:</p>
+
+        <program language="markdown">
+          <input>---
+output:
+  ioslides_presentation:
+    css: styles.css
+---</input>
+        </program>
+
+        <p>You can also target specific slides or classes of slides with custom CSS by adding IDs or classes to the slides headers within your document. For example the following slide header:</p>
+
+        <program language="markdown">
+          <input>## Future Steps {#future-steps .emphasized}</input>
+        </program>
+
+        <p>Would enable you to apply CSS to all of its content using either of the following CSS selectors:</p>
+
+        <program language="css">
+          <input>#future-steps {
+  color: blue;
+}
+
+.emphasized {
+  font-size: 1.2em;
+}</input>
+        </program>
+      </subsubsection>
+    </subsection>
+
+    <subsection>
+      <title>Code highlighting</title>
+
+      <p>It is possible to select subsets of code for additional emphasis by adding a special "highlight" comment around the code. For example:</p>
+
+      <program language="r">
+        <input>### &lt;b&gt;
+x &lt;- 10
+y &lt;- x * 2
+### &lt;/b&gt;</input>
+      </program>
+
+      <p>The highlighted region will be displayed with a bold font. When you want to help the audience focus exclusively on the highlighted region press the <c>h</c> key and the rest of the code will fade away.</p>
+    </subsection>
+
+    <subsection>
+      <title>Adding a logo</title>
+
+      <p>You can add a logo to the presentation using the <c>logo</c> option (by default, the logo will be displayed in a 85x85 pixel square). For example:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  ioslides_presentation:
+    logo: logo.png
+---</input>
+      </program>
+
+      <p>The logo graphic will be rescaled to 85x85 (if necessary) and added to the title slide. A smaller icon version of the logo will be included in the bottom-left footer of each slide.</p>
+
+      <p>The logo on the title page and the rectangular element containing it can be customised with CSS. For example:</p>
+
+      <program language="css">
+        <input>.gdbar img {
+  width: 300px !important;
+  height: 150px !important;
+  margin: 8px 8px;
+}
+
+.gdbar {
+  width: 400px !important;
+  height: 170px !important;
+}</input>
+      </program>
+
+      <p>These selectors are to be placed in the CSS text file.</p>
+
+      <p>Similarly, the logo in the footer of each slide can be resized to any desired size. For example:</p>
+
+      <program language="css">
+        <input>slides &gt; slide:not(.nobackground):before {
+  width: 150px;
+  height: 75px;
+  background-size: 150px 75px;
+}</input>
+      </program>
+
+      <p>This will make the footer logo 150 by 75 pixels in size.</p>
+    </subsection>
+
+    <subsection>
+      <title>Tables</title>
+
+      <p>The ioslides template has an attractive default style for tables so you should not hesitate to add tables for presenting more complex sets of information. Pandoc Markdown supports several syntaxes for defining tables, which are described in the Pandoc Manual.</p>
+    </subsection>
+
+    <subsection>
+      <title>Advanced layout</title>
+
+      <p>You can center content on a slide by adding the <c>.flexbox</c> and <c>.vcenter</c> attributes to the slide title. For example:</p>
+
+      <program language="markdown">
+        <input>## Dinner {.flexbox .vcenter}</input>
+      </program>
+
+      <p>You can horizontally center content by enclosing it in a <c>div</c> tag with class <c>centered</c>. For example:</p>
+
+      <program language="html">
+        <input>&lt;div class="centered"&gt;
+This text is centered.
+&lt;/div&gt;</input>
+      </program>
+
+      <p>You can do a two-column layout using the <c>columns-2</c> class. For example:</p>
+
+      <program language="html">
+        <input>&lt;div class="columns-2"&gt;
+  ![](image.png)
+
+  - Bullet 1
+  - Bullet 2
+  - Bullet 3
+&lt;/div&gt;</input>
+      </program>
+
+      <p>Note that content will flow across the columns so if you want to have an image on one side and text on the other you should make sure that the image has sufficient height to force the text to the other side of the slide.</p>
+    </subsection>
+
+    <subsection>
+      <title>Text color</title>
+
+      <p>You can color content using base color classes <c>red</c>, <c>blue</c>, <c>green</c>, <c>yellow</c>, and <c>gray</c> (or variations of them, e.g., <c>red2</c>, <c>red3</c>, <c>blue2</c>, <c>blue3</c>, etc.). For example:</p>
+
+      <program language="html">
+        <input>&lt;div class="red2"&gt;
+This text is red
+&lt;/div&gt;</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Presenter mode</title>
+
+      <p>A separate presenter window can also be opened (ideal for when you are presenting on one screen but have another screen that is private to you). The window stays in sync with the main presentation window and also shows presenter notes and a thumbnail of the next slide. To enable presenter mode add <c>?presentme=true</c> to the URL of the presentation. For example:</p>
+
+      <program language="markdown">
+        <input>my-presentation.html?presentme=true</input>
+      </program>
+
+      <p>The presenter mode window will open and will always re-open with the presentation until it is disabled with:</p>
+
+      <program language="markdown">
+        <input>my-presentation.html?presentme=false</input>
+      </program>
+
+      <p>To add presenter notes to a slide, you include it within a "notes" <c>div</c>. For example:</p>
+
+      <program language="html">
+        <input>&lt;div class="notes"&gt;
+This is my *note*.
+
+- It can contain markdown
+- like this list
+&lt;/div&gt;</input>
+      </program>
+    </subsection>
+
+    <subsection xml:id="printing-and-pdf-output">
+      <title>Printing and PDF output</title>
+
+      <p>You can print an ioslides presentation from within browsers that have good support for print CSS (as of this writing, Google Chrome has the best support). Printing maintains most of the visual styles of the HTML version of the presentation.</p>
+
+      <p>To create a PDF version of a presentation, you can use the menu <c>Print to PDF</c> from Google Chrome. Alternatively, you can use the function <c>pagedown::chrome_print()</c> from the **pagedown** package [@R-pagedown], which calls Chrome to print an Rmd or HTML file to PDF.</p>
+    </subsection>
+
+    <subsection>
+      <title>Custom templates</title>
+
+      <p>You can replace the underlying Pandoc template using the <c>template</c> option:</p>
+
+      <program language="yaml">
+        <input>---
+title: "Habits"
+output:
+  ioslides_presentation:
+    template: quarterly-report.html
+---</input>
+      </program>
+
+      <p>However, please note that the level of customization that can be achieved is limited compared to the templates of other output formats, because the slides are generated by custom formatting written in Lua, and as such the template used must include the string <c>RENDERED_SLIDES</c> as can be found in the default template file with the path <url href="https://github.com/rstudio/rmarkdown/blob/master/inst/rmd/ioslides/default.html"/>.</p>
+    </subsection>
+
+    <subsection>
+      <title>Other features</title>
+
+      <p>Refer to Section \@ref(html-document) for the documentation of other features of ioslides presentations, including figure options (Section \@ref(figure-options)), MathJax equations (Section \@ref(mathjax-equations)), data frame printing (Section \@ref(data-frame-printing)), Markdown extensions (Section \@ref(markdown-extensions)), keeping Markdown (Section \@ref(keeping-markdown)), document dependencies (Section \@ref(document-dependencies)), header and before/after body inclusions (Section \@ref(includes)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+    </subsection>
+  </section>
+
+  <section xml:id="slidy-presentation">
+    <title>Slidy presentation</title>
+
+    <p>To create a <url href="https://www.w3.org/Talks/Tools/Slidy2/"/> presentation from R Markdown, you specify the <c>slidy_presentation</c>\index{Slidy presentation} output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>##</c> heading tag (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show (see Figure \@ref(fig:slidy) for two sample slides):</p>
+
+    <program language="markdown">
+      <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: slidy_presentation
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+---
+
+`r ''````{r, cars, fig.cap="A scatterplot.", echo=FALSE}
+plot(cars)
+```
+
+## Going to sleep
+
+- Get in bed
+- Count sheep</input>
+    </program>
+
+    <figure>
+      <image source="images/slidy-1.png"/>
+      <image source="images/slidy-2.png"/>
+      <caption><p>Two sample slides in a Slidy presentation.</p></caption>
+    </figure>
+
+    <subsection>
+      <title>Display modes</title>
+
+      <p>The following single character keyboard shortcuts enable alternate display modes:</p>
+
+      <ul>
+        <li><p><c>'C'</c>: Show table of contents (the right sub-figure in Figure \@ref(fig:slidy) has shown the table of contents).</p></li>
+        <li><p><c>'F'</c>: Toggles the display of the footer.</p></li>
+        <li><p><c>'A'</c>: Toggles display of current vs all slides (useful for printing handouts).</p></li>
+        <li><p><c>'S'</c>: Make fonts smaller.</p></li>
+        <li><p><c>'B'</c>: Make fonts larger .</p></li>
+      </ul>
+    </subsection>
+
+    <subsection>
+      <title>Text size</title>
+
+      <p>You can use the <c>font_adjustment</c> option to increase or decrease the default font size (e.g., <c>-1</c> or <c>+1</c>) for the entire presentation. For example:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  slidy_presentation:
+    font_adjustment: -1
+---</input>
+      </program>
+
+      <p>If you want to decrease the text size on an individual slide you can use the <c>.smaller</c> slide attribute. For example:</p>
+
+      <program language="markdown">
+        <input>## Getting up {.smaller}</input>
+      </program>
+
+      <p>If you want to increase the text size on an individual slide you can use the <c>.bigger</c> slide attribute. For example:</p>
+
+      <program language="markdown">
+        <input>## Getting up {.bigger}</input>
+      </program>
+
+      <p>You can also manually adjust the font size during the presentation using the <c>'S'</c> (smaller) and <c>'B'</c> (bigger) keys.</p>
+    </subsection>
+
+    <subsection>
+      <title>Footer elements</title>
+
+      <p>You can add a countdown timer to the footer of your slides using the <c>duration</c> option (duration is specified in minutes). For example:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  slidy_presentation:
+    duration: 45
+---</input>
+      </program>
+
+      <p>You can also add custom footer text (e.g., organization name and/or copyright) using the <c>footer</c> option. For example:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  slidy_presentation:
+    footer: "Copyright (c) 2014, RStudio"
+---</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Other features</title>
+
+      <p>Refer to Section \@ref(html-document) for the documentation of other features of Slidy presentations, including figure options (Section \@ref(figure-options)), appearance and style (Section \@ref(appearance-and-style)), MathJax equations (Section \@ref(mathjax-equations)), data frame printing (Section \@ref(data-frame-printing)), Markdown extensions (Section \@ref(markdown-extensions)), keeping Markdown (Section \@ref(keeping-markdown)), document dependencies (Section \@ref(document-dependencies)), header and before/after body inclusions (Section \@ref(includes)), custom templates (Section \@ref(custom-templates)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+
+      <p>Slidy presentations have several features in common with ioslides presentations in Section \@ref(ioslides-presentation). For incremental bullets, see Section \@ref(incremental-bullets). For custom CSS, see Section \@ref(custom-css-ioslides). For printing Slidy slides to PDF, see Section \@ref(printing-and-pdf-output).</p>
+    </subsection>
+  </section>
+
+  <section xml:id="beamer-presentation">
+    <title>Beamer presentation</title>
+
+    <p>To create a Beamer\index{LaTeX Beamer} presentation from R Markdown, you specify the <c>beamer_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show (see Figure \@ref(fig:beamer) for two sample slides):</p>
+
+    <program language="markdown">
+      <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: beamer_presentation
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+---
+
+`r ''````{r, cars, fig.cap="A scatterplot.", echo=FALSE}
+plot(cars)
+```
+
+## Going to sleep
+
+- Get in bed
+- Count sheep</input>
+    </program>
+
+    <figure>
+      <image source="images/beamer-1.png"/>
+      <image source="images/beamer-2.png"/>
+      <caption><p>Two sample slides in a Beamer presentation.</p></caption>
+    </figure>
+
+    <p>Within R Markdown documents that generate PDF output, you can use raw LaTeX and even define LaTeX macros. See Pandoc's manual for details.</p>
+
+    <subsection>
+      <title>Themes</title>
+
+      <p>You can specify Beamer themes using the <c>theme</c>, <c>colortheme</c>, and <c>fonttheme</c> options. For example:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  beamer_presentation:
+    theme: "AnnArbor"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
+---</input>
+      </program>
+
+      <p>Figure \@ref(fig:beamer-theme) shows two sample slides of the <c>AnnArbor</c> theme in the above example. You can find a list of possible themes and color themes at <url href="https://hartwork.org/beamer-theme-matrix/"/>.</p>
+
+      <figure>
+        <image source="images/beamer-theme-1.png"/>
+        <image source="images/beamer-theme-2.png"/>
+        <caption><p>Two sample slides with the AnnArbor theme in Beamer.</p></caption>
+      </figure>
+    </subsection>
+
+    <subsection xml:id="slide-level">
+      <title>Slide level</title>
+
+      <p>The <c>slide_level</c> option defines the heading level that defines individual slides. By default, this is the highest header level in the hierarchy that is followed immediately by content, and not another header, somewhere in the document. This default can be overridden by specifying an explicit <c>slide_level</c>:</p>
+
+      <program language="yaml">
+        <input>---
+output:
+  beamer_presentation:
+    slide_level: 2
+---</input>
+      </program>
+    </subsection>
+
+    <subsection>
+      <title>Other features</title>
+
+      <p>Refer to Section \@ref(html-document) for the documentation of other features of Beamer presentations, including table of contents (Section \@ref(table-of-contents)), figure options (Section \@ref(figure-options)), appearance and style (Section \@ref(appearance-and-style)), data frame printing (Section \@ref(data-frame-printing)), Markdown extensions (Section \@ref(markdown-extensions)), header and before/after body inclusions (Section \@ref(includes)), custom templates (Section \@ref(custom-templates)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+
+      <p>Beamer presentations have a few features in common with ioslides presentations in Section \@ref(ioslides-presentation) and PDF documents in Section \@ref(pdf-document). For incremental bullets, see Section \@ref(incremental-bullets). For how to keep the intermediate LaTeX output file, see Section \@ref(keeping-intermediate-tex).</p>
+    </subsection>
+  </section>
+
+  <section xml:id="powerpoint-presentation">
+    <title>PowerPoint presentation</title>
+
+    <p>To create a PowerPoint\index{PowerPoint} presentation from R Markdown, you specify the <c>powerpoint_presentation</c> output format in the YAML metadata of your document. Please note that this output format is only available in **rmarkdown** &gt;= v1.9, and requires at least Pandoc v2.0.5. You can check the versions of your **rmarkdown** package and Pandoc with <c>packageVersion('rmarkdown')</c> and <c>rmarkdown::pandoc_version()</c> in R, respectively. The RStudio version 1.1.x ships Pandoc 1.19.2.1, which is not sufficient to generate PowerPoint presentations. You need to either install Pandoc 2.x by yourself if you use RStudio 1.1.x, or install <url href="https://www.rstudio.com/products/rstudio/download/preview/"/> (&gt;= 1.2.633), which has bundled Pandoc 2.x.</p>
+
+    <p>Below is a quick example (see Figure \@ref(fig:powerpoint) for a sample slide):</p>
+
+    <program language="markdown">
+      <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: powerpoint_presentation
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+---
+
+`r ''````{r, cars, fig.cap="A scatterplot.", echo=FALSE}
+plot(cars)
+```
+
+## Going to sleep
+
+- Get in bed
+- Count sheep</input>
+    </program>
+
+    <figure>
+      <image source="images/powerpoint.png"/>
+      <caption><p>A sample slide in a PowerPoint presentation.</p></caption>
+    </figure>
+
+    <p>The default slide level (i.e., the heading level that defines individual slides) is determined in the same way as in Beamer slides (Section \@ref(slide-level)), and you can specify an explicit level via the <c>slide_level</c> option under <c>powerpoint_presentation</c>. You can also start a new slide without a header using a horizontal rule <c>---</c>.</p>
+
+    <p>You can generate most elements supported by Pandoc's Markdown (Section \@ref(markdown-syntax)) in PowerPoint output, such as bold/italic text, footnotes, bullets, LaTeX math expressions, images, and tables, etc.</p>
+
+    <p>Please note that images and tables will always be placed on new slides. The only elements that can coexist with an image or table on a slide are the slide header and image/table caption. When you have a text paragraph and an image on the same slide, the image will be moved to a new slide automatically. Images will be scaled automatically to fit the slide, and if the automatic size does not work well, you may manually control the image sizes: for static images included via the Markdown syntax <c>![]()</c>, you may use the <c>width</c> and/or <c>height</c> attributes in a pair of curly braces after the image, e.g., <c>![caption](foo.png){width=40%}</c>; for images generated dynamically from R code chunks, you can use the chunk options <c>fig.width</c> and <c>fig.height</c> to control the sizes.</p>
+
+    <p>Please read the Pandoc manual for more information on slide shows (<url href="https://pandoc.org/MANUAL.html#slide-shows"/>), such as the multi-column layout:</p>
+
+    <program language="markdown">
+      <input>:::::: {.columns}
+::: {.column}
+Content of the left column.
+:::
+
+::: {.column}
+Content of the right column.
+:::
+:::::</input>
+    </program>
+
+    <subsection xml:id="ppt-templates">
+      <title>Custom templates</title>
+
+      <p>Like Word documents (Section \@ref(word-document)), you can customize the appearance of PowerPoint presentations by passing a custom reference document via the <c>reference_doc</c> option, e.g.,</p>
+
+      <program language="yaml">
+        <input>---
+title: "Habits"
+output:
+  powerpoint_presentation:
+    reference_doc: my-styles.pptx
+---</input>
+      </program>
+
+      <p>Note that the <c>reference_doc</c> option requires a version of **rmarkdown** higher than 1.9:</p>
+
+      <program language="r">
+        <input>if (packageVersion('rmarkdown') &lt;= '1.9') {
+  install.packages('rmarkdown')  # update rmarkdown from CRAN
+}</input>
+      </program>
+
+      <p>Basically any template included in a recent version of Microsoft PowerPoint should work. You can create a new <c>*.pptx</c> file from the PowerPoint menu <c>File -&gt; New</c> with your desired template, save the new file, and use it as the reference document (template) through the <c>reference_doc</c> option. Pandoc will read the styles in the template and apply them to the PowerPoint presentation to be created from R Markdown.</p>
+    </subsection>
+
+    <subsection>
+      <title>Other features</title>
+
+      <p>Refer to Section \@ref(html-document) for the documentation of other features of PowerPoint presentations, including table of contents (Section \@ref(table-of-contents)), figure options (Section \@ref(figure-options)), data frame printing (Section \@ref(data-frame-printing)), keeping Markdown (Section \@ref(keeping-markdown)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), shared options (Section \@ref(shared-options)), and incremental slides since Pandoc 2.15 (Section \@ref(incremental-bullets).</p>
+    </subsection>
+  </section>
 </chapter>

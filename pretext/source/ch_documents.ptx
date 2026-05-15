@@ -2,9 +2,1345 @@
 <chapter xml:id="ch-documents" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Documents</title>
 
-  <p>
-    This chapter covers R Markdown output formats for documents (HTML, PDF, Word, etc.).
-    Content to be filled in from the original RMD book (Chapter 3).
-  </p>
+  <p>The very original version of Markdown was invented mainly to write HTML content more easily. For example, you can write a bullet with <c>- text</c> instead of the verbose HTML code <c>&lt;ul&gt;&lt;li&gt;text&lt;/li&gt;&lt;/ul&gt;</c>, or a quote with <c>&gt; text</c> instead of <c>&lt;blockquote&gt;text&lt;/blockquote&gt;</c>.</p>
+
+  <p>The syntax of Markdown has been greatly extended by Pandoc. What is more, Pandoc makes it possible to convert a Markdown document to a large variety of output formats. In this chapter, we will introduce the features of various document output formats. In the next two chapters, we will document the presentation formats and other R Markdown extensions, respectively.</p>
+
+  <section>
+    <title>HTML document</title>
+
+  <p>As we just mentioned before, Markdown was originally designed for HTML output, so it may not be surprising that the HTML format\index{HTML format} has the richest features among all output formats. We recommend that you read this full section before you learn other output formats, because other formats have several features in common with the HTML document format, and we will not repeat these features in the corresponding sections.</p>
+
+  <p>To create an HTML document from R Markdown, you specify the <c>html_document</c> output format in the YAML metadata of your document:</p>
+
+  <program language="yaml">
+    <input>---
+title: Habits
+author: John Doe
+date: March 22, 2005
+output: html_document
+---</input>
+  </program>
+
+  <subsection>
+    <title>Table of contents</title>
+
+  <p>You can add a table of contents (TOC) using the <c>toc</c> option and specify the depth of headers that it applies to using the <c>toc_depth</c> option. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---</input>
+  </program>
+
+  <p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
+
+  <subsubsection>
+    <title>Floating TOC</title>
+
+  <p>You can specify the <c>toc_float</c> option to float the table of contents to the left of the main document content. The floating table of contents will always be visible even when the document is scrolled. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---</input>
+  </program>
+
+  <p>You may optionally specify a list of options for the <c>toc_float</c> parameter which control its behavior. These options include:</p>
+
+  <ul>
+    <li><p><c>collapsed</c> (defaults to <c>TRUE</c>) controls whether the TOC appears with only the top-level (e.g., H2) headers. If collapsed initially, the TOC is automatically expanded inline when necessary.</p></li>
+    <li><p><c>smooth_scroll</c> (defaults to <c>TRUE</c>) controls whether page scrolls are animated when TOC items are navigated to via mouse clicks. For example:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---</input>
+  </program>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Section numbering</title>
+
+  <p>You can add section numbering to headers using the <c>number_sections</c> option:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---</input>
+  </program>
+
+  <p>Note that if you do choose to use the <c>number_sections</c> option, you will likely also want to use <c>#</c> (H1) headers in your document as <c>##</c> (H2) headers will include a decimal point, because without H1 headers, you H2 headers will be numbered with <c>0.1</c>, <c>0.2</c>, and so on.</p>
+
+  </subsection>
+
+  <subsection>
+    <title>Tabbed sections</title>
+
+  <p>You can organize content using tabs by applying the <c>.tabset</c> class attribute to headers within a document. This will cause all sub-headers of the header with the <c>.tabset</c> attribute to appear within tabs rather than as standalone sections. For example:</p>
+
+  <program language="markdown">
+    <input>## Quarterly Results {.tabset}
+
+### By Product
+
+(tab content)
+
+### By Region
+
+(tab content)</input>
+  </program>
+
+  <p>You can also specify two additional attributes to control the appearance and behavior of the tabs. The <c>.tabset-fade</c> attribute causes the tabs to fade in and out when switching between tabs. The <c>.tabset-pills</c> attribute causes the visual appearance of the tabs to be "pill" (see Figure \@ref(fig:tabset)) rather than traditional tabs. For example:</p>
+
+  <program language="markdown">
+    <input>## Quarterly Results {.tabset .tabset-fade .tabset-pills}</input>
+  </program>
+
+  <figure>
+    <image source="images/tabset.png"/>
+    <caption><p>Traditional tabs and pill tabs on an HTML page.</p></caption>
+  </figure>
+
+  </subsection>
+
+  <subsection>
+    <title>Appearance and style</title>
+
+  <p>There are several options that control the appearance of HTML documents:</p>
+
+  <ul>
+    <li><p><c>theme</c> specifies the Bootstrap theme to use for the page (themes are drawn from the Bootswatch (<url href="https://bootswatch.com/3/"/>) theme library). Valid themes include <c>r knitr::combine_words(rmarkdown:::themes())</c>. Pass <c>null</c> for no theme (in this case you can use the <c>css</c> parameter to add your own styles).</p></li>
+    <li><p><c>highlight</c> specifies the syntax highlighting style. Supported styles include <c>r knitr::combine_words(rmarkdown:::html_highlighters(), before='\x60')</c>. Pass <c>null</c> to prevent syntax highlighting.</p></li>
+    <li><p><c>smart</c> indicates whether to produce typographically correct output, converting straight quotes to curly quotes, <c>---</c> to em-dashes, <c>--</c> to en-dashes, and <c>...</c> to ellipses. Note that <c>smart</c> is enabled by default. For example:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+---</input>
+  </program>
+
+  <subsubsection>
+    <title>Custom CSS</title>
+
+  <p>You can add your own CSS\index{CSS} to an HTML document using the <c>css</c> option:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    css: styles.css
+---</input>
+  </program>
+
+  <p>If you want to provide all of the styles for the document from your own CSS you set the <c>theme</c> (and potentially <c>highlight</c>) to <c>null</c>:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    theme: null
+    highlight: null
+    css: styles.css
+---</input>
+  </program>
+
+  <p>You can also target specific sections of documents with custom CSS by adding ids or classes to section headers within your document. For example the following section header:</p>
+
+  <program language="markdown">
+    <input>## Next Steps {#nextsteps .emphasized}</input>
+  </program>
+
+  <p>Would enable you to apply CSS to all of its content using either of the following CSS selectors:</p>
+
+  <program language="css">
+    <input>#nextsteps {
+   color: blue;
+}
+
+.emphasized {
+   font-size: 1.2em;
+}</input>
+  </program>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Figure options</title>
+
+  <p>There are a number of options that affect the output of figures within HTML documents:</p>
+
+  <ul>
+    <li><p><c>fig_width</c> and  <c>fig_height</c> can be used to control the default figure width and height (7x5 is used by default).</p></li>
+    <li><p><c>fig_retina</c> specifies the scaling to perform for retina displays (defaults to 2, which currently works for all widely used retina displays). Set to <c>null</c> to prevent retina scaling.</p></li>
+    <li><p><c>fig_caption</c> controls whether figures are rendered with captions.</p></li>
+    <li><p><c>dev</c> controls the graphics device used to render figures (defaults to <c>png</c>). For example:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>Data frame printing</title>
+
+  <p>You can enhance the default display of data frames via the <c>df_print</c> option. Valid values are shown in Table \@ref(tab:df-print).</p>
+
+  <p>Table: (\#tab:df-print) The possible values of the <c>df_print</c> option for the <c>html_document</c> format.</p>
+
+  <program language="text">
+    <input>| Option  | Description  |
+|------------|-------------------------------------------|
+| default  | Call the `print.data.frame` generic method |
+| kable  | Use the `knitr::kable` function |
+| tibble  | Use the `tibble::print.tbl_df` function |
+| paged  |  Use `rmarkdown::paged_table` to create a pageable table |
+| A custom function | Use the function to create the table |</input>
+  </program>
+
+  <subsubsection>
+    <title>Paged printing</title>
+
+  <p>When the <c>df_print</c> option is set to <c>paged</c>, tables are printed as HTML tables with support for pagination over rows and columns. For instance (see Figure \@ref(fig:paged)):</p>
+
+  <program language="markdown">
+    <input>---
+title: "Motor Trend Car Road Tests"
+output:
+  html_document:
+    df_print: paged
+---
+
+`r ''````{r}
+mtcars
+```</input>
+  </program>
+
+  <figure>
+    <image source="images/paged.png"/>
+    <caption><p>A paged table in the HTML output document.</p></caption>
+  </figure>
+
+  <p>Table \@ref(tab:paged) shows the available options for paged tables.</p>
+
+  <p>Table: (\#tab:paged) The options for paged HTML tables.</p>
+
+  <program language="text">
+    <input>| Option          | Description                                           |
+|-----------------|-------------------------------------------------------|
+| max.print       | The number of rows to print.                          |
+| rows.print      | The number of rows to display.                        |
+| cols.print      | The number of columns to display.                     |
+| cols.min.print  | The minimum number of columns to display.             |
+| pages.print     | The number of pages to display under page navigation. |
+| paged.print     | When set to `FALSE` turns off paged tables.           |
+| rownames.print  | When set to `FALSE` turns off row names.              |</input>
+  </program>
+
+  <p>These options are specified in each chunk like below:</p>
+
+  <program language="markdown">
+    <input>`r ''````{r cols.print=3, rows.print=3}
+mtcars
+```</input>
+  </program>
+
+  </subsubsection>
+
+  <subsubsection xml:id="custom-fun-dfprint">
+    <title>Custom function</title>
+
+  <p>The <c>df_print</c> option can also take an arbitrary function to create the table in the output document. This function must output in the correct format according to the output used.</p>
+
+  <p>For example,</p>
+
+  <program language="r">
+    <input>rmarkdown::html_document(df_print = knitr::kable)</input>
+  </program>
+
+  <p>is the equivalent to using the method <c>"kable"</c></p>
+
+  <program language="r">
+    <input>rmarkdown::html_document(df_print = "kable")</input>
+  </program>
+
+  <p>To use a custom function in <c>df_print</c> within the YAML header, the tag <c>!expr</c> must be used so the R expression after it will be evaluated. See the <c>eval.expr</c> argument on the help page <c>?yaml::yaml.load</c> for details.</p>
+
+  <program language="markdown">
+    <input>---
+title: "Motor Trend Car Road Tests"
+output:
+  html_document:
+    df_print: !expr pander::pander 
+---
+
+`r ''````{r}
+mtcars
+```</input>
+  </program>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Code folding</title>
+
+  <p>When the <em>knitr</em> chunk option <c>echo = TRUE</c> is specified (the default behavior), the R source code within chunks is included within the rendered document. In some cases, it may be appropriate to exclude code entirely (<c>echo = FALSE</c>) but in other cases you might want the code to be available but not visible by default.</p>
+
+  <p>The <c>code_folding: hide</c> option enables you to include R code but have it hidden by default. Users can then choose to show hidden R code chunks either individually or document wide. For example:</p>
+
+  <program language="markdown">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    code_folding: hide
+---</input>
+  </program>
+
+  <p>You can specify <c>code_folding: show</c> to still show all R code by default but then allow users to hide the code if they wish.</p>
+
+  </subsection>
+
+  <subsection>
+    <title>MathJax equations</title>
+
+  <p>By default, MathJax (<url href="https://www.mathjax.org"/>)\index{MathJax} scripts are included in HTML documents for rendering LaTeX and MathML equations. You can use the <c>mathjax</c> option to control how MathJax is included:</p>
+
+  <ul>
+    <li><p>Specify <c>"default"</c> to use an HTTPS URL from a CDN host (currently provided by RStudio).</p></li>
+    <li><p>Specify <c>"local"</c> to use a local version of MathJax (which is copied into the output directory). Note that when using <c>"local"</c> you also need to set the <c>self_contained</c> option to <c>false</c>.</p></li>
+    <li><p>Specify an alternate URL to load MathJax from another location.</p></li>
+    <li><p>Specify <c>null</c> to exclude MathJax entirely. For example, to use a local copy of MathJax:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    mathjax: local
+    self_contained: false
+---</input>
+  </program>
+
+  <p>To use a self-hosted copy of MathJax:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    mathjax: "http://example.com/MathJax.js"
+---</input>
+  </program>
+
+  <p>To exclude MathJax entirely:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    mathjax: null
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection xml:id="document-dependencies">
+    <title>Document dependencies</title>
+
+  <p>By default, R Markdown produces standalone HTML files with no external dependencies, using <c>data:</c> URIs to incorporate the contents of linked scripts, stylesheets, images, and videos. This means you can share or publish the file just like you share Office documents or PDFs. If you would rather keep dependencies in external files, you can specify <c>self_contained: false</c>. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    self_contained: false
+---</input>
+  </program>
+
+  <p>Note that even for self-contained documents, MathJax is still loaded externally (this is necessary because of its big size). If you want to serve MathJax locally, you should specify <c>mathjax: local</c> and <c>self_contained: false</c>.</p>
+
+  <p>One common reason to keep dependencies external is for serving R Markdown documents from a website (external dependencies can be cached separately by browsers, leading to faster page load times). In the case of serving multiple R Markdown documents you may also want to consolidate dependent library files (e.g. Bootstrap, and MathJax, etc.) into a single directory shared by multiple documents. You can use the <c>lib_dir</c> option to do this. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    self_contained: false
+    lib_dir: libs
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>Advanced customization</title>
+
+  <subsubsection>
+    <title>Keeping Markdown</title>
+
+  <p>When <em>knitr</em> processes an R Markdown input file, it creates a Markdown (<c>*.md</c>) file that is subsequently transformed into HTML by Pandoc. If you want to keep a copy of the Markdown file after rendering, you can do so using the <c>keep_md</c> option:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    keep_md: true
+---</input>
+  </program>
+
+  </subsubsection>
+
+  <subsubsection xml:id="includes">
+    <title>Includes</title>
+
+  <p>You can do more advanced customization of output by including additional HTML content or by replacing the core Pandoc template entirely. To include content in the document header or before/after the document body, you use the <c>includes</c> option as follows:</p>
+
+  <program language="markdown">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    includes:
+      in_header: header.html
+      before_body: doc_prefix.html
+      after_body: doc_suffix.html
+---</input>
+  </program>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Custom templates</title>
+
+  <p>You can also replace the underlying Pandoc template\index{Pandoc template} using the <c>template</c> option:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    template: quarterly_report.html
+---</input>
+  </program>
+
+  <p>Consult the documentation on Pandoc templates (<url href="http://pandoc.org/MANUAL.html#templates"/>) for additional details on templates. You can also study the default HTML template <c>default.html5</c> (<url href="https://github.com/jgm/pandoc-templates"/>) as an example.</p>
+
+  </subsubsection>
+
+  <subsubsection xml:id="markdown-extensions">
+    <title>Markdown extensions</title>
+
+  <p>By default, R Markdown is defined as all Pandoc Markdown extensions with the following tweaks for backward compatibility with the old <em>markdown</em> package [@R-markdown]:</p>
+
+  <program language="text">
+    <input>+autolink_bare_uris
++tex_math_single_backslash</input>
+  </program>
+
+  <p>You can enable or disable Markdown extensions using the <c>md_extensions</c> option (you preface an option with <c>-</c> to disable and <c>+</c> to enable it). For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    md_extensions: -autolink_bare_uris+hard_line_breaks
+---</input>
+  </program>
+
+  <p>The above would disable the <c>autolink_bare_uris</c> extension, and enable the <c>hard_line_breaks</c> extension.</p>
+
+  <p>For more on available markdown extensions see the Pandoc Markdown specification (<url href="http://pandoc.org/MANUAL.html#pandocs-markdown"/>).</p>
+
+  </subsubsection>
+
+  <subsubsection xml:id="pandoc-arguments">
+    <title>Pandoc arguments</title>
+
+  <p>If there are Pandoc features that you want to use but lack equivalents in the YAML options described above, you can still use them by passing custom <c>pandoc_args</c>. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  html_document:
+    pandoc_args: [
+      "--title-prefix", "Foo",
+      "--id-prefix", "Bar"
+    ]
+---</input>
+  </program>
+
+  <p>Documentation on all available pandoc arguments can be found in the Pandoc User Guide (<url href="http://pandoc.org/MANUAL.html#options"/>).</p>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection xml:id="shared-options">
+    <title>Shared options</title>
+
+  <p>If you want to specify a set of default options to be shared by multiple documents within a directory, you can include a file named <c>_output.yml</c> within the directory. Note that no YAML delimiters (<c>---</c>) or the enclosing <c>output</c> field are used in this file. For example:</p>
+
+  <program language="yaml">
+    <input>html_document:
+  self_contained: false
+  theme: united
+  highlight: textmate</input>
+  </program>
+
+  <p>It should not be written as:</p>
+
+  <program language="yaml">
+    <input>---
+output:
+  html_document:
+    self_contained: false
+    theme: united
+    highlight: textmate
+---</input>
+  </program>
+
+  <p>All documents located in the same directory as <c>_output.yml</c> will inherit its options. Options defined explicitly within documents will override those specified in the shared options file.</p>
+
+  </subsection>
+
+  <subsection>
+    <title>HTML fragments</title>
+
+  <p>If you want to create an HTML fragment rather than a full HTML document, you can use the <c>html_fragment</c> format. For example:</p>
+
+  <program language="yaml">
+    <input>---
+output: html_fragment
+---</input>
+  </program>
+
+  <p>Note that HTML fragments are not complete HTML documents. They do not contain the standard header content that HTML documents do (they only contain content in the <c>&lt;body&gt;</c> tags of normal HTML documents). They are intended for inclusion within other web pages or content management systems (like blogs). As such, they do not support features like themes or code highlighting (it is expected that the environment they are ultimately published within handles these things).</p>
+
+  </subsection>
+
+  </section>
+
+  <section>
+    <title>Notebook</title>
+
+  <p>An R Notebook is an R Markdown document with chunks that can be executed independently and interactively, with output visible immediately beneath the input. See Figure \@ref(fig:notebook-demo) for an example.</p>
+
+  <figure>
+    <image source="images/notebook-demo.png"/>
+    <caption><p>An R Notebook example.</p></caption>
+  </figure>
+
+  <p>R Notebooks are an implementation of Literate Programming (<url href="https://en.wikipedia.org/wiki/Literate_programming"/>) that allows for direct interaction with R while producing a reproducible document with publication-quality output.</p>
+
+  <p>Any R Markdown document can be used as a notebook, and all R Notebooks can be rendered to other R Markdown document types. A notebook can therefore be thought of as a special execution mode for R Markdown documents. The immediacy of notebook mode makes it a good choice while authoring the R Markdown document and iterating on code. When you are ready to publish the document, you can share the notebook directly, or render it to a publication format with the <c>Knit</c> button.</p>
+
+  <subsection>
+    <title>Using Notebooks</title>
+
+  <subsubsection>
+    <title>Creating a Notebook</title>
+
+  <p>You can create a new notebook in RStudio with the menu command <c>File -&gt; New File -&gt; R Notebook</c>, or by using the <c>html_notebook</c> output type in your document's YAML metadata.</p>
+
+  <program language="yaml">
+    <input>---
+title: "My Notebook"
+output: html_notebook
+---</input>
+  </program>
+
+  <p>By default, RStudio enables inline output (Notebook mode) on all R Markdown documents, so you can interact with any R Markdown document as though it were a notebook. If you have a document with which you prefer to use the traditional console method of interaction, you can disable notebook mode by clicking the gear button in the editor toolbar, and choosing <c>Chunk Output in Console</c> (Figure \@ref(fig:notebook-console)).</p>
+
+  <figure>
+    <image source="images/notebook-console.png"/>
+    <caption><p>Send the R code chunk output to the console.</p></caption>
+  </figure>
+
+  <p>If you prefer to use the console by default for <em>all</em> your R Markdown documents (restoring the behavior in previous versions of RStudio), you can make <c>Chunk Output in Console</c> the default: <c>Tools -&gt; Options -&gt; R Markdown -&gt; Show output inline for all R Markdown documents</c>.</p>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Inserting chunks</title>
+
+  <p>Notebook chunks can be inserted quickly using the keyboard shortcut <c>Ctrl + Alt + I</c> (macOS: <c>Cmd + Option + I</c>), or via the <c>Insert</c> menu in the editor toolbar.</p>
+
+  <p>Because all of a chunk's output appears beneath the chunk (not alongside the statement which emitted the output, as it does in the rendered R Markdown output), it is often helpful to split chunks that produce multiple outputs into two or more chunks which each produce only one output. To do this, select the code to split into a new chunk (Figure \@ref(fig:notebook-split-before)), and use the same keyboard shortcut for inserting a new code chunk (Figure \@ref(fig:notebook-split-after)).</p>
+
+  <figure>
+    <image source="images/notebook-split-before.png"/>
+    <caption><p>Select the code to split into a new chunk.</p></caption>
+  </figure>
+
+  <figure>
+    <image source="images/notebook-split-after.png"/>
+    <caption><p>Insert a new chunk from the code selected before.</p></caption>
+  </figure>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Executing code</title>
+
+  <p>Code in the notebook is executed with the same gestures you would use to execute code in an R Markdown document:</p>
+
+  <ol>
+    <li><p>Use the green triangle button on the toolbar of a code chunk that has the tooltip "Run Current Chunk", or <c>Ctrl + Shift + Enter</c> (macOS: <c>Cmd + Shift + Enter</c>) to run the current chunk.</p></li>
+    <li><p>Press <c>Ctrl + Enter</c> (macOS: <c>Cmd + Enter</c>) to run just the current statement. Running a single statement is much like running an entire chunk consisting only of that statement.</p></li>
+    <li><p>There are other ways to run a batch of chunks if you click the menu <c>Run</c> on the editor toolbar, such as <c>Run All</c>, <c>Run All Chunks Above</c>, and <c>Run All Chunks Below</c>. The primary difference is that when executing chunks in an R Markdown document, all the code is sent to the console at once, but in a notebook, only one line at a time is sent. This allows execution to stop if a line raises an error. When you execute code in a notebook, an indicator will appear in the gutter to show you execution progress (Figure \@ref(fig:notebook-longrunning)). Lines of code that have been sent to R are marked with dark green; lines that have not yet been sent to R are marked with light green. If at least one chunk is waiting to be executed, you will see a progress meter appear in the editor's status bar, indicating the number of chunks remaining to be executed. You can click on this meter at any time to jump to the currently executing chunk. When a chunk is waiting to execute, the <c>Run</c> button in its toolbar will change to a "queued" icon. If you do not want the chunk to run, you can click on the icon to remove it from the execution queue.</p></li>
+  </ol>
+
+  <figure>
+    <image source="images/notebook-longrunning.png"/>
+    <caption><p>The indicator in the gutter to show the execution progress of a code chunk in the notebook.</p></caption>
+  </figure>
+
+  <p>In general, when you execute code in a notebook chunk, it will do exactly the same thing as it would if that same code were typed into the console. There are however a few differences:</p>
+
+  <ul>
+    <li><p><em>Output</em>: The most obvious difference is that most forms of output produced from a notebook chunk are shown in the chunk output rather than, for example, the RStudio Viewer or the Plots pane. Console output (including warnings and messages) appears both at the console <em>and</em> in the chunk output.</p></li>
+    <li><p><em>Working directory</em>: The current working directory inside a notebook chunk is always the directory containing the notebook <c>.Rmd</c> file. This makes it easier to use relative paths inside notebook chunks, and also matches the behavior when knitting, making it easier to write code that works identically both interactively and in a standalone render. You'll get a warning if you try to change the working directory inside a notebook chunk, and the directory will revert back to the notebook's directory once the chunk is finished executing. You can suppress this warning by using the <c>warnings = FALSE</c> chunk option. If it is necessary to execute notebook chunks in a different directory, you can change the working directory for <em>all</em> your chunks by using the <em>knitr</em> <c>root.dir</c> option, e.g. <c>knitr::opts_knit$set(root.dir = normalizePath(".."))</c>. This option is only effective when used inside the setup chunk. Also note that, as in <em>knitr</em>, the <c>root.dir</c> chunk option applies only to chunks; relative paths in Markdown are still relative to the notebook's parent folder.</p></li>
+    <li><p><em>Warnings</em>: Inside a notebook chunk, warnings are always displayed immediately rather than being held until the end, as in <c>options(warn = 1)</c>.</p></li>
+    <li><p><em>Plots</em>: Plots emitted from a chunk are rendered to match the width of the editor at the time the chunk was executed. The height of the plot is determined by the golden ratio (<url href="https://en.wikipedia.org/wiki/Golden_ratio"/>). The plot's display list is saved, too, and the plot is re-rendered to match the editor's width when the editor is resized. You can use the <c>fig.width</c>, <c>fig.height</c>, and <c>fig.asp</c> chunk options to manually specify the size of rendered plots in the notebook; you can also use <c>knitr::opts_chunk$set(fig.width = ..., fig.height = ...)</c> in the setup chunk to to set a default rendered size. Note, however, specifying a chunk size manually suppresses the generation of the display list, so plots with manually specified sizes will be resized using simple image scaling when the notebook editor is resized. To execute an inline R expression in the notebook, put your cursor inside the chunk and press <c>Ctrl + Enter</c> (macOS: <c>Cmd + Enter</c>). As in the execution of ordinary chunks, the content of the expression will be sent to the R console for evaluation. The results will appear in a small pop-up window next to the code (Figure \@ref(fig:notebook-inline-output)).</p></li>
+  </ul>
+
+  <figure>
+    <image source="images/notebook-inline-output.png"/>
+    <caption><p>Output from an inline R expression in the notebook.</p></caption>
+  </figure>
+
+  <p>In notebooks, inline R expressions can only produce text (not figures or other kinds of output). It is also important that inline R expressions executes quickly and do not have side-effects, as they are executed whenever you save the notebook.</p>
+
+  <p>Notebooks are typically self-contained. However, in some situations, it is preferable to re-use code from an R script as a notebook chunk, as in <em>knitr</em>'s code externalization (<url href="https://yihui.name/knitr/demo/externalization/"/>). This can be done by using <c>knitr::read_chunk()</c> in your notebook's setup chunk, along with a special <c>## ---- chunkname</c> annotation in the R file from which you intend to read code. Here is a minimal example with two files:</p>
+
+  <p><em>example.Rmd</em></p>
+
+  <program language="markdown">
+    <input>`r ''````{r setup}
+knitr::read_chunk("example.R")
+```
+
+```{r chunk}
+```</input>
+  </program>
+
+  <p><em>example.R</em></p>
+
+  <program language="r">
+    <input>## ---- chunk
+1 + 1</input>
+  </program>
+
+  <p>When you execute the empty chunk in the notebook <c>example.Rmd</c>, code from the external file <c>example.R</c> will be inserted, and the results displayed inline, as though the chunk contained that code (Figure \@ref(fig:notebook-external-code)).</p>
+
+  <figure>
+    <image source="images/notebook-external-code.png"/>
+    <caption><p>Execute a code chunk read from an external R script.</p></caption>
+  </figure>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Chunk output</title>
+
+  <p>When code is executed in the notebook, its output appears beneath the code chunk that produced it. You can clear an individual chunk's output by clicking the <c>X</c> button in the upper right corner of the output, or collapse it by clicking the chevron.</p>
+
+  <p>It is also possible to clear or collapse all of the output in the document at once using the <c>Collapse All Output</c> and <c>Clear All Output</c> menu items available on the gear menu in the editor toolbar (Figure \@ref(fig:notebook-console)).</p>
+
+  <p>If you want to fully reset the state of the notebook, the item <c>Restart R and Clear Output</c> on the <c>Run</c> menu on the editor toolbar will do the job.</p>
+
+  <p>Ordinary R Markdown documents are "knitted", but notebooks are "previewed". While the notebook preview looks similar to a rendered R Markdown document, the notebook preview _does not execute any of your R code chunks_. It simply shows you a rendered copy of the Markdown output of your document along with the most recent chunk output. This preview is generated automatically whenever you save the notebook (whether you are viewing it in RStudio or not); see the section beneath on the <c>*.nb.html</c> file for details.</p>
+
+  <p>When <c>html_notebook</c> is the topmost (default) format in your YAML metadata, you will see a <c>Preview</c> button in the editor toolbar. Clicking it will show you the notebook preview (Figure \@ref(fig:notebook-preview)).</p>
+
+  <figure>
+    <image source="images/notebook-preview.png"/>
+    <caption><p>Preview a notebook.</p></caption>
+  </figure>
+
+  <p>If you have configured R Markdown previewing to use the Viewer pane (as illustrated in Figure \@ref(fig:notebook-preview)), the preview will be automatically updated whenever you save your notebook.</p>
+
+  <p>When an error occurs while a notebook chunk is executing (Figure \@ref(fig:notebook-error)):</p>
+
+  <figure>
+    <image source="images/notebook-error.png"/>
+    <caption><p>Errors in a notebook.</p></caption>
+  </figure>
+
+  <ol>
+    <li><p>Execution will stop; the remaining lines of that chunk (and any chunks that have not yet been run) will not be executed.</p></li>
+    <li><p>The editor will scroll to the error.</p></li>
+    <li><p>The line of code that caused the error will have a red indicator in the editor's gutter. If you want your notebook to keep running after an error, you can suppress the first two behaviors by specifying <c>error = TRUE</c> in the chunk options. In most cases, it should not be necessary to have the console open while using the notebook, as you can see all of the console output in the notebook itself. To preserve vertical space, the console will be automatically collapsed when you open a notebook or run a chunk in the notebook. If you prefer not to have the console hidden when chunks are executed, uncheck the option from the menu <c>Tools -&gt; Global Options -&gt; R Markdown -&gt; Hide console automatically when executing notebook chunks</c>.</p></li>
+  </ol>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Saving and sharing</title>
+
+  <subsubsection>
+    <title>Notebook file</title>
+
+  <p>When a notebook <c>*.Rmd</c> file is saved, a <c>*.nb.html</c> file is created alongside it. This file is a self-contained HTML file which contains both a rendered copy of the notebook with all current chunk outputs (suitable for display on a website) and a copy of the <c>*.Rmd</c> file itself.</p>
+
+  <p>You can view the <c>*.nb.html</c> file in any ordinary web browser. It can also be opened in RStudio; when you open there (e.g., using <c>File -&gt; Open File</c>), RStudio will do the following:</p>
+
+  <ol>
+    <li><p>Extract the bundled <c>*.Rmd</c> file, and place it alongside the <c>*.nb.html</c> file.</p></li>
+    <li><p>Open the <c>*.Rmd</c> file in a new RStudio editor tab.</p></li>
+    <li><p>Extract the chunk outputs from the <c>*.nb.html</c> file, and place them appropriately in the editor. Note that the <c>*.nb.html</c> file is only created for R Markdown documents that are notebooks (i.e., at least one of their output formats is <c>html_notebook</c>). It is possible to have an R Markdown document that includes inline chunk output beneath code chunks, but does not produce an <c>*.nb.html</c> file, when <c>html_notebook</c> is not specified as an output format for the R Markdown document.</p></li>
+  </ol>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Output storage</title>
+
+  <p>The document's chunk outputs are also stored in an internal RStudio folder beneath the project's <c>.Rproj.user</c> folder. If you work with a notebook but do not have a project open, the outputs are stored in the RStudio state folder in your home directory (the location of this folder varies between the desktop (<url href="https://support.rstudio.com/hc/en-us/articles/200534577"/>) and the server (<url href="https://support.rstudio.com/hc/en-us/articles/218730228"/>)).</p>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Version control</title>
+
+  <p>One of the major advantages of R Notebooks compared to other notebook systems is that they are plain-text files and therefore work well with version control. We recommend checking in both the <c>*.Rmd</c> and <c>*.nb.html</c> files into version control, so that both your source code and output are available to collaborators. However, you can choose to include only the <c>*.Rmd</c> file (with a <c>.gitignore</c> that excludes <c>*.nb.html</c>) if you want each collaborator to work with their own private copies of the output.</p>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Notebook format</title>
+
+  <p>While RStudio provides a set of integrated tools for authoring R Notebooks, the notebook file format itself is decoupled from RStudio. The <em>rmarkdown</em> package provides several functions that can be used to read and write R Notebooks outside of RStudio.</p>
+
+  <p>In this section, we describe the internals of the notebook format. It is primarily intended for front-end applications using or embedding R, or other users who are interested in reading and writing documents using the R Notebook format. We recommend that beginners skip this section when reading this book or using notebooks for the first time.</p>
+
+  <p>R Notebooks are HTML documents with data written and encoded in such a way that:</p>
+
+  <ol>
+    <li><p>The source Rmd document can be recovered, and</p></li>
+    <li><p>Chunk outputs can be recovered. To generate an R Notebook, you can use <c>rmarkdown::render()</c> and specify the <c>html_notebook</c> output format in your document's YAML metadata. Documents rendered in this form will be generated with the <c>.nb.html</c> file extension, to indicate that they are HTML notebooks. To ensure chunk outputs can be recovered, the elements of the R Markdown document are enclosed with HTML comments, providing more information on the output. For example, chunk output might be serialized in the form:</p></li>
+  </ol>
+
+  <program language="html">
+    <input>&lt;!-- rnb-chunk-begin --&gt;
+&lt;!-- rnb-output-begin --&gt;
+&lt;pre&gt;&lt;code&gt;Hello, World!&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- rnb-output-end --&gt;
+&lt;!-- rnb-chunk-end --&gt;</input>
+  </program>
+
+  <p>Because R Notebooks are just HTML documents, they can be opened and viewed in any web browser; in addition, hosting environments can be configured to recover and open the source Rmd document, and also recover and display chunk outputs as appropriate.</p>
+
+  <subsubsection>
+    <title>Generating R Notebooks with custom output</title>
+
+  <p>It is possible to render an HTML notebook with custom chunk outputs inserted in lieu of the result that would be generated by evaluating the associated R code. This can be useful for front-end editors that show the output of chunk execution inline, or for conversion programs from other notebook formats where output is already available from the source format. To facilitate this, one can provide a custom "output source" to <c>rmarkdown::render()</c>. Let's investigate with a simple example:</p>
+
+  <program language="r">
+    <input>rmd_stub = "examples/r-notebook-stub.Rmd"
+cat(readLines(rmd_stub), sep = "\n")</input>
+  </program>
+
+  <p>Let's try to render this document with a custom output source, so that we can inject custom output for the single chunk within the document. The output source function will accept:</p>
+
+  <ul>
+    <li><p><c>code</c>: The code within the current chunk.</p></li>
+    <li><p><c>context</c>: An environment containing active chunk options and other chunk information.</p></li>
+    <li><p><c>...</c>: Optional arguments reserved for future expansion. In particular, the <c>context</c> elements <c>label</c> and <c>chunk.index</c> can be used to help identify which chunk is currently being rendered.</p></li>
+  </ul>
+
+  <program language="r">
+    <input>output_source = function(code, context, ...) {
+  logo = file.path(R.home("doc"), "html", "logo.jpg")
+  if (context$label == "chunk-one") list(
+    rmarkdown::html_notebook_output_code("# R Code"),
+    paste("Custom output for chunk:", context$chunk.index),
+    rmarkdown::html_notebook_output_code("# R Logo"),
+    rmarkdown::html_notebook_output_img(logo)
+  )
+}</input>
+  </program>
+
+  <p>We can pass our <c>output_source</c> along as part of the <c>output_options</c> list to <c>rmarkdown::render()</c>.</p>
+
+  <program language="r">
+    <input>output_file = rmarkdown::render(
+  rmd_stub,
+  output_options = list(output_source = output_source),
+  quiet = TRUE
+)</input>
+  </program>
+
+  <p>We have now generated an R Notebook. Open this document (<url href="https://rmarkdown.rstudio.com/notebook/r-notebook-stub.nb.html"/>) in a web browser, and it will show that the <c>output_source</c> function has effectively side-stepped evaluation of code within that chunk, and instead returned the injected result.</p>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Implementing output sources</title>
+
+  <p>In general, you can provide regular R output in your output source function, but <em>rmarkdown</em> also provides a number of endpoints for insertion of custom HTML content. These are documented within <c>?html_notebook_output</c>.</p>
+
+  <p>Using these functions ensures that you produce an R Notebook that can be opened in R frontends (e.g., RStudio).</p>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Parsing R Notebooks</title>
+
+  <p>The <c>rmarkdown::parse_html_notebook()</c> function provides an interface for recovering and parsing an HTML notebook.</p>
+
+  <program language="r">
+    <input>parsed = rmarkdown::parse_html_notebook(output_file)
+str(parsed, width = 60, strict.width = 'wrap')</input>
+  </program>
+
+  <p>This interface can be used to recover the original Rmd source, and also (with some more effort from the front-end) the ability to recover chunk outputs from the document itself.</p>
+
+  <program language="r">
+    <input>rm(parsed)</input>
+  </program>
+
+  </subsubsection>
+
+  </subsection>
+
+  </section>
+
+  <section>
+    <title>PDF document</title>
+
+  <p>To create a PDF document from R Markdown, you specify the <c>pdf_document</c> output format in the YAML metadata:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: pdf_document
+---</input>
+  </program>
+
+  <p>Within R Markdown documents that generate PDF output, you can use raw LaTeX\index{LaTeX}, and even define LaTeX macros. See Pandoc's documentation on the raw_tex extension (<url href="https://pandoc.org/MANUAL.html#extension-raw_tex"/>) for details.</p>
+
+  <p>Note that PDF output (including Beamer slides) requires an installation of LaTeX (see <xref ref="ch-installation"/>).</p>
+
+  <subsection>
+    <title>Table of contents</title>
+
+  <p>You can add a table of contents using the <c>toc</c> option and specify the depth of headers that it applies to using the <c>toc_depth</c> option. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+---</input>
+  </program>
+
+  <p>If the TOC depth is not explicitly specified, it defaults to 2 (meaning that all level 1 and 2 headers will be included in the TOC), while it defaults to 3 in <c>html_document</c>.</p>
+
+  <p>You can add section numbering to headers using the <c>number_sections</c> option:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+---</input>
+  </program>
+
+  <p>If you are familiar with LaTeX, <c>number_sections: true</c> means <c>\section{}</c>, and <c>number_sections: false</c> means <c>\section*{}</c> for sections in LaTeX (it also applies to other levels of "sections" such as <c>\chapter{}</c>, and <c>\subsection{}</c>).</p>
+
+  </subsection>
+
+  <subsection>
+    <title>Figure options</title>
+
+  <p>There are a number of options that affect the output of figures within PDF documents:</p>
+
+  <ul>
+    <li><p><c>fig_width</c> and <c>fig_height</c> can be used to control the default figure width and height (6.5x4.5 is used by default).</p></li>
+    <li><p><c>fig_crop</c> controls whether the <c>pdfcrop</c> utility, if available in your system, is automatically applied to PDF figures (this is <c>true</c> by default).</p></li>
+    <li><p>If you are using TinyTeX (<url href="https://yihui.name/tinytex/"/>) as your LaTeX distribution, we recommend that you run <c>tinytex::tlmgr_install("pdfcrop")</c> to install the LaTeX package <c>pdfcrop</c>. You also have to make sure the system package <c>ghostscript</c> (<url href="https://www.ghostscript.com"/>) is available in your system for <c>pdfcrop</c> to work. For macOS users who have installed Homebrew, <c>ghostscript</c> can be installed via <c>brew install ghostscript</c>.</p></li>
+    <li><p>If your graphics device is <c>postscript</c>, we recommend that you disable this feature (see more info in the <em>knitr</em> issue #1365 (<url href="https://github.com/yihui/knitr/issues/1365"/>)).</p></li>
+    <li><p><c>fig_caption</c> controls whether figures are rendered with captions (this is <c>true</c> by default).</p></li>
+    <li><p><c>dev</c> controls the graphics device used to render figures (defaults to <c>pdf</c>). For example:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>Data frame printing</title>
+
+  <p>You can enhance the default display of data frames via the <c>df_print</c> option. Valid values are presented in Table \@ref(tab:df-print-pdf).</p>
+
+  <p>Table: (\#tab:df-print-pdf) The possible values of the <c>df_print</c> option for the <c>pdf_document</c> format.</p>
+
+  <program language="text">
+    <input>| Option  | Description  |
+|------------|-------------------------------------------|
+| default  | Call the `print.data.frame` generic method |
+| kable  | Use the `knitr::kable()` function |
+| tibble  | Use the `tibble::print.tbl_df()` function |
+| A custom function | Use the function to create the table. See \@ref(custom-fun-dfprint) |</input>
+  </program>
+
+  <p>For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    df_print: kable
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>Syntax highlighting</title>
+
+  <p>The <c>highlight</c> option specifies the syntax highlighting style. Its usage in <c>pdf_document</c> is the same as <c>html_document</c> (Section \@ref(appearance-and-style)). For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    highlight: tango
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>LaTeX options</title>
+
+  <p>Many aspects of the LaTeX template used to create PDF documents can be customized using _top-level_ YAML metadata (note that these options do not appear underneath the <c>output</c> section, but rather appear at the top level along with <c>title</c>, <c>author</c>, and so on). For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Crop Analysis Q3 2013"
+output: pdf_document
+fontsize: 11pt
+geometry: margin=1in
+---</input>
+  </program>
+
+  <p>A few available metadata variables are displayed in Table \@ref(tab:latex-vars) (consult the Pandoc manual for the full list (<url href="https://pandoc.org/MANUAL.html#variables-for-latex"/>)):</p>
+
+  <p>Table: (\#tab:latex-vars) Available top-level YAML metadata variables for LaTeX output.</p>
+
+  <program language="text">
+    <input>Variable|Description
+------------------------|--------------------------------------------------------------------
+lang|Document language code
+fontsize|Font size (e.g., `10pt`, `11pt`, or `12pt`)
+documentclass|LaTeX document class (e.g., `article`)
+classoption|Options for documentclass (e.g., `oneside`)
+geometry|Options for geometry class (e.g., `margin=1in`)
+mainfont, sansfont, monofont, mathfont|Document fonts (works only with `xelatex` and `lualatex`)
+linkcolor, urlcolor, citecolor|Color for internal, external, and citation links</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>LaTeX packages for citations</title>
+
+  <p>By default, citations\index{citation} are processed through <c>pandoc-citeproc</c>, which works for all output formats. For PDF output, sometimes it is better to use LaTeX packages to process citations, such as <c>natbib</c> or <c>biblatex</c>. To use one of these packages, just set the option <c>citation_package</c> to be <c>natbib</c> or <c>biblatex</c>, e.g.</p>
+
+  <program language="yaml">
+    <input>---
+output:
+  pdf_document:
+    citation_package: natbib
+---</input>
+  </program>
+
+  </subsection>
+
+  <subsection>
+    <title>Advanced customization</title>
+
+  <subsubsection>
+    <title>LaTeX engine</title>
+
+  <p>By default, PDF documents are rendered using <c>pdflatex</c>. You can specify an alternate engine using the <c>latex_engine</c> option. Available engines are <c>pdflatex</c>, <c>xelatex</c>, and <c>lualatex</c>. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---</input>
+  </program>
+
+  <p>The main reasons you may want to use <c>xelatex</c> or <c>lualatex</c> are: (1) They support Unicode better; (2) It is easier to make use of system fonts. See some posts on Stack Overflow for more detailed explanations, e.g., <url href="https://tex.stackexchange.com/q/3393/9128"/> and <url href="https://tex.stackexchange.com/q/36/9128."/></p>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Keeping intermediate TeX</title>
+
+  <p>R Markdown documents are converted to PDF by first converting to a TeX file and then calling the LaTeX engine to convert to PDF. By default, this TeX file is removed, however if you want to keep it (e.g., for an article submission), you can specify the <c>keep_tex</c> option. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    keep_tex: true
+---</input>
+  </program>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Includes</title>
+
+  <p>You can do more advanced customization of PDF output by including additional LaTeX directives and/or content or by replacing the core Pandoc template entirely. To include content in the document header or before/after the document body, you use the <c>includes</c> option as follows:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    includes:
+      in_header: preamble.tex
+      before_body: doc-prefix.tex
+      after_body: doc-suffix.tex
+---</input>
+  </program>
+
+  </subsubsection>
+
+  <subsubsection>
+    <title>Custom templates</title>
+
+  <p>You can also replace the underlying Pandoc template using the <c>template</c> option:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  pdf_document:
+    template: quarterly-report.tex
+---</input>
+  </program>
+
+  <p>Consult the documentation on Pandoc templates (<url href="https://pandoc.org/README.html#templates"/>) for additional details on templates. You can also study the default LaTeX template (<url href="https://github.com/jgm/pandoc-templates/blob/master/default.latex"/>) as an example.</p>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Other features</title>
+
+  <p>Similar to HTML documents, you can enable or disable certain Markdown extensions for generating PDF documents. See Section \@ref(markdown-extensions) for details. You can also pass more custom Pandoc arguments through the <c>pandoc_args</c> option (Section \@ref(pandoc-arguments)), and define shared options in <c>_output.yml</c> (Section \@ref(shared-options)).</p>
+
+  </subsection>
+
+  </section>
+
+  <section>
+    <title>Word document</title>
+
+  <p>To create a Word\index{Word} document from R Markdown, you specify the <c>word_document</c> output format in the YAML metadata of your document:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: word_document
+---</input>
+  </program>
+
+  <p>The most notable feature of Word documents is the Word template, which is also known as the "style reference document". You can specify a document to be used as a style reference in producing a <c>*.docx</c> file (a Word document). This will allow you to customize things such as margins and other formatting characteristics. For best results, the reference document should be a modified version of a <c>.docx</c> file produced using <em>rmarkdown</em> or Pandoc. The path of such a document can be passed to the <c>reference_docx</c> argument of the <c>word_document</c> format. Pass <c>"default"</c> to use the default styles. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  word_document:
+    reference_docx: my-styles.docx
+---</input>
+  </program>
+
+  <p>For more on how to create and use a reference document, you may watch this short video: <url href="https://vimeo.com/110804387,"/> or read this detailed article: <url href="https://rmarkdown.rstudio.com/articles_docx.html."/></p>
+
+  <subsection>
+    <title>Other features</title>
+
+  <p>Refer to Section \@ref(html-document) for the documentation of most features of Word documents, including figure options (Section \@ref(figure-options)), data frame printing (Section \@ref(data-frame-printing)), syntax highlighting (Section \@ref(appearance-and-style)), keeping Markdown (Section \@ref(keeping-markdown)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+
+  </subsection>
+
+  </section>
+
+  <section>
+    <title>OpenDocument Text document</title>
+
+  <p>To create an OpenDocument Text (ODT) document from R Markdown, you specify the <c>odt_document</c> output format in the YAML metadata of your document:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: odt_document
+---</input>
+  </program>
+
+  <p>Similar to <c>word_document,</c> you can also provide a style reference document to <c>odt_document</c> through the <c>reference_odt</c> option. For best results, the reference ODT document should be a modified version of an ODT file produced using <em>rmarkdown</em> or Pandoc. For example:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+output:
+  odt_document:
+    reference_odt: my-styles.odt
+---</input>
+  </program>
+
+  <subsection>
+    <title>Other features</title>
+
+  <p>Refer to Section \@ref(html-document) for the documentation of most features of ODT documents, including figure options (Section \@ref(figure-options)), keeping Markdown (Section \@ref(keeping-markdown)), header and before/after body inclusions (Section \@ref(includes)), custom templates (Section \@ref(custom-templates)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+
+  </subsection>
+
+  </section>
+
+  <section>
+    <title>Rich Text Format document</title>
+
+  <p>To create a Rich Text Format (RTF) document from R Markdown, you specify the <c>rtf_document</c> output format in the YAML metadata of your document:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: rtf_document
+---</input>
+  </program>
+
+  <p>If you know the RTF format really well, you can actually embed raw RTF content in R Markdown. For example, you may create a table in RTF using other software packages, and insert it to your final RTF output document. An RTF document is essentially a plain-text document, so you can read it into R using functions like <c>readLines()</c>. Now suppose you have an RTF table in the file <c>table.rtf</c>. To embed it in R Markdown, you read it and pass to <c>knitr::raw_output()</c>, e.g.,</p>
+
+  <program language="markdown">
+    <input>`r ''````{r, echo=FALSE}
+knitr::raw_output(readLines('table.rtf'))
+```</input>
+  </program>
+
+  <subsection>
+    <title>Other features</title>
+
+  <p>Refer to Section \@ref(html-document) for the documentation of most features of RTF documents, including table of contents (Section \@ref(table-of-contents)), figure options (Section \@ref(figure-options)), keeping Markdown (Section \@ref(keeping-markdown)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+
+  </subsection>
+
+  </section>
+
+  <section>
+    <title>Markdown document</title>
+
+  <p>In some cases, you might want to produce plain Markdown output from R Markdown (e.g., to create a document for a system that accepts Markdown input like Stack Overflow (<url href="https://stackoverflow.com/editing-help"/>)).</p>
+
+  <p>To create a Markdown document from R Markdown, you specify the <c>md_document</c> output format in the front-matter of your document:</p>
+
+  <program language="yaml">
+    <input>---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: md_document
+---</input>
+  </program>
+
+  <subsection>
+    <title>Markdown variants</title>
+
+  <p>By default, the <c>md_document</c> format produces "strict" Markdown (i.e., conforming to the original Markdown specification with no extensions). You can generate a different flavor of Markdown using the <c>variant</c> option. For example:</p>
+
+  <program language="yaml">
+    <input>---
+output:
+  md_document:
+    variant: markdown_github
+---</input>
+  </program>
+
+  <p>Valid values are:</p>
+
+  <ul>
+    <li><p><c>markdown</c> (Full Pandoc Markdown)</p></li>
+    <li><p><c>markdown_strict</c> (Original Markdown specification; the default)</p></li>
+    <li><p><c>markdown_github</c> (GitHub Flavored Markdown)</p></li>
+    <li><p><c>markdown_mmd</c> (MultiMarkdown)</p></li>
+    <li><p><c>markdown_phpextra</c> (PHP Markdown extra) You can also compose custom Markdown variants. For example:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+output:
+  md_document:
+    variant: markdown_strict+backtick_code_blocks+autolink_bare_uris
+---</input>
+  </program>
+
+  <p>See Pandoc's Manual for all of the Markdown extensions and their names to be used in composing custom variants.</p>
+
+  <subsubsection>
+    <title>Publishing formats</title>
+
+  <p>Many popular publishing systems now accept Markdown as input. Table \@ref(tab:markdown-variant) shows the correct Markdown variants to use for some popular systems.</p>
+
+  <p>Table: (\#tab:markdown-variant) Markdown variants for some popular publishing systems.</p>
+
+  <program language="text">
+    <input>System|Markdown Variant
+--------|-----------
+GitHub Wikis|`markdown_github`
+Drupal|`markdown_phpextra`
+WordPress.com|`markdown_phpextra+backtick_code_blocks`
+StackOverflow|`markdown_strict+autolink_bare_uris`</input>
+  </program>
+
+  <p>In many cases, you can simply copy and paste the Markdown generated by <c>rmarkdown::render()</c> into the editing interface of the system you are targeting. Note, however, that if you have embedded plots or other images, you will need to upload them separately and fix up their URLs to point to the uploaded location. If you intend to build websites based on R Markdown, we recommend that you use the more straightforward solutions such as <em>blogdown</em> [@xie2017; @R-blogdown] as introduced in <xref ref="ch-website"/> instead of manually copying the Markdown content.</p>
+
+  </subsubsection>
+
+  </subsection>
+
+  <subsection>
+    <title>Other features</title>
+
+  <p>Refer to Section \@ref(html-document) for the documentation of other features of Markdown documents, including table of contents (Section \@ref(table-of-contents)), figure options (Section \@ref(figure-options)), header and before/after body inclusions (Section \@ref(includes)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+
+  </subsection>
+
+  </section>
+
+  <section xml:id="r-package-vignette">
+    <title>R package vignette</title>
+
+  <p>The <c>html_vignette</c> format provides a lightweight alternative to <c>html_document</c> suitable for inclusion in packages to be released to CRAN. It reduces the size of a basic vignette\index{R package vignette} from 600Kb to around 10Kb. The format differs from a conventional HTML document as follows:</p>
+
+  <ul>
+    <li><p>Never uses retina figures</p></li>
+    <li><p>Has a smaller default figure size</p></li>
+    <li><p>Uses a custom lightweight CSS stylesheet To use <c>html_vignette</c>, you specify it as the output format and add some additional vignette related settings via the <c>\Vignette*{}</c> macros:</p></li>
+  </ul>
+
+  <program language="yaml">
+    <input>---
+title: "Your Vignette Title"
+output: rmarkdown::html_vignette
+vignette: &gt;
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Your Vignette Title}
+  %\VignetteEncoding{UTF-8}
+---</input>
+  </program>
+
+  <p>Note that you should change the <c>title</c> field and the <c>\VignetteIndexEntry{}</c> to match the title of your vignette.</p>
+
+  <p>Most options for <c>html_document</c> (Section \@ref(html-document)) also work for <c>html_vignette</c>, except <c>fig_retina</c> and <c>theme</c>, which have been set to <c>null</c> internally in this format.</p>
+
+  <p>The <c>html_vignette</c> template includes a basic CSS theme. To override this theme, you can specify your own CSS in the document metadata as follows:</p>
+
+  <program language="yaml">
+    <input>output:
+  rmarkdown::html_vignette:
+    css: mystyles.css</input>
+  </program>
+
+  <p>The default figure size is 3x3. Because the figure width is small, usually you will be able to put two images side-by-side if you set the chunk option <c>fig.show='hold'</c>, e.g.,</p>
+
+  <program language="markdown">
+    <input>`r ''````{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```</input>
+  </program>
+
+  <p>If you want larger figure sizes you can change the <c>fig_width</c> and <c>fig_height</c> in the document output options or alternatively override the default options on a per-chunk basis.</p>
+
+  </section>
 
 </chapter>

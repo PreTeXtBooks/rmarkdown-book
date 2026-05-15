@@ -2,10 +2,6 @@
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-back">
   <references xml:id="references">
     <title>References</title>
-    <p>
-      This section will contain the bibliography and references for
-      <em>R Markdown: The Definitive Guide</em>.
-    </p>
   </references>
 
   <index>

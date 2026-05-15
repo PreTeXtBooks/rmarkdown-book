@@ -152,16 +152,16 @@ The slope of the regression is `r b[1]`.</input>
   <subsection xml:id="examples-books">
     <title>Books</title>
 
-  <p>We will introduce the R Markdown extension **bookdown** in Chapter <xref ref="ch-bookdown"/>. It is an R package that allows you to write books and long-form reports with multiple Rmd files. After this package was published, a large number of books have emerged. You can find a subset of them at <url href="https://bookdown.org"/>. Some of these books have been printed, and some only have free online versions.</p>
+  <p>We will introduce the R Markdown extension <em>bookdown</em> in Chapter <xref ref="ch-bookdown"/>. It is an R package that allows you to write books and long-form reports with multiple Rmd files. After this package was published, a large number of books have emerged. You can find a subset of them at <url href="https://bookdown.org"/>. Some of these books have been printed, and some only have free online versions.</p>
 
-  <p>There have also been students who wrote their dissertations/theses with **bookdown**, such as Ed Berry: <url href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown"/>. Chester Ismay has even provided an R package **thesisdown** (<url href="https://github.com/ismayc/thesisdown"/>) \index{thesisdown} that can render a thesis in various formats. Several other people have customized this package for their own institutions, such as Zhian N. Kamvar's **beaverdown** (<url href="https://github.com/zkamvar/beaverdown"/>) and Ben Marwick's **huskydown** (<url href="https://github.com/benmarwick/huskydown"/>).</p>
+  <p>There have also been students who wrote their dissertations/theses with <em>bookdown</em>, such as Ed Berry: <url href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown"/>. Chester Ismay has even provided an R package <em>thesisdown</em> (<url href="https://github.com/ismayc/thesisdown"/>) \index{thesisdown} that can render a thesis in various formats. Several other people have customized this package for their own institutions, such as Zhian N. Kamvar's <em>beaverdown</em> (<url href="https://github.com/zkamvar/beaverdown"/>) and Ben Marwick's <em>huskydown</em> (<url href="https://github.com/benmarwick/huskydown"/>).</p>
 
   </subsection>
 
   <subsection xml:id="examples-websites">
     <title>Websites</title>
 
-  <p>The **blogdown** package to be introduced in Chapter <xref ref="ch-website"/> can be used to build general-purpose websites (including blogs and personal websites) based on R Markdown. You may find tons of examples at <url href="https://github.com/rbind"/> or by searching on Twitter: <url href="https://twitter.com/search?q=blogdown"/> Here are a few impressive websites that I can quickly think of off the top of my head:</p>
+  <p>The <em>blogdown</em> package to be introduced in Chapter <xref ref="ch-website"/> can be used to build general-purpose websites (including blogs and personal websites) based on R Markdown. You may find tons of examples at <url href="https://github.com/rbind"/> or by searching on Twitter: <url href="https://twitter.com/search?q=blogdown"/> Here are a few impressive websites that I can quickly think of off the top of my head:</p>
 
   <ul>
     <li><p>Rob J Hyndman's personal website: <url href="https://robjhyndman.com"/> (a very comprehensive academic website).</p></li>

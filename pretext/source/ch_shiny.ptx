@@ -21,6 +21,11 @@ runtime: shiny
 
     <p>In RStudio, use <c>Run Document</c>. From the console, run <c>rmarkdown::run("file.Rmd")</c>.</p>
 
+    <figure xml:id="fig-shiny-new-document">
+      <image source="images/shiny-new-document.png"/>
+      <caption><p>Create a new Shiny document in RStudio.</p></caption>
+    </figure>
+
     <p>Shiny inputs and outputs can be embedded directly in document chunks. In this example, changing the numeric input updates the rendered table.</p>
 
     <program language="r">
@@ -30,6 +35,11 @@ renderTable({
   head(cars, input$rows)
 })</input>
     </program>
+
+    <figure xml:id="fig-shiny-table">
+      <image source="images/shiny-table.png"/>
+      <caption><p>Increase the number of rows in the table in a Shiny document.</p></caption>
+    </figure>
 
     <p>Similarly, render functions like <c>renderPlot()</c> can generate dynamic graphics from user input.</p>
 
@@ -42,6 +52,11 @@ renderPlot({
   hist(x, breaks = bins, col = "darkgray", border = "white")
 })</input>
     </program>
+
+    <figure xml:id="fig-shiny-plot">
+      <image source="images/shiny-plot.png"/>
+      <caption><p>Change the number of bins of a histogram in a Shiny document.</p></caption>
+    </figure>
   </section>
 
   <section xml:id="shiny-deploy">
@@ -60,6 +75,11 @@ renderPlot({
         <input>install.packages("rsconnect")
 rsconnect::deployApp()</input>
       </program>
+
+      <figure xml:id="fig-shiny-deploy">
+        <image source="images/shiny-deploy.png"/>
+        <caption><p>Deploy a Shiny document to ShinyApps.io.</p></caption>
+      </figure>
 
       <p>If <c>index.Rmd</c> is present, it is served by default. Other files can be addressed explicitly in the URL (for example <c>/test.Rmd</c>).</p>
     </subsection>
@@ -135,6 +155,11 @@ rsconnect::deployApp()</input>
         <input>library(rmdexamples)
 kmeans_cluster(iris)</input>
       </program>
+
+      <figure xml:id="fig-shiny-widget-kmeans">
+        <image source="images/shiny-widget-kmeans.png"/>
+        <caption><p>A Shiny widget to apply k-Means clustering on a dataset.</p></caption>
+      </figure>
 
       <p>Its implementation defines UI and server in one function and returns a <c>shinyApp()</c>.</p>
 

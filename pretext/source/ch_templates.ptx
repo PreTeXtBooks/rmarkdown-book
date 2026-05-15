@@ -6,6 +6,11 @@
 
   <p>Examples include company-branded templates, customized default YAML fields, and additional metadata fields (for example, a department on the title page).</p>
 
+  <figure xml:id="fig-templates-select">
+    <image source="images/templates-select.png"/>
+    <caption><p>Selecting R Markdown templates within RStudio.</p></caption>
+  </figure>
+
   <section xml:id="template-structure">
     <title>Template structure</title>
 

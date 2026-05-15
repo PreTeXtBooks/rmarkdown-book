@@ -34,6 +34,10 @@
 
   <preface xml:id="preface">
     <title>Preface</title>
+    <figure xml:id="fig-book-cover">
+      <image source="images/cover.png"/>
+      <caption><p>The <em>R Markdown: The Definitive Guide</em> book cover.</p></caption>
+    </figure>
     <p>
       The document format <q>R Markdown</q> was first introduced in the <em>knitr</em> package
       in early 2012. The idea was to embed code chunks (of R or other languages) in Markdown

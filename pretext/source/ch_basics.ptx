@@ -636,7 +636,7 @@ knitr::include_graphics('images/hex-rmarkdown.png')
   <subsection>
     <title>Tables</title>
 
-  <p>The easiest way to include tables<idx>tables</idx> is by using <c>knitr::kable()</c>, which can create tables for HTML, PDF and Word outputs.<fn>You may also consider the **pander** package. There are several other packages for producing tables, including **xtable**, **Hmisc**, and **stargazer**, but these are generally less compatible with multiple output formats.</fn> Table captions can be included by passing <c>caption</c> to the function, e.g.,</p>
+  <p>The easiest way to include tables<idx>tables</idx> is by using <c>knitr::kable()</c>, which can create tables for HTML, PDF and Word outputs.<fn>You may also consider the <em>pander</em> package. There are several other packages for producing tables, including <em>xtable</em>, <em>Hmisc</em>, and <em>stargazer</em>, but these are generally less compatible with multiple output formats.</fn> Table captions can be included by passing <c>caption</c> to the function, e.g.,</p>
 
   <program language="markdown">
     <input>`r ''````{r tables-mtcars}

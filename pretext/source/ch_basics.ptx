@@ -228,7 +228,21 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>There are two types of output formats<idx>output formats</idx> in the **rmarkdown** package: documents, and presentations. All available formats are listed below:</p>
 
-  <p><c>r knitr::combine_words(grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')), value = TRUE), sep = '\n', and = '', before = '- \x60', after = '\x60')</c></p>
+<ul>
+  <li><p><c>beamer_presentation</c></p></li>
+  <li><p><c>context_document</c></p></li>
+  <li><p><c>github_document</c></p></li>
+  <li><p><c>html_document</c></p></li>
+  <li><p><c>ioslides_presentation</c></p></li>
+  <li><p><c>latex_document</c></p></li>
+  <li><p><c>md_document</c></p></li>
+  <li><p><c>odt_document</c></p></li>
+  <li><p><c>pdf_document</c></p></li>
+  <li><p><c>powerpoint_presentation</c></p></li>
+  <li><p><c>rtf_document</c></p></li>
+  <li><p><c>slidy_presentation</c></p></li>
+  <li><p><c>word_document</c></p></li>
+</ul>
 
   <p>We will document these output formats in detail in <xref ref="ch-documents"/> and <xref ref="ch-presentations"/>. There are more output formats provided in other extension packages (starting from <xref ref="ch-dashboards"/>). For the output format names in the YAML metadata of an Rmd file, you need to include the package name if a format is from an extension package, e.g.,</p>
 
@@ -268,6 +282,13 @@ The slope of the regression is `r b[1]`.</input>
   title = 'A Wonderful Day',
   subtitle = 'hygge: a quality of coziness'
 )))</input>
+  </program>
+
+  <program language="r">
+    <input>
+title: A Wonderful Day
+subtitle: 'hygge: a quality of coziness'
+</input>
   </program>
 
   <p>Note that the subtitle in the above example is quoted because of the colon.</p>

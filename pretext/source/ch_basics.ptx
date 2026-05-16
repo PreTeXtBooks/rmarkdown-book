@@ -997,7 +997,24 @@ Test the `square()` function:
   <p><xref ref="fig-leaflet"/> shows an interactive map created via the **leaflet** package, and the source document is below:</p>
 
   <program language="markdown">
-    <input>`r xfun::file_string('examples/htmlwidgets.Rmd')`</input>
+    <input>
+---
+title: "An Interactive Map"
+---
+
+Below is a map that shows the location of the
+Department of Statistics, Iowa State University.
+
+```{r out.width='100%', echo=FALSE}
+library(leaflet)
+leaflet() %&lt;% addTiles() %&lt;%
+  setView(-93.65, 42.0285, zoom = 17) %>%
+  addPopups(
+    -93.65, 42.0285,
+    'Here is the &lt;b&gt;Department of Statistics&lt;/b&gt;, ISU'
+  )
+```
+</input>
   </program>
 
   <figure xml:id="fig-leaflet">
@@ -1017,7 +1034,33 @@ Test the `square()` function:
   <p>The **shiny** package [@R-shiny] builds interactive web apps powered by R. To call Shiny<idx>Shiny</idx> code from an R Markdown document, add  <c>runtime: shiny</c> to the YAML metadata, like in this document:</p>
 
   <program language="markdown">
-    <input>`r xfun::file_string('examples/shiny.Rmd')`</input>
+    <input>
+---
+title: "A Shiny Document"
+output: html_document
+runtime: shiny
+---
+
+A standard R plot can be made interactive by wrapping
+it in the Shiny `renderPlot()` function. The `selectInput()`
+function creates the input widget to drive the plot.
+
+```{r eruptions, echo=FALSE}
+selectInput(
+  'breaks', label = 'Number of bins:',
+  choices = c(10, 20, 35, 50), selected = 20
+)
+
+renderPlot({
+  par(mar = c(4, 4, .1, .5))
+  hist(
+    faithful$eruptions, as.numeric(input$breaks),
+    col = 'gray', border = 'white',
+    xlab = 'Duration (minutes)', main = ''
+  )
+})
+```
+</input>
   </program>
 
   <p><xref ref="fig-shiny"/> shows the output, where you can see a dropdown menu that allows you to choose the number of bins in the histogram.</p>

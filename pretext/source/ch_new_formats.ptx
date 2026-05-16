@@ -4,7 +4,7 @@
 
   <p>The <c>rmarkdown</c> package includes many built-in document and presentation formats. These formats are R functions. When you specify an output format in YAML metadata, you are specifying a format function and the parameters passed to it.</p>
 
-  <p>You can create new formats to customize output options or reference external files. This is especially useful when pairing custom templates (Chapter <xref ref="ch-templates" />) with reusable package-based workflows.</p>
+  <p>You can create new formats to customize output options or reference external files. This is especially useful when pairing custom templates (<xref ref="ch-templates" />) with reusable package-based workflows.</p>
 
   <section xml:id="format-derive">
     <title>Deriving from built-in formats</title>

@@ -35,7 +35,7 @@
   <preface xml:id="preface">
     <title>Preface</title>
     <p>
-      <em>Note</em>: This book has been published by <url href="https://www.crcpress.com/p/book/9781138359338"/>. The online version of this book is free to read here (thanks to Chapman &amp; Hall/CRC), and licensed under the <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>.
+      <em>Note</em>: This book has been published by <url href="https://www.crcpress.com/p/book/9781138359338">Chapman &amp; Hall/CRC</url>. The online version of this book is free to read here (thanks to Chapman &amp; Hall/CRC), and licensed under the <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</url>.
     </p>
     <figure xml:id="fig-book-cover">
       <image source="images/cover.png"/>
@@ -51,7 +51,7 @@
       among these document formats.
     </p>
     <p>
-      However, the original version of Markdown invented by John Gruber was often found overly simple and not suitable to write highly technical documents. For example, there was no syntax for tables, footnotes, math expressions, or citations. Fortunately, John MacFarlane created a wonderful package named Pandoc (<url href="http://pandoc.org"/>) to convert Markdown documents (and many other types of documents) to a large variety of output formats. More importantly, the Markdown syntax was significantly enriched. Now we can write more types of elements with Markdown while still enjoying its simplicity.
+      However, the original version of Markdown invented by John Gruber was often found overly simple and not suitable to write highly technical documents. For example, there was no syntax for tables, footnotes, math expressions, or citations. Fortunately, John MacFarlane created a wonderful package named <url href="http://pandoc.org">Pandoc</url> to convert Markdown documents (and many other types of documents) to a large variety of output formats. More importantly, the Markdown syntax was significantly enriched. Now we can write more types of elements with Markdown while still enjoying its simplicity.
     </p>
     <p>
       In a nutshell, R Markdown stands on the shoulders of <em>knitr</em> and Pandoc. The former
@@ -84,7 +84,7 @@
       Epictetus once said, "<em>Wealth consists not in having great possessions, but in having few wants.</em>" The spirit is also reflected in Markdown. If you can control your preoccupation with pursuing typesetting features, you should be much more efficient in writing the content and can become a prolific author. It is entirely possible to succeed with simplicity.
     </p>
     <p>
-      Please do not underestimate the customizability of R Markdown because of the simplicity of its syntax. In particular, Pandoc templates can be surprisingly powerful, as long as you understand the underlying technologies such as LaTeX and CSS, and are willing to invest time in the appearance of your output documents (reports, books, presentations, and/or websites). As one example, you may check out the PDF report at <url href="http://files.kff.org/attachment/Report-Employer-Health-Benefits-Annual-Survey-2017"/>. It looks fairly sophisticated, but was actually produced via <em>bookdown</em>, which is an R Markdown extension. A custom LaTeX template and a lot of LaTeX tricks were used to generate this report. Not surprisingly, this very book that you are reading right now was also written in R Markdown, and its full source is publicly available in the GitHub repository <url href="https://github.com/rstudio/rmarkdown-book"/>.
+      Please do not underestimate the customizability of R Markdown because of the simplicity of its syntax. In particular, Pandoc templates can be surprisingly powerful, as long as you understand the underlying technologies such as LaTeX and CSS, and are willing to invest time in the appearance of your output documents (reports, books, presentations, and/or websites). As one example, you may check out the <url href="http://files.kff.org/attachment/Report-Employer-Health-Benefits-Annual-Survey-2017">KFF 2017 Employer Health Benefits Report</url>. It looks fairly sophisticated, but was actually produced via <em>bookdown</em>, which is an R Markdown extension. A custom LaTeX template and a lot of LaTeX tricks were used to generate this report. Not surprisingly, this very book that you are reading right now was also written in R Markdown, and its full source is publicly available in the <url href="https://github.com/rstudio/rmarkdown-book">rmarkdown-book GitHub repository</url>.
     </p>
     <p>
       R Markdown documents are often portable in the sense that they can be compiled to multiple types of output formats. Again, this is mainly due to the simplified syntax of the authoring language, Markdown. The simpler the elements in your document are, the more likely that the document can be converted to different formats. Similarly, if you heavily tailor R Markdown to a specific output format (e.g., LaTeX), you are likely to lose the portability, because not all features in one format work in another format.
@@ -113,10 +113,10 @@
     <section xml:id="software-info">
       <title>Software information and conventions</title>
       <p>
-        We do not add prompts (<c>&gt;</c> and <c>+</c>) to R source code in this book, and we comment out the text output with two hashes <c>##</c> by default. Package names are in bold text (e.g., <em>rmarkdown</em>), and inline code and filenames are formatted in a typewriter font (e.g., <c>knitr::knit('foo.Rmd')</c>). Function names are followed by parentheses (e.g., <c>blogdown::serve_site()</c>). The double-colon operator <c>::</c> means accessing an object from a package.
+        We do not add prompts (<c>&gt;</c> and <c>+</c>) to R source code in this book, and we comment out the text output with two hashes <c>##</c> by default. Package names are in emphasized text (e.g., <em>rmarkdown</em>), and inline code and filenames are formatted in a typewriter font (e.g., <c>knitr::knit('foo.Rmd')</c>). Function names are followed by parentheses (e.g., <c>blogdown::serve_site()</c>). The double-colon operator <c>::</c> means accessing an object from a package.
       </p>
       <p>
-        <c>Rmd</c> is the filename extension of R Markdown files, and also an abbreviation of R Markdown in this book.
+        <c>Rmd</c> is the filename extension of R Markdown files, and also a shorthand for R Markdown in this book.
       </p>
     </section>
     <section xml:id="acknowledgments">
@@ -127,17 +127,18 @@
       <p>
         Lastly, I want to thank my editor, John Kimmel, for his continued help with my fourth book.
       </p>
-      <p>Yihui Xie<br/>Elkhorn, Nebraska</p>
+      <p>Yihui Xie</p>
+      <p>Elkhorn, Nebraska</p>
     </section>
   </preface>
 
   <preface xml:id="note-pretext-edition">
     <title>Note on This PreTeXt Edition</title>
     <p>
-      This is a <url href="https://pretextbook.org/">PreTeXt</url> conversion of <em>R Markdown: The Definitive Guide</em>, originally written by <url href="https://yihui.org/">Yihui Xie</url>, <url href="https://www.rstudio.com/about/">J. J. Allaire</url>, and <url href="https://github.com/garrettgman">Garrett Grolemund</url>. The original work is available online at <url href="https://bookdown.org/yihui/rmarkdown/"/> and was published by Chapman &amp; Hall/CRC. The original GitHub repository for the book source is at <url href="https://github.com/rstudio/rmarkdown-book"/>.
+      This is a <url href="https://pretextbook.org/">PreTeXt</url> conversion of <em>R Markdown: The Definitive Guide</em>, originally written by <url href="https://yihui.org/">Yihui Xie</url>, <url href="https://www.rstudio.com/about/">J. J. Allaire</url>, and <url href="https://github.com/garrettgman">Garrett Grolemund</url>. The original work is available online at <url href="https://bookdown.org/yihui/rmarkdown/">bookdown.org</url> and was published by Chapman &amp; Hall/CRC. The original GitHub repository for the book source is at <url href="https://github.com/rstudio/rmarkdown-book">the rmarkdown-book repository</url>.
     </p>
     <p>
-      This PreTeXt edition was prepared by <url href="https://github.com/PreTeXtBooks/rmarkdown-book">the PreTeXtBooks project</url> to make the content available in the PreTeXt format, enabling accessible and structured output in HTML, PDF, and other formats. All prose, code examples, figures, and mathematical content are intended to be faithful reproductions of the original work, though occasional typographical errors may have been introduced in the conversion process. Report any issues to our <url href="https://github.com/PreTeXtBooks/rmarkdown-book/issues">GitHub Issues page</url>.
+      This PreTeXt edition was prepared by <url href="https://github.com/PreTeXtBooks/rmarkdown-book">the PreTeXtBooks project</url> to make the content available in the PreTeXt format, enabling accessible and structured output in HTML, PDF, and other formats. All prose, code examples, figures, and mathematical content are intended to be faithful reproductions of the original work, though occasional typographical errors may have been introduced in the conversion process. To report issues, use <url href="https://github.com/PreTeXtBooks/rmarkdown-book/issues">the issue tracker on GitHub</url>.
     </p>
     <p>
       The original work by Yihui Xie, J. J. Allaire, and Garrett Grolemund is licensed under a <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</url>.
@@ -152,7 +153,10 @@
     <section xml:id="author-yihui-xie">
       <title>Yihui Xie</title>
       <p>
-        Yihui Xie (<url href="https://yihui.name"/>) is a software engineer at RStudio (<url href="https://www.rstudio.com"/>). He earned his PhD from the Department of Statistics, Iowa State University. He is interested in interactive statistical graphics and statistical computing. As an active R user, he has authored several R packages, such as <em>knitr</em>, <em>bookdown</em>, <em>blogdown</em>, <em>xaringan</em>, <em>tinytex</em>, <em>animation</em>, <em>DT</em>, <em>tufte</em>, <em>formatR</em>, <em>fun</em>, <em>xfun</em>, <em>mime</em>, <em>highr</em>, <em>servr</em>, and <em>Rd2roxygen</em>, among which the <em>animation</em> package won the 2009 John M. Chambers Statistical Software Award (ASA). He also co-authored a few other R packages, including <em>shiny</em>, <em>rmarkdown</em>, and <em>leaflet</em>.
+        Yihui Xie (<url href="https://yihui.name"/>) is a software engineer at RStudio (<url href="https://www.rstudio.com"/>). He earned his PhD from the Department of Statistics, Iowa State University. He is interested in interactive statistical graphics and statistical computing.
+      </p>
+      <p>
+        As an active R user, he has authored several R packages, such as <em>knitr</em>, <em>bookdown</em>, <em>blogdown</em>, <em>xaringan</em>, <em>tinytex</em>, <em>animation</em>, <em>DT</em>, <em>tufte</em>, <em>formatR</em>, <em>fun</em>, <em>xfun</em>, <em>mime</em>, <em>highr</em>, <em>servr</em>, and <em>Rd2roxygen</em>, among which the <em>animation</em> package won the 2009 John M. Chambers Statistical Software Award (ASA). He also co-authored a few other R packages, including <em>shiny</em>, <em>rmarkdown</em>, and <em>leaflet</em>.
       </p>
       <p>
         He has authored two books, <em>Dynamic Documents with knitr</em>, and <em>bookdown: Authoring Books and Technical Documents with R Markdown</em>, and co-authored two books, <em>blogdown: Creating Websites with R Markdown</em>, and <em>R Markdown: The Definitive Guide</em>.
@@ -174,10 +178,10 @@
     <section xml:id="author-garrett-grolemund">
       <title>Garrett Grolemund</title>
       <p>
-        Garrett Grolemund is the co-author of <em>R for Data Science</em> and author of <em>Hands-On Programming with R</em>. He wrote the <em>lubridate</em> R package and works for RStudio as an advocate who trains engineers to do data science with R and the Tidyverse. If you use R yourself, you may recognize Garrett from his video courses on Datacamp.com and O'Reilly media, or for his series of popular R cheatsheets distributed by RStudio.
+        Garrett Grolemund is the co-author of <em>R for Data Science</em> and author of <em>Hands-On Programming with R</em>. He wrote the <em>lubridate</em> R package and works for RStudio as an advocate who trains engineers to do data science with R and the Tidyverse. If you use R yourself, you may recognize Garrett from his video courses on Datacamp.com and O'Reilly Media, or from his series of popular R cheatsheets distributed by RStudio.
       </p>
       <p>
-        Garrett earned his PhD in Statistics from Rice University in 2012 under the guidance of Hadley Wickham. Before that, he earned a Bachelor's degree in Psychology from Harvard University and briefly attended law school. Garrett has been one of the foremost promoters of Shiny, R Markdown, and the Tidyverse, documenting and explaining each in detail.
+        Garrett earned his PhD in Statistics from Rice University in 2012 under the guidance of Hadley Wickham. Before that, he earned a bachelor's degree in Psychology from Harvard University and briefly attended law school. Garrett has been one of the foremost promoters of Shiny, R Markdown, and the Tidyverse, documenting and explaining each in detail.
       </p>
     </section>
   </preface>

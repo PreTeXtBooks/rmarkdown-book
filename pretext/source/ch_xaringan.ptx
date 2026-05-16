@@ -2,7 +2,7 @@
 <chapter xml:id="ch-xaringan" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>xaringan Presentations</title>
 
-  <p>We have introduced a few HTML5 presentation formats in Chapter <xref ref="ch-presentations"/>. The **xaringan** package (R-xaringan)\index{xaringan} is an R Markdown extension based on the JavaScript library remark.js (<url href="https://remarkjs.com"/>) to generate HTML5 presentations\index{HTML5 slides} of a different style. See <xref ref="fig-xaringan-sample"/> for two sample slides.</p>
+  <p>We have introduced a few HTML5 presentation formats in Chapter <xref ref="ch-presentations"/>. The **xaringan** package (R-xaringan)<idx>xaringan</idx> is an R Markdown extension based on the JavaScript library remark.js (<url href="https://remarkjs.com"/>) to generate HTML5 presentations<idx>HTML5 slides</idx> of a different style. See <xref ref="fig-xaringan-sample"/> for two sample slides.</p>
 
   <program language="r">
     <input>```{r xaringan-sample, echo=FALSE, fig.cap='Two sample slides created from the xaringan package.', out.width='49%', fig.show='hold'}
@@ -284,7 +284,7 @@ knitr::include_graphics('images/mirror-display.png', dpi = NA)
     <subsection>
       <title>yolo: true</title>
 
-      <p>Inspired by a random feature request from <url href="https://twitter.com/_inundata/status/798970002992873472">a tweet by Karthik Ram</url>, the output format <c>xaringan::moon_reader</c> provided an option named <c>yolo</c> (an acronym of "you only live once"). If you set it to true, a photo of Karl Broman\index{Karl Broman} (with a mustache) will be inserted into a random slide in your presentation.<fn>For the full story behind the mustache, see Karl's post at <url href="http://kbroman.org/blog/2014/08/28/the-mustache-photo/"/>.</fn></p>
+      <p>Inspired by a random feature request from <url href="https://twitter.com/_inundata/status/798970002992873472">a tweet by Karthik Ram</url>, the output format <c>xaringan::moon_reader</c> provided an option named <c>yolo</c> (an acronym of "you only live once"). If you set it to true, a photo of Karl Broman<idx>Karl Broman</idx> (with a mustache) will be inserted into a random slide in your presentation.<fn>For the full story behind the mustache, see Karl's post at <url href="http://kbroman.org/blog/2014/08/28/the-mustache-photo/"/>.</fn></p>
 
       <program language="yaml">
         <input>---
@@ -333,7 +333,7 @@ output:
   <section>
     <title>CSS and themes</title>
 
-    <p>The format <c>xaringan::moon_reader</c> has a <c>css</c> option, to which you can pass a vector of CSS\index{CSS} file paths, e.g.,</p>
+    <p>The format <c>xaringan::moon_reader</c> has a <c>css</c> option, to which you can pass a vector of CSS<idx>CSS</idx> file paths, e.g.,</p>
 
     <program language="yaml">
       <input>---

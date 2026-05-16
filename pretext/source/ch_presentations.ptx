@@ -7,7 +7,7 @@
   <section xml:id="ioslides-presentation">
     <title>ioslides presentation</title>
 
-    <p>To create an ioslides presentation\index{ioslides} from R Markdown, you specify the <c>ioslides_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example here is a simple slide show (see Figure <xref ref="fig-ioslides"/> for two sample slides):</p>
+    <p>To create an ioslides presentation<idx>ioslides</idx> from R Markdown, you specify the <c>ioslides_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example here is a simple slide show (see Figure <xref ref="fig-ioslides"/> for two sample slides):</p>
 
     <program language="markdown">
       <input>---
@@ -164,7 +164,7 @@ output:
       <subsubsection xml:id="custom-css-ioslides">
         <title>Custom CSS</title>
 
-        <p>You can add your own CSS\index{CSS} to an ioslides presentation using the <c>css</c> option:</p>
+        <p>You can add your own CSS<idx>CSS</idx> to an ioslides presentation using the <c>css</c> option:</p>
 
         <program language="markdown">
           <input>---
@@ -366,7 +366,7 @@ output:
   <section xml:id="slidy-presentation">
     <title>Slidy presentation</title>
 
-    <p>To create a <url href="https://www.w3.org/Talks/Tools/Slidy2/"/> presentation from R Markdown, you specify the <c>slidy_presentation</c>\index{Slidy presentation} output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>##</c> heading tag (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show (see Figure <xref ref="fig-slidy"/> for two sample slides):</p>
+    <p>To create a <url href="https://www.w3.org/Talks/Tools/Slidy2/"/> presentation from R Markdown, you specify the <c>slidy_presentation</c><idx>Slidy presentation</idx> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>##</c> heading tag (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show (see Figure <xref ref="fig-slidy"/> for two sample slides):</p>
 
     <program language="markdown">
       <input>---
@@ -491,7 +491,7 @@ output:
   <section xml:id="beamer-presentation">
     <title>Beamer presentation</title>
 
-    <p>To create a Beamer\index{LaTeX Beamer} presentation from R Markdown, you specify the <c>beamer_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show (see Figure <xref ref="fig-beamer"/> for two sample slides):</p>
+    <p>To create a Beamer<idx>LaTeX Beamer</idx> presentation from R Markdown, you specify the <c>beamer_presentation</c> output format in the YAML metadata of your document. You can create a slide show broken up into sections by using the <c>#</c> and <c>##</c> heading tags (you can also create a new slide without a header using a horizontal rule (<c>---</c>). For example, here is a simple slide show (see Figure <xref ref="fig-beamer"/> for two sample slides):</p>
 
     <program language="markdown">
       <input>---
@@ -590,7 +590,7 @@ output:
   <section xml:id="powerpoint-presentation">
     <title>PowerPoint presentation</title>
 
-    <p>To create a PowerPoint\index{PowerPoint} presentation from R Markdown, you specify the <c>powerpoint_presentation</c> output format in the YAML metadata of your document. Please note that this output format is only available in **rmarkdown** &gt;= v1.9, and requires at least Pandoc v2.0.5. You can check the versions of your **rmarkdown** package and Pandoc with <c>packageVersion('rmarkdown')</c> and <c>rmarkdown::pandoc_version()</c> in R, respectively. The RStudio version 1.1.x ships Pandoc 1.19.2.1, which is not sufficient to generate PowerPoint presentations. You need to either install Pandoc 2.x by yourself if you use RStudio 1.1.x, or install <url href="https://www.rstudio.com/products/rstudio/download/preview/"/> (&gt;= 1.2.633), which has bundled Pandoc 2.x.</p>
+    <p>To create a PowerPoint<idx>PowerPoint</idx> presentation from R Markdown, you specify the <c>powerpoint_presentation</c> output format in the YAML metadata of your document. Please note that this output format is only available in **rmarkdown** &gt;= v1.9, and requires at least Pandoc v2.0.5. You can check the versions of your **rmarkdown** package and Pandoc with <c>packageVersion('rmarkdown')</c> and <c>rmarkdown::pandoc_version()</c> in R, respectively. The RStudio version 1.1.x ships Pandoc 1.19.2.1, which is not sufficient to generate PowerPoint presentations. You need to either install Pandoc 2.x by yourself if you use RStudio 1.1.x, or install <url href="https://www.rstudio.com/products/rstudio/download/preview/"/> (&gt;= 1.2.633), which has bundled Pandoc 2.x.</p>
 
     <p>Below is a quick example (see Figure <xref ref="fig-powerpoint"/> for a sample slide):</p>
 

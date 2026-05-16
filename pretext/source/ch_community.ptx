@@ -2,7 +2,7 @@
 <chapter xml:id="ch-community" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Community Formats</title>
 
-  <p>Most output formats introduced in this book are created and maintained by the RStudio team. In fact, other members in the R community have also created a number of R Markdown output formats.\index{output formats} We mention those formats that we are aware of in this chapter. If you have developed or know other formats, please feel free to suggest that we add them to the page <url href="https://rmarkdown.rstudio.com/formats.html">https://rmarkdown.rstudio.com/formats.html</url>.</p>
+  <p>Most output formats introduced in this book are created and maintained by the RStudio team. In fact, other members in the R community have also created a number of R Markdown output formats.<idx>output formats</idx> We mention those formats that we are aware of in this chapter. If you have developed or know other formats, please feel free to suggest that we add them to the page <url href="https://rmarkdown.rstudio.com/formats.html">https://rmarkdown.rstudio.com/formats.html</url>.</p>
 
   <section>
     <title>Lightweight Pretty HTML Documents</title>
@@ -44,7 +44,7 @@ output:
     <subsection>
       <title>Package vignettes</title>
 
-      <p>The <c>prettydoc::html_pretty</c> can be particularly useful for R package vignettes.\index{R package vignette} We have mentioned the <c>html_vignette</c> format in <xref ref="r-package-vignette"/> that also aims at smaller file sizes, but that format is not as stylish. To apply the <c>prettydoc::html_pretty</c> format to a package vignette, you may use the YAML metadata below:</p>
+      <p>The <c>prettydoc::html_pretty</c> can be particularly useful for R package vignettes.<idx>R package vignette</idx> We have mentioned the <c>html_vignette</c> format in <xref ref="r-package-vignette"/> that also aims at smaller file sizes, but that format is not as stylish. To apply the <c>prettydoc::html_pretty</c> format to a package vignette, you may use the YAML metadata below:</p>
 
       <program language="yaml">
         <input>---
@@ -93,7 +93,7 @@ output: rmdformats::material
   <section>
     <title>Shower presentations</title>
 
-    <p>Shower (<url href="https://github.com/shower/shower">https://github.com/shower/shower</url>) is a popular and customizable HTML5 presentation\index{HTML5 slides} framework. See <xref ref="fig-shower"/> for what it looks like.</p>
+    <p>Shower (<url href="https://github.com/shower/shower">https://github.com/shower/shower</url>) is a popular and customizable HTML5 presentation<idx>HTML5 slides</idx> framework. See <xref ref="fig-shower"/> for what it looks like.</p>
 
     <figure xml:id="fig-shower">
       <image source="images/shower.png"/>

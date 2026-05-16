@@ -9,7 +9,7 @@
   <section xml:id="html-document">
     <title>HTML document</title>
 
-  <p>As we just mentioned before, Markdown was originally designed for HTML output, so it may not be surprising that the HTML format\index{HTML format} has the richest features among all output formats. We recommend that you read this full section before you learn other output formats, because other formats have several features in common with the HTML document format, and we will not repeat these features in the corresponding sections.</p>
+  <p>As we just mentioned before, Markdown was originally designed for HTML output, so it may not be surprising that the HTML format<idx>HTML format</idx> has the richest features among all output formats. We recommend that you read this full section before you learn other output formats, because other formats have several features in common with the HTML document format, and we will not repeat these features in the corresponding sections.</p>
 
   <p>To create an HTML document from R Markdown, you specify the <c>html_document</c> output format in the YAML metadata of your document:</p>
 
@@ -150,7 +150,7 @@ output:
   <subsubsection>
     <title>Custom CSS</title>
 
-  <p>You can add your own CSS\index{CSS} to an HTML document using the <c>css</c> option:</p>
+  <p>You can add your own CSS<idx>CSS</idx> to an HTML document using the <c>css</c> option:</p>
 
   <program language="yaml">
     <input>---
@@ -348,7 +348,7 @@ output:
   <subsection xml:id="mathjax-equations">
     <title>MathJax equations</title>
 
-  <p>By default, MathJax (<url href="https://www.mathjax.org"/>)\index{MathJax} scripts are included in HTML documents for rendering LaTeX and MathML equations. You can use the <c>mathjax</c> option to control how MathJax is included:</p>
+  <p>By default, MathJax (<url href="https://www.mathjax.org"/>)<idx>MathJax</idx> scripts are included in HTML documents for rendering LaTeX and MathML equations. You can use the <c>mathjax</c> option to control how MathJax is included:</p>
 
   <ul>
     <li><p>Specify <c>"default"</c> to use an HTTPS URL from a CDN host (currently provided by RStudio).</p></li>
@@ -462,7 +462,7 @@ output:
   <subsubsection xml:id="custom-templates">
     <title>Custom templates</title>
 
-  <p>You can also replace the underlying Pandoc template\index{Pandoc template} using the <c>template</c> option:</p>
+  <p>You can also replace the underlying Pandoc template<idx>Pandoc template</idx> using the <c>template</c> option:</p>
 
   <program language="yaml">
     <input>---
@@ -876,7 +876,7 @@ output: pdf_document
 ---</input>
   </program>
 
-  <p>Within R Markdown documents that generate PDF output, you can use raw LaTeX\index{LaTeX}, and even define LaTeX macros. See Pandoc's documentation on the raw_tex extension (<url href="https://pandoc.org/MANUAL.html#extension-raw_tex"/>) for details.</p>
+  <p>Within R Markdown documents that generate PDF output, you can use raw LaTeX<idx>LaTeX</idx>, and even define LaTeX macros. See Pandoc's documentation on the raw_tex extension (<url href="https://pandoc.org/MANUAL.html#extension-raw_tex"/>) for details.</p>
 
   <p>Note that PDF output (including Beamer slides) requires an installation of LaTeX (see <xref ref="ch-installation"/>).</p>
 
@@ -1022,7 +1022,7 @@ linkcolor, urlcolor, citecolor|Color for internal, external, and citation links<
   <subsection>
     <title>LaTeX packages for citations</title>
 
-  <p>By default, citations\index{citation} are processed through <c>pandoc-citeproc</c>, which works for all output formats. For PDF output, sometimes it is better to use LaTeX packages to process citations, such as <c>natbib</c> or <c>biblatex</c>. To use one of these packages, just set the option <c>citation_package</c> to be <c>natbib</c> or <c>biblatex</c>, e.g.</p>
+  <p>By default, citations<idx>citation</idx> are processed through <c>pandoc-citeproc</c>, which works for all output formats. For PDF output, sometimes it is better to use LaTeX packages to process citations, such as <c>natbib</c> or <c>biblatex</c>. To use one of these packages, just set the option <c>citation_package</c> to be <c>natbib</c> or <c>biblatex</c>, e.g.</p>
 
   <program language="yaml">
     <input>---
@@ -1122,7 +1122,7 @@ output:
   <section xml:id="word-document">
     <title>Word document</title>
 
-  <p>To create a Word\index{Word} document from R Markdown, you specify the <c>word_document</c> output format in the YAML metadata of your document:</p>
+  <p>To create a Word<idx>Word</idx> document from R Markdown, you specify the <c>word_document</c> output format in the YAML metadata of your document:</p>
 
   <program language="yaml">
     <input>---
@@ -1304,7 +1304,7 @@ StackOverflow|`markdown_strict+autolink_bare_uris`</input>
   <section xml:id="r-package-vignette">
     <title>R package vignette</title>
 
-  <p>The <c>html_vignette</c> format provides a lightweight alternative to <c>html_document</c> suitable for inclusion in packages to be released to CRAN. It reduces the size of a basic vignette\index{R package vignette} from 600Kb to around 10Kb. The format differs from a conventional HTML document as follows:</p>
+  <p>The <c>html_vignette</c> format provides a lightweight alternative to <c>html_document</c> suitable for inclusion in packages to be released to CRAN. It reduces the size of a basic vignette<idx>R package vignette</idx> from 600Kb to around 10Kb. The format differs from a conventional HTML document as follows:</p>
 
   <ul>
     <li><p>Never uses retina figures</p></li>

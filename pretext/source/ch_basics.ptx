@@ -312,7 +312,7 @@ The slope of the regression is `r b[1]`.</input>
   <subsection>
     <title>Inline formatting</title>
 
-  <p>Inline text will be _italic_ if surrounded by underscores or asterisks, e.g., <c>_text_</c> or <c>*text*</c>. **Bold** text is produced using a pair of double asterisks (<c>**text**</c>). A pair of tildes (<c>~</c>) turn text to a subscript (e.g., <c>H~3~PO~4~</c> renders H~3~PO~4~). A pair of carets (<c>^</c>) produce a superscript (e.g., <c>Cu^2+^</c> renders Cu^2+^).</p>
+  <p>Inline text will be <em>italic</em> if surrounded by underscores or asterisks, e.g., <c>_text_</c> or <c>*text*</c>. <em>Bold</em> text is produced using a pair of double asterisks (<c>**text**</c>). A pair of tildes (<c>~</c>) turn text to a subscript (e.g., <c>H~3~PO~4~</c> renders <m>H_3PO_4</m>). A pair of carets (<c>^</c>) produce a superscript (e.g., <c>Cu^2+^</c> renders <m>Cu^{2+}</m>).</p>
 
   <p>To mark text as <c>inline code</c>, use a pair of backticks, e.g., <c></c> <c>code</c> <c></c>. To include $n$ literal backticks, use at least $n+1$ backticks outside, e.g., you can use four backticks to preserve three backtick inside: <c></c><c></c><c> </c><c></c><c> </c><c></c>code<c></c><c> </c><c></c><c> </c><c></c><c></c>, which is rendered as <c></c><c></c> <c></c><c>code</c><c></c> <c></c><c></c>.</p>
 

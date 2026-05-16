@@ -45,31 +45,31 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>You can create such a text file with any editor (including but not limited to RStudio). If you use RStudio, you can create a new Rmd file from the menu <c>File -&gt; New File -&gt; R Markdown</c>.</p>
 
-  <p>There are three basic components of an R Markdown document: the metadata, text, and code. The metadata is written between the pair of three dashes <c>---</c>. The syntax for the metadata is YAML (YAML Ain't Markup Language, <url href="https://en.wikipedia.org/wiki/YAML"/>),\index{YAML} so sometimes it is also called the YAML metadata or the YAML frontmatter. Before it bites you hard, we want to warn you in advance that indentation matters in YAML, so do not forget to indent the sub-fields of a top field properly. See the <url href="https://bookdown.org/yihui/bookdown/r-markdown.html">Appendix B.2</url> of @xie2016 for a few simple examples that show the YAML syntax.</p>
+  <p>There are three basic components of an R Markdown document: the metadata, text, and code. The metadata is written between the pair of three dashes <c>---</c>. The syntax for the metadata is YAML (YAML Ain't Markup Language, <url href="https://en.wikipedia.org/wiki/YAML"/>),<idx>YAML</idx> so sometimes it is also called the YAML metadata or the YAML frontmatter. Before it bites you hard, we want to warn you in advance that indentation matters in YAML, so do not forget to indent the sub-fields of a top field properly. See the <url href="https://bookdown.org/yihui/bookdown/r-markdown.html">Appendix B.2</url> of @xie2016 for a few simple examples that show the YAML syntax.</p>
 
-  <p>The body of a document follows the metadata. The syntax for text (also known as prose or narratives) is Markdown, which is introduced in Section \@ref(markdown-syntax). There are two types of computer code, which are explained in detail in Section \@ref(r-code):</p>
+  <p>The body of a document follows the metadata. The syntax for text (also known as prose or narratives) is Markdown, which is introduced in <xref ref="markdown-syntax"/>. There are two types of computer code, which are explained in detail in <xref ref="r-code"/>:</p>
 
   <ul>
-    <li><p>A code chunk\index{code chunk} starts with three backticks like <c>```{r}</c> where <c>r</c> indicates the language name,^[It is not limited to the R language; see Section \@ref(language-engines) for how to use other languages.] and ends with three backticks. You can write chunk options in the curly braces (e.g., set the figure height to 5 inches: <c>```{r, fig.height=5}</c>).</p></li>
+    <li><p>A code chunk<idx>code chunk</idx> starts with three backticks like <c>```{r}</c> where <c>r</c> indicates the language name,^[It is not limited to the R language; see <xref ref="language-engines"/> for how to use other languages.] and ends with three backticks. You can write chunk options in the curly braces (e.g., set the figure height to 5 inches: <c>```{r, fig.height=5}</c>).</p></li>
   </ul>
 
   <ul>
-    <li><p>An inline R code expression\index{inline R expression} starts with <c>`r </c> and ends with a backtick <c>`</c>.</p></li>
+    <li><p>An inline R code expression<idx>inline R expression</idx> starts with <c>`r </c> and ends with a backtick <c>`</c>.</p></li>
   </ul>
 
-  <p>Figure \@ref(fig:hello-rmd) shows the above example in the RStudio IDE. You can click the <c>Knit</c> button to compile the document (to an HTML page). Figure \@ref(fig:hello-rmd-out) shows the output in the RStudio Viewer.</p>
+  <p><xref ref="fig-hello-rmd"/> shows the above example in the RStudio IDE. You can click the <c>Knit</c> button to compile the document (to an HTML page). <xref ref="fig-hello-rmd-out"/> shows the output in the RStudio Viewer.</p>
 
-  <figure>
+  <figure xml:id="fig-hello-rmd">
     <image source="images/hello-rmd.png"/>
     <caption><p>A minimal R Markdown example in RStudio.</p></caption>
   </figure>
 
-  <figure>
+  <figure xml:id="fig-hello-rmd-out">
     <image source="images/hello-rmd-out.png"/>
     <caption><p>The output document of the minimal R Markdown example in RStudio.</p></caption>
   </figure>
 
-  <p>Now please take a closer look at the example. Did you notice a problem? The object <c>b</c> is the vector of coefficients of length 2 from the linear regression; <c>b[1]</c> is actually the intercept, and <c>b[2]</c> is the slope! This minimal example shows you why R Markdown is great for reproducible research\index{reproducible research}: it includes the source code right inside the document, which makes it easy to discover and fix problems, as well as update the output document. All you have to do is change <c>b[1]</c> to <c>b[2]</c>, and click the <c>Knit</c> button again. Had you copied a number <c>-17.579</c> computed elsewhere into this document, it would be very difficult to realize the problem. In fact, I had used this example a few times by myself in my presentations before I discovered this problem during one of my talks, but I discovered it anyway.</p>
+  <p>Now please take a closer look at the example. Did you notice a problem? The object <c>b</c> is the vector of coefficients of length 2 from the linear regression; <c>b[1]</c> is actually the intercept, and <c>b[2]</c> is the slope! This minimal example shows you why R Markdown is great for reproducible research<idx>reproducible research</idx>: it includes the source code right inside the document, which makes it easy to discover and fix problems, as well as update the output document. All you have to do is change <c>b[1]</c> to <c>b[2]</c>, and click the <c>Knit</c> button again. Had you copied a number <c>-17.579</c> computed elsewhere into this document, it would be very difficult to realize the problem. In fact, I had used this example a few times by myself in my presentations before I discovered this problem during one of my talks, but I discovered it anyway.</p>
 
   <p>Although the above is a toy example, it could become a horror story if it happens in scientific research that was not done in a reproducible way (e.g., cut-and-paste). Here are two of my personal favorite videos on this topic:</p>
 
@@ -77,20 +77,20 @@ The slope of the regression is `r b[1]`.</input>
     <li><p>"A reproducible workflow" by Ignasi Bartomeus and Francisco Rodríguez-Sánchez (<url href="https://youtu.be/s3JldKoA0zw"/> It is a 2-min video that looks artistic but also shows very common and practical problems in data analysis.</p></li>
   </ul>
 
-  <p>Embedded video: <url href="https://www.youtube.com/embed/s3JldKoA0zw?rel=0"/></p>
+  <video youtube="s3JldKoA0zw" width="100%"/>
 
   <ul>
     <li><p>"The Importance of Reproducible Research in High-Throughput Biology" by Keith Baggerly (<url href="https://youtu.be/7gYIs7uYbMo"/> You will be impressed by both the content and the style of this lecture. Keith Baggerly and Kevin Coombes were the two notable heroes in revealing <url href="https://en.wikipedia.org/wiki/Anil_Potti">the Duke/Potti scandal</url>, which was described as "one of the biggest medical research frauds ever" by the television program "60 Minutes".</p></li>
   </ul>
 
-  <p>Embedded video: <url href="https://www.youtube.com/embed/7gYIs7uYbMo"/></p>
+  <video youtube="7gYIs7uYbMo" width="100%"/>
 
   <p>It is fine for humans to err (in computing), as long as the source code is readily available.</p>
 
   <section xml:id="basics-examples">
     <title>Example applications</title>
 
-  <p>Now you have learned the very basic concepts of R Markdown. The idea should be simple enough: interweave narratives with code in a document, knit the document to dynamically generate results from the code, and you will get a report. This idea was not invented by R Markdown, but came from an early programming paradigm called "Literate Programming" [@knuth1984]\index{Literate Programming}.</p>
+  <p>Now you have learned the very basic concepts of R Markdown. The idea should be simple enough: interweave narratives with code in a document, knit the document to dynamically generate results from the code, and you will get a report. This idea was not invented by R Markdown, but came from an early programming paradigm called "Literate Programming" [@knuth1984]<idx>Literate Programming</idx>.</p>
 
   <p>Due to the simplicity of Markdown and the powerful R language for data analysis, R Markdown has been widely used in many areas. Before we dive into the technical details, we want to show some examples to give you an idea of its possible applications.</p>
 
@@ -104,9 +104,9 @@ The slope of the regression is `r b[1]`.</input>
   <subsection>
     <title>Homework assignments on RPubs</title>
 
-  <p>A huge number of homework assignments have been published to the website <url href="https://RPubs.com"/> (a free publishing platform provided by RStudio), which shows that R Markdown is easy and convenient enough for students to do their homework assignments (see Figure \@ref(fig:rpubs)). When I was still a student, I did most of my homework assignments using Sweave, which was a much earlier implementation of literate programming based on the S language (later R) and LaTeX. I was aware of the importance of reproducible research but did not enjoy LaTeX, and few of my classmates wanted to use Sweave. Right after I graduated, R Markdown was born, and it has been great to see so many students do their homework in the reproducible manner.</p>
+  <p>A huge number of homework assignments have been published to the website <url href="https://RPubs.com"/> (a free publishing platform provided by RStudio), which shows that R Markdown is easy and convenient enough for students to do their homework assignments (see <xref ref="fig-rpubs"/>). When I was still a student, I did most of my homework assignments using Sweave, which was a much earlier implementation of literate programming based on the S language (later R) and LaTeX. I was aware of the importance of reproducible research but did not enjoy LaTeX, and few of my classmates wanted to use Sweave. Right after I graduated, R Markdown was born, and it has been great to see so many students do their homework in the reproducible manner.</p>
 
-  <figure>
+  <figure xml:id="fig-rpubs">
     <image source="images/rpubs.png"/>
     <caption><p>A screenshot of RPubs.com that contains some homework assginments submitted by students.</p></caption>
   </figure>
@@ -154,7 +154,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>We will introduce the R Markdown extension <em>bookdown</em> in <xref ref="ch-bookdown"/>. It is an R package that allows you to write books and long-form reports with multiple Rmd files. After this package was published, a large number of books have emerged. You can find a subset of them at <url href="https://bookdown.org"/>. Some of these books have been printed, and some only have free online versions.</p>
 
-  <p>There have also been students who wrote their dissertations/theses with <em>bookdown</em>, such as Ed Berry: <url href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown"/>. Chester Ismay has even provided an R package <em>thesisdown</em> (<url href="https://github.com/ismayc/thesisdown"/>) \index{thesisdown} that can render a thesis in various formats. Several other people have customized this package for their own institutions, such as Zhian N. Kamvar's <em>beaverdown</em> (<url href="https://github.com/zkamvar/beaverdown"/>) and Ben Marwick's <em>huskydown</em> (<url href="https://github.com/benmarwick/huskydown"/>).</p>
+  <p>There have also been students who wrote their dissertations/theses with <em>bookdown</em>, such as Ed Berry: <url href="https://eddjberry.netlify.com/post/writing-your-thesis-with-bookdown"/>. Chester Ismay has even provided an R package <em>thesisdown</em> (<url href="https://github.com/ismayc/thesisdown"/>) <idx>thesisdown</idx> that can render a thesis in various formats. Several other people have customized this package for their own institutions, such as Zhian N. Kamvar's <em>beaverdown</em> (<url href="https://github.com/zkamvar/beaverdown"/>) and Ben Marwick's <em>huskydown</em> (<url href="https://github.com/benmarwick/huskydown"/>).</p>
 
   </subsection>
 
@@ -186,7 +186,7 @@ The slope of the regression is `r b[1]`.</input>
   <section xml:id="compile">
     <title>Compile an R Markdown document</title>
 
-  <p>The usual way to compile an R Markdown document is to click the <c>Knit</c> button as shown in Figure \@ref(fig:hello-rmd), and the corresponding keyboard shortcut is <c>Ctrl + Shift + K</c> (<c>Cmd + Shift + K</c> on macOS). Under the hood, RStudio calls the function <c>rmarkdown::render()</c> to render the document _in a new R session_. Please note the emphasis here, which often confuses R Markdown users. Rendering an Rmd document in a new R session means that _none of the objects in your current R session (e.g., those you created in your R console) are available to that session_.^[This is not strictly true, but mostly true. You may save objects in your current R session to a file, e.g., <c>.RData</c>, and load it in a new R session.] Reproducibility is the main reason that RStudio uses a new R session to render your Rmd documents: in most cases, you may want your documents to continue to work the next time you open R, or in other people's computing environments. See <url href="https://stackoverflow.com/a/48494678/559676">this StackOverflow answer</url> if you want to know more.</p>
+  <p>The usual way to compile an R Markdown document is to click the <c>Knit</c> button as shown in <xref ref="fig-hello-rmd"/>, and the corresponding keyboard shortcut is <c>Ctrl + Shift + K</c> (<c>Cmd + Shift + K</c> on macOS). Under the hood, RStudio calls the function <c>rmarkdown::render()</c> to render the document _in a new R session_. Please note the emphasis here, which often confuses R Markdown users. Rendering an Rmd document in a new R session means that _none of the objects in your current R session (e.g., those you created in your R console) are available to that session_.^[This is not strictly true, but mostly true. You may save objects in your current R session to a file, e.g., <c>.RData</c>, and load it in a new R session.] Reproducibility is the main reason that RStudio uses a new R session to render your Rmd documents: in most cases, you may want your documents to continue to work the next time you open R, or in other people's computing environments. See <url href="https://stackoverflow.com/a/48494678/559676">this StackOverflow answer</url> if you want to know more.</p>
 
   <p>If you must render a document in the current R session, you can also call <c>rmarkdown::render()</c> by yourself, and pass the path of the Rmd file to this function. The second argument of this function is the output format, which defaults to the first output format you specify in the YAML metadata (if it is missing, the default is <c>html_document</c>). When you have multiple output formats in the metadata, and do not want to use the first one, you can specify the one you want in the second argument, e.g., for an Rmd document <c>foo.Rmd</c> with the metadata:</p>
 
@@ -206,7 +206,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>The function call gives you much more freedom (e.g., you can generate a series of reports in a loop), but you should bear reproducibility in mind when you render documents this way. Of course, you can start a new and clean R session by yourself, and call <c>rmarkdown::render()</c> in that session. As long as you do not manually interact with that session (e.g., manually creating variables in the R console), your reports should be reproducible.</p>
 
-  <p>Another main way to work with Rmd documents is the R Markdown Notebooks, which will be introduced in Section \@ref(notebook). With notebooks, you can run code chunks individually and see results right inside the RStudio editor. This is a convenient way to interact or experiment with code in an Rmd document, because you do not have to compile the whole document. Without using the notebooks, you can still partially execute code chunks, but the execution only occurs in the R console, and the notebook interface presents results of code chunks right beneath the chunks in the editor, which can be a great advantage. Again, for the sake of reproducibility, you will need to compile the whole document eventually in a clean environment.</p>
+  <p>Another main way to work with Rmd documents is the R Markdown Notebooks, which will be introduced in <xref ref="notebook"/>. With notebooks, you can run code chunks individually and see results right inside the RStudio editor. This is a convenient way to interact or experiment with code in an Rmd document, because you do not have to compile the whole document. Without using the notebooks, you can still partially execute code chunks, but the execution only occurs in the R console, and the notebook interface presents results of code chunks right beneath the chunks in the editor, which can be a great advantage. Again, for the sake of reproducibility, you will need to compile the whole document eventually in a clean environment.</p>
 
   <p>Lastly, I want to mention an "unofficial" way to compile Rmd documents: the function <c>xaringan::inf_mr()</c>, or equivalently, the RStudio addin "Infinite Moon Reader". Obviously, this requires you to install the **xaringan** package [@R-xaringan], which is available on CRAN. The main advantage of this way is LiveReload: a technology that enables you to live preview the output as soon as you save the source document, and you do not need to hit the <c>Knit</c> button. The other advantage is that it compiles the Rmd document _in the current R session_, which may or may not be what you desire. Note that this method only works for Rmd documents that output to HTML, including HTML documents and presentations.</p>
 
@@ -226,7 +226,7 @@ The slope of the regression is `r b[1]`.</input>
   <section>
     <title>Output formats</title>
 
-  <p>There are two types of output formats\index{output formats} in the **rmarkdown** package: documents, and presentations. All available formats are listed below:</p>
+  <p>There are two types of output formats<idx>output formats</idx> in the **rmarkdown** package: documents, and presentations. All available formats are listed below:</p>
 
   <p><c>r knitr::combine_words(grep('^[^_]+_(document|presentation)$', ls(asNamespace('rmarkdown')), value = TRUE), sep = '\n', and = '', before = '- \x60', after = '\x60')</c></p>
 
@@ -238,14 +238,14 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>If the format is from the **rmarkdown** package, you do not need the <c>rmarkdown::</c> prefix (although it will not hurt).</p>
 
-  <p>When there are multiple output formats in a document, there will be a dropdown menu behind the RStudio <c>Knit</c> button that lists the output format names (Figure \@ref(fig:format-dropdown)).</p>
+  <p>When there are multiple output formats in a document, there will be a dropdown menu behind the RStudio <c>Knit</c> button that lists the output format names (<xref ref="fig-format-dropdown"/>).</p>
 
-  <figure>
+  <figure xml:id="fig-format-dropdown">
     <image source="images/format-dropdown.png"/>
     <caption><p>The output formats listed in the dropdown menu on the RStudio toolbar.</p></caption>
   </figure>
 
-  <p>Each output format is often accompanied with several format options. All these options are documented on the R package help pages. For example, you can type <c>?rmarkdown::html_document</c> in R to open the help page of the <c>html_document</c> format. When you want to use certain options, you have to translate the values from R to YAML,\index{YAML} e.g.,</p>
+  <p>Each output format is often accompanied with several format options. All these options are documented on the R package help pages. For example, you can type <c>?rmarkdown::html_document</c> in R to open the help page of the <c>html_document</c> format. When you want to use certain options, you have to translate the values from R to YAML,<idx>YAML</idx> e.g.,</p>
 
   <program language="r">
     <input>html_document(toc = TRUE, toc_depth = 2, dev = 'svg')</input>
@@ -304,10 +304,10 @@ The slope of the regression is `r b[1]`.</input>
 
   </section>
 
-  <section>
+  <section xml:id="markdown-syntax">
     <title>Markdown syntax</title>
 
-  <p>The text in an R Markdown document is written with the Markdown syntax\index{Markdown syntax}. Precisely speaking, it is Pandoc's Markdown. There are many flavors of Markdown invented by different people, and Pandoc's flavor is the most comprehensive one to our knowledge. You can find the full documentation of Pandoc's Markdown at <url href="https://pandoc.org/MANUAL.html"/> We strongly recommend that you read this page at least once to know all the possibilities with Pandoc's Markdown, even if you will not use all of them. This section is adapted from <url href="https://bookdown.org/yihui/bookdown/markdown-syntax.html">Section 2.1</url> of @xie2016, and only covers a small subset of Pandoc's Markdown syntax.</p>
+  <p>The text in an R Markdown document is written with the Markdown syntax<idx>Markdown syntax</idx>. Precisely speaking, it is Pandoc's Markdown. There are many flavors of Markdown invented by different people, and Pandoc's flavor is the most comprehensive one to our knowledge. You can find the full documentation of Pandoc's Markdown at <url href="https://pandoc.org/MANUAL.html"/> We strongly recommend that you read this page at least once to know all the possibilities with Pandoc's Markdown, even if you will not use all of them. This section is adapted from <url href="https://bookdown.org/yihui/bookdown/markdown-syntax.html">Section 2.1</url> of @xie2016, and only covers a small subset of Pandoc's Markdown syntax.</p>
 
   <subsection>
     <title>Inline formatting</title>
@@ -318,7 +318,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>Hyperlinks are created using the syntax <c>[text](link)</c>, e.g., <c>[RStudio](https://www.rstudio.com)</c>. The syntax for images is similar: just add an exclamation mark, e.g., <c>![alt text or image title](path/to/image)</c>. Footnotes are put inside the square brackets after a caret <c>^[]</c>, e.g., <c>^[This is a footnote.]</c>.</p>
 
-  <p>There are multiple ways to insert citations,\index{citation} and we recommend that you use BibTeX databases, because they work better when the output format is LaTeX/PDF. <url href="https://bookdown.org/yihui/bookdown/citations.html">Section 2.8</url> of @xie2016 has explained the details. The key idea is that when you have a BibTeX database (a plain-text file with the conventional filename extension <c>.bib</c>) that contains entries like:</p>
+  <p>There are multiple ways to insert citations,<idx>citation</idx> and we recommend that you use BibTeX databases, because they work better when the output format is LaTeX/PDF. <url href="https://bookdown.org/yihui/bookdown/citations.html">Section 2.8</url> of @xie2016 has explained the details. The key idea is that when you have a BibTeX database (a plain-text file with the conventional filename extension <c>.bib</c>) that contains entries like:</p>
 
   <program language="bibtex">
     <input>@Manual{R-base,
@@ -447,7 +447,7 @@ Or indent by four spaces:
   <subsection>
     <title>Math expressions</title>
 
-  <p>Inline LaTeX equations\index{LaTeX math} can be written in a pair of dollar signs using the LaTeX syntax, e.g., <c>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</c> (actual output: $f(k)={n \choose k}p^{k}(1-p)^{n-k}$); math expressions of the display style can be written in a pair of double dollar signs, e.g., <c>$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$</c>, and the output looks like this:</p>
+  <p>Inline LaTeX equations<idx>LaTeX math</idx> can be written in a pair of dollar signs using the LaTeX syntax, e.g., <c>$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$</c> (actual output: $f(k)={n \choose k}p^{k}(1-p)^{n-k}$); math expressions of the display style can be written in a pair of double dollar signs, e.g., <c>$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$</c>, and the output looks like this:</p>
 
   <p>$$f\left(k\right)=\binom{n}{k}p^k\left(1-p\right)^{n-k}$$</p>
 
@@ -494,7 +494,7 @@ c &amp; d
   <section xml:id="r-code">
     <title>R code chunks and inline R code</title>
 
-  <p>You can insert an R code chunk\index{code chunk} either using the RStudio toolbar (the <c>Insert</c> button) or the keyboard shortcut <c>Ctrl + Alt + I</c> (<c>Cmd + Option + I</c> on macOS).</p>
+  <p>You can insert an R code chunk<idx>code chunk</idx> either using the RStudio toolbar (the <c>Insert</c> button) or the keyboard shortcut <c>Ctrl + Alt + I</c> (<c>Cmd + Option + I</c> on macOS).</p>
 
   <p>There are a lot of things you can do in a code chunk: you can produce text output, tables, or graphics. You have fine control over all these output via chunk options, which can be provided inside the curly braces (between <c></c><c></c> <c></c><c>{r</c><c></c><c> and </c>}<c>). For example, you can choose hide text output via the chunk option </c>results = 'hide'<c>, or set the figure height to 4 inches via </c>fig.height = 4`. Chunk options are separated by commas, e.g.,</p>
 
@@ -515,7 +515,7 @@ x = rnorm(100)
 ```</input>
   </program>
 
-  <p>There are a large number of chunk options\index{chunk options} in **knitr** documented at <url href="https://yihui.name/knitr/options"/> We list a subset of them below:</p>
+  <p>There are a large number of chunk options<idx>chunk options</idx> in **knitr** documented at <url href="https://yihui.name/knitr/options"/> We list a subset of them below:</p>
 
   <ul>
     <li><p><c>eval</c>: Whether to evaluate a code chunk.</p></li>
@@ -581,7 +581,7 @@ knitr::opts_chunk$set(fig.width = 8, collapse = TRUE)
 ```</input>
   </program>
 
-  <p>Besides code chunks, you can also insert values of R objects inline in text.\index{inline R expression} For example:</p>
+  <p>Besides code chunks, you can also insert values of R objects inline in text.<idx>inline R expression</idx> For example:</p>
 
   <program language="markdown">
     <input>`r ''````{r}
@@ -595,7 +595,7 @@ its area is `r '\x60r pi * x^2\x60'`.</input>
   <subsection>
     <title>Figures</title>
 
-  <p>By default, figures\index{figures} produced by R code will be placed immediately after the code chunk they were generated from. For example:</p>
+  <p>By default, figures<idx>figures</idx> produced by R code will be placed immediately after the code chunk they were generated from. For example:</p>
 
   <program language="markdown">
     <input>`r ''````{r}
@@ -607,15 +607,18 @@ plot(cars, pch = 18)
 
   <p>PDF documents are generated through the LaTeX files generated from R Markdown. A highly surprising fact to LaTeX beginners is that figures float by default: even if you generate a plot in a code chunk on the first page, the whole figure environment may float to the next page. This is just how LaTeX works by default. It has a tendency to float figures to the top or bottom of pages. Although it can be annoying and distracting, we recommend that you refrain from playing the "Whac-A-Mole" game in the beginning of your writing, i.e., desparately trying to position figures "correctly" while they seem to be always dodging you. You may wish to fine-tune the positions once the content is complete using the <c>fig.pos</c> chunk option (e.g., <c>fig.pos = 'h')</c>. See <url href="https://www.overleaf.com/learn/latex/Positioning_images_and_tables"/> for possible values of <c>fig.pos</c> and more general tips about this behavior in LaTeX. In short, this can be a difficult problem for PDF output.</p>
 
-  <p>To place multiple figures side-by-side from the same code chunk, you can use the <c>fig.show='hold'</c> option along with the <c>out.width</c> option. Figure \@ref(fig:hold-position) shows an example with two plots, each with a width of <c>50%</c>.</p>
+  <p>To place multiple figures side-by-side from the same code chunk, you can use the <c>fig.show='hold'</c> option along with the <c>out.width</c> option. <xref ref="fig-hold-position"/> shows an example with two plots, each with a width of <c>50%</c>.</p>
 
-  <program language="r">
-    <input>par(mar = c(4, 4, .2, .1))
+  <figure xml:id="fig-hold-position">
+    <caption><p>Two plots side-by-side, each with a width of 50%.</p></caption>
+    <program language="r">
+      <input>par(mar = c(4, 4, .2, .1))
 plot(cars, pch = 19)
 plot(pressure, pch = 17)</input>
-  </program>
+    </program>
+  </figure>
 
-  <p>If you want to include a graphic that is not generated from R code, you may use the <c>knitr::include_graphics()</c> function, which gives you more control over the attributes of the image than the Markdown syntax of <c>![alt text or image title](path/to/image)</c> (e.g., you can specify the image width via <c>out.width</c>). Figure \@ref(fig:include-graphics) provides an example of this.</p>
+  <p>If you want to include a graphic that is not generated from R code, you may use the <c>knitr::include_graphics()</c> function, which gives you more control over the attributes of the image than the Markdown syntax of <c>![alt text or image title](path/to/image)</c> (e.g., you can specify the image width via <c>out.width</c>). <xref ref="fig-include-graphics"/> provides an example of this.</p>
 
   <program language="markdown">
     <input>`r ''````{r, out.width='25%', fig.align='center', fig.cap='...'}
@@ -623,7 +626,7 @@ knitr::include_graphics('images/hex-rmarkdown.png')
 ```</input>
   </program>
 
-  <figure>
+  <figure xml:id="fig-include-graphics">
     <image source="images/hex-rmarkdown.png"/>
     <caption><p>The R Markdown hex logo.</p></caption>
   </figure>
@@ -633,7 +636,7 @@ knitr::include_graphics('images/hex-rmarkdown.png')
   <subsection>
     <title>Tables</title>
 
-  <p>The easiest way to include tables\index{tables} is by using <c>knitr::kable()</c>, which can create tables for HTML, PDF and Word outputs.^[You may also consider the **pander** package. There are several other packages for producing tables, including **xtable**, **Hmisc**, and **stargazer**, but these are generally less compatible with multiple output formats.] Table captions can be included by passing <c>caption</c> to the function, e.g.,</p>
+  <p>The easiest way to include tables<idx>tables</idx> is by using <c>knitr::kable()</c>, which can create tables for HTML, PDF and Word outputs.^[You may also consider the **pander** package. There are several other packages for producing tables, including **xtable**, **Hmisc**, and **stargazer**, but these are generally less compatible with multiple output formats.] Table captions can be included by passing <c>caption</c> to the function, e.g.,</p>
 
   <program language="markdown">
     <input>`r ''````{r tables-mtcars}
@@ -645,7 +648,7 @@ knitr::kable(iris[1:5, ], caption = 'A caption')
 
   <p>If you are looking for more advanced control of the styling of tables, you are recommended to use the <url href="https://cran.r-project.org/package=kableExtra">**kableExtra**</url> package, which provides functions to customize the appearance of PDF and HTML tables. Formatting tables can be a very complicated task, especially when certain cells span more than one column or row. It is even more complicated when you have to consider different output formats. For example, it is difficult to make a complex table work for both PDF and HTML output. We know it is disappointing, but sometimes you may have to consider alternative ways of presenting data, such as using graphics.</p>
 
-  <p>We explain in Section \@ref(bookdown-markdown) how the **bookdown** package extends the functionality of **rmarkdown** to allow for figures and tables to be easily cross-referenced within your text.</p>
+  <p>We explain in <xref ref="bookdown-markdown"/> how the **bookdown** package extends the functionality of **rmarkdown** to allow for figures and tables to be easily cross-referenced within your text.</p>
 
   </subsection>
 
@@ -696,7 +699,7 @@ print(sys.version)
   <subsection>
     <title>Python</title>
 
-  <p>The <c>python</c> engine is based on the **reticulate** package [@R-reticulate], which makes it possible to execute all Python\index{Python} code chunks in the same Python session. If you actually want to execute a certain code chunk in a new Python session, you may use the chunk option <c>python.reticulate = FALSE</c>. If you are using a **knitr** version lower than 1.18, you should update your R packages.</p>
+  <p>The <c>python</c> engine is based on the **reticulate** package [@R-reticulate], which makes it possible to execute all Python<idx>Python</idx> code chunks in the same Python session. If you actually want to execute a certain code chunk in a new Python session, you may use the chunk option <c>python.reticulate = FALSE</c>. If you are using a **knitr** version lower than 1.18, you should update your R packages.</p>
 
   <p>Below is a relatively simple example that shows how you can create/modify variables, and draw graphics in Python code chunks. Values can be passed to or retrieved from the Python session. To pass a value to Python, assign to <c>py$name</c>, where <c>name</c> is the variable name you want to use in the Python session; to retrieve a value from Python, also use <c>py$name</c>.</p>
 
@@ -711,7 +714,7 @@ print(sys.version)
   <subsection>
     <title>Shell scripts</title>
 
-  <p>You can also write Shell scripts\index{Shell script} in R Markdown, if your system can run them (the executable <c>bash</c> or <c>sh</c> should exist). Usually this is not a problem for Linux or macOS users. It is not impossible for Windows users to run Shell scripts, but you will have to install additional software (such as <url href="https://www.cygwin.com">Cygwin</url> or the Linux Subsystem).</p>
+  <p>You can also write Shell scripts<idx>Shell script</idx> in R Markdown, if your system can run them (the executable <c>bash</c> or <c>sh</c> should exist). Usually this is not a problem for Linux or macOS users. It is not impossible for Windows users to run Shell scripts, but you will have to install additional software (such as <url href="https://www.cygwin.com">Cygwin</url> or the Linux Subsystem).</p>
 
   <program language="markdown">
     <input>`r ''````{bash}
@@ -727,7 +730,7 @@ cat flights1.csv flights2.csv flights3.csv &gt; flights.csv
   <subsection>
     <title>SQL</title>
 
-  <p>The <c>sql</c> engine uses the <url href="https://cran.rstudio.com/package=DBI">**DBI**</url> package to execute SQL\index{SQL} queries, print their results, and optionally assign the results to a data frame.</p>
+  <p>The <c>sql</c> engine uses the <url href="https://cran.rstudio.com/package=DBI">**DBI**</url> package to execute SQL<idx>SQL</idx> queries, print their results, and optionally assign the results to a data frame.</p>
 
   <p>To use the <c>sql</c> engine, you first need to establish a DBI connection to a database (typically via the <c>DBI::dbConnect()</c> function). You can make use of this connection in a <c>sql</c> chunk via the <c>connection</c> option. For example:</p>
 
@@ -807,7 +810,7 @@ SELECT * FROM trials
   <subsection>
     <title>Rcpp</title>
 
-  <p>The <c>Rcpp</c> engine enables compilation of C++\index{C++} into R functions via the **Rcpp** <c>sourceCpp()</c> function. For example:</p>
+  <p>The <c>Rcpp</c> engine enables compilation of C++<idx>C++</idx> into R functions via the **Rcpp** <c>sourceCpp()</c> function. For example:</p>
 
   <program language="markdown">
     <input>`r ''````{Rcpp}
@@ -870,7 +873,7 @@ int timesTwo(int x) {
   <subsection>
     <title>Stan</title>
 
-  <p>The <c>stan</c> engine enables embedding of the <url href="http://mc-stan.org">Stan probabilistic programming language</url>\index{Stan} within R Markdown documents.</p>
+  <p>The <c>stan</c> engine enables embedding of the <url href="http://mc-stan.org">Stan probabilistic programming language</url><idx>Stan</idx> within R Markdown documents.</p>
 
   <p>The Stan model within the code chunk is compiled into a <c>stanmodel</c> object, and is assigned to a variable with the name given by the <c>output.var</c> option. For example:</p>
 
@@ -897,7 +900,7 @@ print(fit)
   <subsection>
     <title>JavaScript and CSS</title>
 
-  <p>If you are using an R Markdown format that targets HTML output (e.g., <c>html_document</c> and <c>ioslides_presentation</c>, etc.), you can include JavaScript\index{JavaScript} to be executed within the HTML page using the JavaScript engine named <c>js</c>.</p>
+  <p>If you are using an R Markdown format that targets HTML output (e.g., <c>html_document</c> and <c>ioslides_presentation</c>, etc.), you can include JavaScript<idx>JavaScript</idx> to be executed within the HTML page using the JavaScript engine named <c>js</c>.</p>
 
   <p>For example, the following chunk uses jQuery (which is included in most R Markdown HTML formats) to change the color of the document title to red:</p>
 
@@ -907,7 +910,7 @@ $('.title').css('color', 'red')
 ```</input>
   </program>
 
-  <p>Similarly, you can embed CSS\index{CSS} rules in the output document. For example, the following code chunk turns text within the document body red:</p>
+  <p>Similarly, you can embed CSS<idx>CSS</idx> rules in the output document. For example, the following code chunk turns text within the document body red:</p>
 
   <program language="markdown">
     <input>`r ''````{css, echo=FALSE}
@@ -924,7 +927,7 @@ body {
   <subsection>
     <title>Julia</title>
 
-  <p>The <url href="https://julialang.org">Julia</url> language \index{Julia} is supported through the **JuliaCall** package [@R-JuliaCall]. Similar to the <c>python</c> engine, the <c>julia</c> engine runs all Julia code chunks in the same Julia session. Below is a minimal example:</p>
+  <p>The <url href="https://julialang.org">Julia</url> language <idx>Julia</idx> is supported through the **JuliaCall** package [@R-JuliaCall]. Similar to the <c>python</c> engine, the <c>julia</c> engine runs all Julia code chunks in the same Julia session. Below is a minimal example:</p>
 
   <program language="markdown">
     <input>`r ''````{julia}
@@ -937,7 +940,7 @@ a = sqrt(2);  # the semicolon inhibits printing
   <subsection>
     <title>C and Fortran</title>
 
-  <p>For code chunks that use C\index{C language} or Fortran\index{Fortran}, **knitr** uses <c>R CMD SHLIB</c> to compile the code, and load the shared object (a <c>*.so</c> file on Unix or <c>*.dll</c> on Windows). Then you can use <c>.C()</c> / <c>.Fortran()</c> to call the C / Fortran functions, e.g.,</p>
+  <p>For code chunks that use C<idx>C language</idx> or Fortran<idx>Fortran</idx>, **knitr** uses <c>R CMD SHLIB</c> to compile the code, and load the shared object (a <c>*.so</c> file on Unix or <c>*.dll</c> on Windows). Then you can use <c>.C()</c> / <c>.Fortran()</c> to call the C / Fortran functions, e.g.,</p>
 
   <program language="markdown">
     <input>`r ''````{c, test-c, results='hide'}
@@ -968,15 +971,15 @@ Test the `square()` function:
   <subsection xml:id="intro-widgets">
     <title>HTML widgets</title>
 
-  <p>The HTML Widgets\index{HTML widgets} framework is implemented in the R package **htmlwidgets** [@R-htmlwidgets], interfacing JavaScript libraries that create interactive applications, such as interactive graphics and tables. Several widget packages have been developed based on this framework, such as **DT** [@R-DT], **leaflet** [@R-leaflet], and **dygraphs** [@R-dygraphs]. Visit <url href="https://www.htmlwidgets.org"/> to know more about widget packages as well as how to develop a widget package by yourself.</p>
+  <p>The HTML Widgets<idx>HTML widgets</idx> framework is implemented in the R package **htmlwidgets** [@R-htmlwidgets], interfacing JavaScript libraries that create interactive applications, such as interactive graphics and tables. Several widget packages have been developed based on this framework, such as **DT** [@R-DT], **leaflet** [@R-leaflet], and **dygraphs** [@R-dygraphs]. Visit <url href="https://www.htmlwidgets.org"/> to know more about widget packages as well as how to develop a widget package by yourself.</p>
 
-  <p>Figure \@ref(fig:leaflet) shows an interactive map created via the **leaflet** package, and the source document is below:</p>
+  <p><xref ref="fig-leaflet"/> shows an interactive map created via the **leaflet** package, and the source document is below:</p>
 
   <program language="markdown">
     <input>`r xfun::file_string('examples/htmlwidgets.Rmd')`</input>
   </program>
 
-  <figure>
+  <figure xml:id="fig-leaflet">
     <image source="images/leaflet.png"/>
     <caption><p>An R Markdown document with a leaflet map widget.</p></caption>
   </figure>
@@ -990,15 +993,15 @@ Test the `square()` function:
   <subsection xml:id="intro-shiny">
     <title>Shiny documents</title>
 
-  <p>The **shiny** package [@R-shiny] builds interactive web apps powered by R. To call Shiny\index{Shiny} code from an R Markdown document, add  <c>runtime: shiny</c> to the YAML metadata, like in this document:</p>
+  <p>The **shiny** package [@R-shiny] builds interactive web apps powered by R. To call Shiny<idx>Shiny</idx> code from an R Markdown document, add  <c>runtime: shiny</c> to the YAML metadata, like in this document:</p>
 
   <program language="markdown">
     <input>`r xfun::file_string('examples/shiny.Rmd')`</input>
   </program>
 
-  <p>Figure \@ref(fig:shiny) shows the output, where you can see a dropdown menu that allows you to choose the number of bins in the histogram.</p>
+  <p><xref ref="fig-shiny"/> shows the output, where you can see a dropdown menu that allows you to choose the number of bins in the histogram.</p>
 
-  <figure>
+  <figure xml:id="fig-shiny">
     <image source="images/shiny.png"/>
     <caption><p>An R Markdown document with a Shiny widget.</p></caption>
   </figure>

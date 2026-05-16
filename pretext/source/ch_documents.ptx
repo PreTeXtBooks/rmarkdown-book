@@ -6,10 +6,10 @@
 
   <p>The syntax of Markdown has been greatly extended by Pandoc. What is more, Pandoc makes it possible to convert a Markdown document to a large variety of output formats. In this chapter, we will introduce the features of various document output formats. In the next two chapters, we will document the presentation formats and other R Markdown extensions, respectively.</p>
 
-  <section>
+  <section xml:id="html-document">
     <title>HTML document</title>
 
-  <p>As we just mentioned before, Markdown was originally designed for HTML output, so it may not be surprising that the HTML format\index{HTML format} has the richest features among all output formats. We recommend that you read this full section before you learn other output formats, because other formats have several features in common with the HTML document format, and we will not repeat these features in the corresponding sections.</p>
+  <p>As we just mentioned before, Markdown was originally designed for HTML output, so it may not be surprising that the HTML format<idx>HTML format</idx> has the richest features among all output formats. We recommend that you read this full section before you learn other output formats, because other formats have several features in common with the HTML document format, and we will not repeat these features in the corresponding sections.</p>
 
   <p>To create an HTML document from R Markdown, you specify the <c>html_document</c> output format in the YAML metadata of your document:</p>
 
@@ -22,7 +22,7 @@ output: html_document
 ---</input>
   </program>
 
-  <subsection>
+  <subsection xml:id="table-of-contents">
     <title>Table of contents</title>
 
   <p>You can add a table of contents (TOC) using the <c>toc</c> option and specify the depth of headers that it applies to using the <c>toc_depth</c> option. For example:</p>
@@ -113,13 +113,13 @@ output:
 (tab content)</input>
   </program>
 
-  <p>You can also specify two additional attributes to control the appearance and behavior of the tabs. The <c>.tabset-fade</c> attribute causes the tabs to fade in and out when switching between tabs. The <c>.tabset-pills</c> attribute causes the visual appearance of the tabs to be "pill" (see Figure \@ref(fig:tabset)) rather than traditional tabs. For example:</p>
+  <p>You can also specify two additional attributes to control the appearance and behavior of the tabs. The <c>.tabset-fade</c> attribute causes the tabs to fade in and out when switching between tabs. The <c>.tabset-pills</c> attribute causes the visual appearance of the tabs to be "pill" (see Figure <xref ref="fig-tabset"/>) rather than traditional tabs. For example:</p>
 
   <program language="markdown">
     <input>## Quarterly Results {.tabset .tabset-fade .tabset-pills}</input>
   </program>
 
-  <figure>
+  <figure xml:id="fig-tabset">
     <image source="images/tabset.png"/>
     <caption><p>Traditional tabs and pill tabs on an HTML page.</p></caption>
   </figure>
@@ -150,7 +150,7 @@ output:
   <subsubsection>
     <title>Custom CSS</title>
 
-  <p>You can add your own CSS\index{CSS} to an HTML document using the <c>css</c> option:</p>
+  <p>You can add your own CSS<idx>CSS</idx> to an HTML document using the <c>css</c> option:</p>
 
   <program language="yaml">
     <input>---
@@ -196,7 +196,7 @@ output:
 
   </subsection>
 
-  <subsection>
+  <subsection xml:id="figure-options">
     <title>Figure options</title>
 
   <p>There are a number of options that affect the output of figures within HTML documents:</p>
@@ -221,14 +221,14 @@ output:
 
   </subsection>
 
-  <subsection>
+  <subsection xml:id="data-frame-printing">
     <title>Data frame printing</title>
 
-  <p>You can enhance the default display of data frames via the <c>df_print</c> option. Valid values are shown in Table \@ref(tab:df-print).</p>
+  <p>You can enhance the default display of data frames via the <c>df_print</c> option. Valid values are shown in Table <xref ref="tab-df-print"/>.</p>
 
-  <p>Table: (\#tab:df-print) The possible values of the <c>df_print</c> option for the <c>html_document</c> format.</p>
-
-  <program language="text">
+  <figure xml:id="tab-df-print">
+    <caption><p>The possible values of the <c>df_print</c> option for the <c>html_document</c> format.</p></caption>
+    <program language="text">
     <input>| Option  | Description  |
 |------------|-------------------------------------------|
 | default  | Call the `print.data.frame` generic method |
@@ -236,12 +236,13 @@ output:
 | tibble  | Use the `tibble::print.tbl_df` function |
 | paged  |  Use `rmarkdown::paged_table` to create a pageable table |
 | A custom function | Use the function to create the table |</input>
-  </program>
+    </program>
+  </figure>
 
   <subsubsection>
     <title>Paged printing</title>
 
-  <p>When the <c>df_print</c> option is set to <c>paged</c>, tables are printed as HTML tables with support for pagination over rows and columns. For instance (see Figure \@ref(fig:paged)):</p>
+  <p>When the <c>df_print</c> option is set to <c>paged</c>, tables are printed as HTML tables with support for pagination over rows and columns. For instance (see Figure <xref ref="fig-paged"/>):</p>
 
   <program language="markdown">
     <input>---
@@ -256,16 +257,16 @@ mtcars
 ```</input>
   </program>
 
-  <figure>
+  <figure xml:id="fig-paged">
     <image source="images/paged.png"/>
     <caption><p>A paged table in the HTML output document.</p></caption>
   </figure>
 
-  <p>Table \@ref(tab:paged) shows the available options for paged tables.</p>
+  <p>Table <xref ref="tab-paged"/> shows the available options for paged tables.</p>
 
-  <p>Table: (\#tab:paged) The options for paged HTML tables.</p>
-
-  <program language="text">
+  <figure xml:id="tab-paged">
+    <caption><p>The options for paged HTML tables.</p></caption>
+    <program language="text">
     <input>| Option          | Description                                           |
 |-----------------|-------------------------------------------------------|
 | max.print       | The number of rows to print.                          |
@@ -275,7 +276,8 @@ mtcars
 | pages.print     | The number of pages to display under page navigation. |
 | paged.print     | When set to `FALSE` turns off paged tables.           |
 | rownames.print  | When set to `FALSE` turns off row names.              |</input>
-  </program>
+    </program>
+  </figure>
 
   <p>These options are specified in each chunk like below:</p>
 
@@ -343,10 +345,10 @@ output:
 
   </subsection>
 
-  <subsection>
+  <subsection xml:id="mathjax-equations">
     <title>MathJax equations</title>
 
-  <p>By default, MathJax (<url href="https://www.mathjax.org"/>)\index{MathJax} scripts are included in HTML documents for rendering LaTeX and MathML equations. You can use the <c>mathjax</c> option to control how MathJax is included:</p>
+  <p>By default, MathJax (<url href="https://www.mathjax.org"/>)<idx>MathJax</idx> scripts are included in HTML documents for rendering LaTeX and MathML equations. You can use the <c>mathjax</c> option to control how MathJax is included:</p>
 
   <ul>
     <li><p>Specify <c>"default"</c> to use an HTTPS URL from a CDN host (currently provided by RStudio).</p></li>
@@ -422,7 +424,7 @@ output:
   <subsection>
     <title>Advanced customization</title>
 
-  <subsubsection>
+  <subsubsection xml:id="keeping-markdown">
     <title>Keeping Markdown</title>
 
   <p>When <em>knitr</em> processes an R Markdown input file, it creates a Markdown (<c>*.md</c>) file that is subsequently transformed into HTML by Pandoc. If you want to keep a copy of the Markdown file after rendering, you can do so using the <c>keep_md</c> option:</p>
@@ -457,10 +459,10 @@ output:
 
   </subsubsection>
 
-  <subsubsection>
+  <subsubsection xml:id="custom-templates">
     <title>Custom templates</title>
 
-  <p>You can also replace the underlying Pandoc template\index{Pandoc template} using the <c>template</c> option:</p>
+  <p>You can also replace the underlying Pandoc template<idx>Pandoc template</idx> using the <c>template</c> option:</p>
 
   <program language="yaml">
     <input>---
@@ -570,12 +572,12 @@ output: html_fragment
 
   </section>
 
-  <section>
+  <section xml:id="notebook">
     <title>Notebook</title>
 
-  <p>An R Notebook is an R Markdown document with chunks that can be executed independently and interactively, with output visible immediately beneath the input. See Figure \@ref(fig:notebook-demo) for an example.</p>
+  <p>An R Notebook is an R Markdown document with chunks that can be executed independently and interactively, with output visible immediately beneath the input. See Figure <xref ref="fig-notebook-demo"/> for an example.</p>
 
-  <figure>
+  <figure xml:id="fig-notebook-demo">
     <image source="images/notebook-demo.png"/>
     <caption><p>An R Notebook example.</p></caption>
   </figure>
@@ -599,9 +601,9 @@ output: html_notebook
 ---</input>
   </program>
 
-  <p>By default, RStudio enables inline output (Notebook mode) on all R Markdown documents, so you can interact with any R Markdown document as though it were a notebook. If you have a document with which you prefer to use the traditional console method of interaction, you can disable notebook mode by clicking the gear button in the editor toolbar, and choosing <c>Chunk Output in Console</c> (Figure \@ref(fig:notebook-console)).</p>
+  <p>By default, RStudio enables inline output (Notebook mode) on all R Markdown documents, so you can interact with any R Markdown document as though it were a notebook. If you have a document with which you prefer to use the traditional console method of interaction, you can disable notebook mode by clicking the gear button in the editor toolbar, and choosing <c>Chunk Output in Console</c> (Figure <xref ref="fig-notebook-console"/>).</p>
 
-  <figure>
+  <figure xml:id="fig-notebook-console">
     <image source="images/notebook-console.png"/>
     <caption><p>Send the R code chunk output to the console.</p></caption>
   </figure>
@@ -615,14 +617,14 @@ output: html_notebook
 
   <p>Notebook chunks can be inserted quickly using the keyboard shortcut <c>Ctrl + Alt + I</c> (macOS: <c>Cmd + Option + I</c>), or via the <c>Insert</c> menu in the editor toolbar.</p>
 
-  <p>Because all of a chunk's output appears beneath the chunk (not alongside the statement which emitted the output, as it does in the rendered R Markdown output), it is often helpful to split chunks that produce multiple outputs into two or more chunks which each produce only one output. To do this, select the code to split into a new chunk (Figure \@ref(fig:notebook-split-before)), and use the same keyboard shortcut for inserting a new code chunk (Figure \@ref(fig:notebook-split-after)).</p>
+  <p>Because all of a chunk's output appears beneath the chunk (not alongside the statement which emitted the output, as it does in the rendered R Markdown output), it is often helpful to split chunks that produce multiple outputs into two or more chunks which each produce only one output. To do this, select the code to split into a new chunk (Figure <xref ref="fig-notebook-split-before"/>), and use the same keyboard shortcut for inserting a new code chunk (Figure <xref ref="fig-notebook-split-after"/>).</p>
 
-  <figure>
+  <figure xml:id="fig-notebook-split-before">
     <image source="images/notebook-split-before.png"/>
     <caption><p>Select the code to split into a new chunk.</p></caption>
   </figure>
 
-  <figure>
+  <figure xml:id="fig-notebook-split-after">
     <image source="images/notebook-split-after.png"/>
     <caption><p>Insert a new chunk from the code selected before.</p></caption>
   </figure>
@@ -637,10 +639,10 @@ output: html_notebook
   <ol>
     <li><p>Use the green triangle button on the toolbar of a code chunk that has the tooltip "Run Current Chunk", or <c>Ctrl + Shift + Enter</c> (macOS: <c>Cmd + Shift + Enter</c>) to run the current chunk.</p></li>
     <li><p>Press <c>Ctrl + Enter</c> (macOS: <c>Cmd + Enter</c>) to run just the current statement. Running a single statement is much like running an entire chunk consisting only of that statement.</p></li>
-    <li><p>There are other ways to run a batch of chunks if you click the menu <c>Run</c> on the editor toolbar, such as <c>Run All</c>, <c>Run All Chunks Above</c>, and <c>Run All Chunks Below</c>. The primary difference is that when executing chunks in an R Markdown document, all the code is sent to the console at once, but in a notebook, only one line at a time is sent. This allows execution to stop if a line raises an error. When you execute code in a notebook, an indicator will appear in the gutter to show you execution progress (Figure \@ref(fig:notebook-longrunning)). Lines of code that have been sent to R are marked with dark green; lines that have not yet been sent to R are marked with light green. If at least one chunk is waiting to be executed, you will see a progress meter appear in the editor's status bar, indicating the number of chunks remaining to be executed. You can click on this meter at any time to jump to the currently executing chunk. When a chunk is waiting to execute, the <c>Run</c> button in its toolbar will change to a "queued" icon. If you do not want the chunk to run, you can click on the icon to remove it from the execution queue.</p></li>
+    <li><p>There are other ways to run a batch of chunks if you click the menu <c>Run</c> on the editor toolbar, such as <c>Run All</c>, <c>Run All Chunks Above</c>, and <c>Run All Chunks Below</c>. The primary difference is that when executing chunks in an R Markdown document, all the code is sent to the console at once, but in a notebook, only one line at a time is sent. This allows execution to stop if a line raises an error. When you execute code in a notebook, an indicator will appear in the gutter to show you execution progress (Figure <xref ref="fig-notebook-longrunning"/>). Lines of code that have been sent to R are marked with dark green; lines that have not yet been sent to R are marked with light green. If at least one chunk is waiting to be executed, you will see a progress meter appear in the editor's status bar, indicating the number of chunks remaining to be executed. You can click on this meter at any time to jump to the currently executing chunk. When a chunk is waiting to execute, the <c>Run</c> button in its toolbar will change to a "queued" icon. If you do not want the chunk to run, you can click on the icon to remove it from the execution queue.</p></li>
   </ol>
 
-  <figure>
+  <figure xml:id="fig-notebook-longrunning">
     <image source="images/notebook-longrunning.png"/>
     <caption><p>The indicator in the gutter to show the execution progress of a code chunk in the notebook.</p></caption>
   </figure>
@@ -651,10 +653,10 @@ output: html_notebook
     <li><p><em>Output</em>: The most obvious difference is that most forms of output produced from a notebook chunk are shown in the chunk output rather than, for example, the RStudio Viewer or the Plots pane. Console output (including warnings and messages) appears both at the console <em>and</em> in the chunk output.</p></li>
     <li><p><em>Working directory</em>: The current working directory inside a notebook chunk is always the directory containing the notebook <c>.Rmd</c> file. This makes it easier to use relative paths inside notebook chunks, and also matches the behavior when knitting, making it easier to write code that works identically both interactively and in a standalone render. You'll get a warning if you try to change the working directory inside a notebook chunk, and the directory will revert back to the notebook's directory once the chunk is finished executing. You can suppress this warning by using the <c>warnings = FALSE</c> chunk option. If it is necessary to execute notebook chunks in a different directory, you can change the working directory for <em>all</em> your chunks by using the <em>knitr</em> <c>root.dir</c> option, e.g. <c>knitr::opts_knit$set(root.dir = normalizePath(".."))</c>. This option is only effective when used inside the setup chunk. Also note that, as in <em>knitr</em>, the <c>root.dir</c> chunk option applies only to chunks; relative paths in Markdown are still relative to the notebook's parent folder.</p></li>
     <li><p><em>Warnings</em>: Inside a notebook chunk, warnings are always displayed immediately rather than being held until the end, as in <c>options(warn = 1)</c>.</p></li>
-    <li><p><em>Plots</em>: Plots emitted from a chunk are rendered to match the width of the editor at the time the chunk was executed. The height of the plot is determined by the golden ratio (<url href="https://en.wikipedia.org/wiki/Golden_ratio"/>). The plot's display list is saved, too, and the plot is re-rendered to match the editor's width when the editor is resized. You can use the <c>fig.width</c>, <c>fig.height</c>, and <c>fig.asp</c> chunk options to manually specify the size of rendered plots in the notebook; you can also use <c>knitr::opts_chunk$set(fig.width = ..., fig.height = ...)</c> in the setup chunk to to set a default rendered size. Note, however, specifying a chunk size manually suppresses the generation of the display list, so plots with manually specified sizes will be resized using simple image scaling when the notebook editor is resized. To execute an inline R expression in the notebook, put your cursor inside the chunk and press <c>Ctrl + Enter</c> (macOS: <c>Cmd + Enter</c>). As in the execution of ordinary chunks, the content of the expression will be sent to the R console for evaluation. The results will appear in a small pop-up window next to the code (Figure \@ref(fig:notebook-inline-output)).</p></li>
+    <li><p><em>Plots</em>: Plots emitted from a chunk are rendered to match the width of the editor at the time the chunk was executed. The height of the plot is determined by the golden ratio (<url href="https://en.wikipedia.org/wiki/Golden_ratio"/>). The plot's display list is saved, too, and the plot is re-rendered to match the editor's width when the editor is resized. You can use the <c>fig.width</c>, <c>fig.height</c>, and <c>fig.asp</c> chunk options to manually specify the size of rendered plots in the notebook; you can also use <c>knitr::opts_chunk$set(fig.width = ..., fig.height = ...)</c> in the setup chunk to to set a default rendered size. Note, however, specifying a chunk size manually suppresses the generation of the display list, so plots with manually specified sizes will be resized using simple image scaling when the notebook editor is resized. To execute an inline R expression in the notebook, put your cursor inside the chunk and press <c>Ctrl + Enter</c> (macOS: <c>Cmd + Enter</c>). As in the execution of ordinary chunks, the content of the expression will be sent to the R console for evaluation. The results will appear in a small pop-up window next to the code (Figure <xref ref="fig-notebook-inline-output"/>).</p></li>
   </ul>
 
-  <figure>
+  <figure xml:id="fig-notebook-inline-output">
     <image source="images/notebook-inline-output.png"/>
     <caption><p>Output from an inline R expression in the notebook.</p></caption>
   </figure>
@@ -681,9 +683,9 @@ knitr::read_chunk("example.R")
 1 + 1</input>
   </program>
 
-  <p>When you execute the empty chunk in the notebook <c>example.Rmd</c>, code from the external file <c>example.R</c> will be inserted, and the results displayed inline, as though the chunk contained that code (Figure \@ref(fig:notebook-external-code)).</p>
+  <p>When you execute the empty chunk in the notebook <c>example.Rmd</c>, code from the external file <c>example.R</c> will be inserted, and the results displayed inline, as though the chunk contained that code (Figure <xref ref="fig-notebook-external-code"/>).</p>
 
-  <figure>
+  <figure xml:id="fig-notebook-external-code">
     <image source="images/notebook-external-code.png"/>
     <caption><p>Execute a code chunk read from an external R script.</p></caption>
   </figure>
@@ -695,24 +697,24 @@ knitr::read_chunk("example.R")
 
   <p>When code is executed in the notebook, its output appears beneath the code chunk that produced it. You can clear an individual chunk's output by clicking the <c>X</c> button in the upper right corner of the output, or collapse it by clicking the chevron.</p>
 
-  <p>It is also possible to clear or collapse all of the output in the document at once using the <c>Collapse All Output</c> and <c>Clear All Output</c> menu items available on the gear menu in the editor toolbar (Figure \@ref(fig:notebook-console)).</p>
+  <p>It is also possible to clear or collapse all of the output in the document at once using the <c>Collapse All Output</c> and <c>Clear All Output</c> menu items available on the gear menu in the editor toolbar (Figure <xref ref="fig-notebook-console"/>).</p>
 
   <p>If you want to fully reset the state of the notebook, the item <c>Restart R and Clear Output</c> on the <c>Run</c> menu on the editor toolbar will do the job.</p>
 
   <p>Ordinary R Markdown documents are "knitted", but notebooks are "previewed". While the notebook preview looks similar to a rendered R Markdown document, the notebook preview _does not execute any of your R code chunks_. It simply shows you a rendered copy of the Markdown output of your document along with the most recent chunk output. This preview is generated automatically whenever you save the notebook (whether you are viewing it in RStudio or not); see the section beneath on the <c>*.nb.html</c> file for details.</p>
 
-  <p>When <c>html_notebook</c> is the topmost (default) format in your YAML metadata, you will see a <c>Preview</c> button in the editor toolbar. Clicking it will show you the notebook preview (Figure \@ref(fig:notebook-preview)).</p>
+  <p>When <c>html_notebook</c> is the topmost (default) format in your YAML metadata, you will see a <c>Preview</c> button in the editor toolbar. Clicking it will show you the notebook preview (Figure <xref ref="fig-notebook-preview"/>).</p>
 
-  <figure>
+  <figure xml:id="fig-notebook-preview">
     <image source="images/notebook-preview.png"/>
     <caption><p>Preview a notebook.</p></caption>
   </figure>
 
-  <p>If you have configured R Markdown previewing to use the Viewer pane (as illustrated in Figure \@ref(fig:notebook-preview)), the preview will be automatically updated whenever you save your notebook.</p>
+  <p>If you have configured R Markdown previewing to use the Viewer pane (as illustrated in Figure <xref ref="fig-notebook-preview"/>), the preview will be automatically updated whenever you save your notebook.</p>
 
-  <p>When an error occurs while a notebook chunk is executing (Figure \@ref(fig:notebook-error)):</p>
+  <p>When an error occurs while a notebook chunk is executing (Figure <xref ref="fig-notebook-error"/>):</p>
 
-  <figure>
+  <figure xml:id="fig-notebook-error">
     <image source="images/notebook-error.png"/>
     <caption><p>Errors in a notebook.</p></caption>
   </figure>
@@ -860,7 +862,7 @@ str(parsed, width = 60, strict.width = 'wrap')</input>
 
   </section>
 
-  <section>
+  <section xml:id="pdf-document">
     <title>PDF document</title>
 
   <p>To create a PDF document from R Markdown, you specify the <c>pdf_document</c> output format in the YAML metadata:</p>
@@ -874,7 +876,7 @@ output: pdf_document
 ---</input>
   </program>
 
-  <p>Within R Markdown documents that generate PDF output, you can use raw LaTeX\index{LaTeX}, and even define LaTeX macros. See Pandoc's documentation on the raw_tex extension (<url href="https://pandoc.org/MANUAL.html#extension-raw_tex"/>) for details.</p>
+  <p>Within R Markdown documents that generate PDF output, you can use raw LaTeX<idx>LaTeX</idx>, and even define LaTeX macros. See Pandoc's documentation on the raw_tex extension (<url href="https://pandoc.org/MANUAL.html#extension-raw_tex"/>) for details.</p>
 
   <p>Note that PDF output (including Beamer slides) requires an installation of LaTeX (see <xref ref="ch-installation"/>).</p>
 
@@ -941,18 +943,19 @@ output:
   <subsection>
     <title>Data frame printing</title>
 
-  <p>You can enhance the default display of data frames via the <c>df_print</c> option. Valid values are presented in Table \@ref(tab:df-print-pdf).</p>
+  <p>You can enhance the default display of data frames via the <c>df_print</c> option. Valid values are presented in Table <xref ref="tab-df-print-pdf"/>.</p>
 
-  <p>Table: (\#tab:df-print-pdf) The possible values of the <c>df_print</c> option for the <c>pdf_document</c> format.</p>
-
-  <program language="text">
+  <figure xml:id="tab-df-print-pdf">
+    <caption><p>The possible values of the <c>df_print</c> option for the <c>pdf_document</c> format.</p></caption>
+    <program language="text">
     <input>| Option  | Description  |
 |------------|-------------------------------------------|
 | default  | Call the `print.data.frame` generic method |
 | kable  | Use the `knitr::kable()` function |
 | tibble  | Use the `tibble::print.tbl_df()` function |
-| A custom function | Use the function to create the table. See \@ref(custom-fun-dfprint) |</input>
-  </program>
+| A custom function | Use the function to create the table. See <xref ref="custom-fun-dfprint"/> |</input>
+    </program>
+  </figure>
 
   <p>For example:</p>
 
@@ -970,7 +973,7 @@ output:
   <subsection>
     <title>Syntax highlighting</title>
 
-  <p>The <c>highlight</c> option specifies the syntax highlighting style. Its usage in <c>pdf_document</c> is the same as <c>html_document</c> (Section \@ref(appearance-and-style)). For example:</p>
+  <p>The <c>highlight</c> option specifies the syntax highlighting style. Its usage in <c>pdf_document</c> is the same as <c>html_document</c> (Section <xref ref="appearance-and-style"/>). For example:</p>
 
   <program language="yaml">
     <input>---
@@ -997,11 +1000,11 @@ geometry: margin=1in
 ---</input>
   </program>
 
-  <p>A few available metadata variables are displayed in Table \@ref(tab:latex-vars) (consult the Pandoc manual for the full list (<url href="https://pandoc.org/MANUAL.html#variables-for-latex"/>)):</p>
+  <p>A few available metadata variables are displayed in Table <xref ref="tab-latex-vars"/> (consult the Pandoc manual for the full list (<url href="https://pandoc.org/MANUAL.html#variables-for-latex"/>)):</p>
 
-  <p>Table: (\#tab:latex-vars) Available top-level YAML metadata variables for LaTeX output.</p>
-
-  <program language="text">
+  <figure xml:id="tab-latex-vars">
+    <caption><p>Available top-level YAML metadata variables for LaTeX output.</p></caption>
+    <program language="text">
     <input>Variable|Description
 ------------------------|--------------------------------------------------------------------
 lang|Document language code
@@ -1011,14 +1014,15 @@ classoption|Options for documentclass (e.g., `oneside`)
 geometry|Options for geometry class (e.g., `margin=1in`)
 mainfont, sansfont, monofont, mathfont|Document fonts (works only with `xelatex` and `lualatex`)
 linkcolor, urlcolor, citecolor|Color for internal, external, and citation links</input>
-  </program>
+    </program>
+  </figure>
 
   </subsection>
 
   <subsection>
     <title>LaTeX packages for citations</title>
 
-  <p>By default, citations\index{citation} are processed through <c>pandoc-citeproc</c>, which works for all output formats. For PDF output, sometimes it is better to use LaTeX packages to process citations, such as <c>natbib</c> or <c>biblatex</c>. To use one of these packages, just set the option <c>citation_package</c> to be <c>natbib</c> or <c>biblatex</c>, e.g.</p>
+  <p>By default, citations<idx>citation</idx> are processed through <c>pandoc-citeproc</c>, which works for all output formats. For PDF output, sometimes it is better to use LaTeX packages to process citations, such as <c>natbib</c> or <c>biblatex</c>. To use one of these packages, just set the option <c>citation_package</c> to be <c>natbib</c> or <c>biblatex</c>, e.g.</p>
 
   <program language="yaml">
     <input>---
@@ -1051,7 +1055,7 @@ output:
 
   </subsubsection>
 
-  <subsubsection>
+  <subsubsection xml:id="keeping-intermediate-tex">
     <title>Keeping intermediate TeX</title>
 
   <p>R Markdown documents are converted to PDF by first converting to a TeX file and then calling the LaTeX engine to convert to PDF. By default, this TeX file is removed, however if you want to keep it (e.g., for an article submission), you can specify the <c>keep_tex</c> option. For example:</p>
@@ -1109,16 +1113,16 @@ output:
   <subsection>
     <title>Other features</title>
 
-  <p>Similar to HTML documents, you can enable or disable certain Markdown extensions for generating PDF documents. See Section \@ref(markdown-extensions) for details. You can also pass more custom Pandoc arguments through the <c>pandoc_args</c> option (Section \@ref(pandoc-arguments)), and define shared options in <c>_output.yml</c> (Section \@ref(shared-options)).</p>
+  <p>Similar to HTML documents, you can enable or disable certain Markdown extensions for generating PDF documents. See Section <xref ref="markdown-extensions"/> for details. You can also pass more custom Pandoc arguments through the <c>pandoc_args</c> option (Section <xref ref="pandoc-arguments"/>), and define shared options in <c>_output.yml</c> (Section <xref ref="shared-options"/>).</p>
 
   </subsection>
 
   </section>
 
-  <section>
+  <section xml:id="word-document">
     <title>Word document</title>
 
-  <p>To create a Word\index{Word} document from R Markdown, you specify the <c>word_document</c> output format in the YAML metadata of your document:</p>
+  <p>To create a Word<idx>Word</idx> document from R Markdown, you specify the <c>word_document</c> output format in the YAML metadata of your document:</p>
 
   <program language="yaml">
     <input>---
@@ -1145,7 +1149,7 @@ output:
   <subsection>
     <title>Other features</title>
 
-  <p>Refer to Section \@ref(html-document) for the documentation of most features of Word documents, including figure options (Section \@ref(figure-options)), data frame printing (Section \@ref(data-frame-printing)), syntax highlighting (Section \@ref(appearance-and-style)), keeping Markdown (Section \@ref(keeping-markdown)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+  <p>Refer to Section <xref ref="html-document"/> for the documentation of most features of Word documents, including figure options (Section <xref ref="figure-options"/>), data frame printing (Section <xref ref="data-frame-printing"/>), syntax highlighting (Section <xref ref="appearance-and-style"/>), keeping Markdown (Section <xref ref="keeping-markdown"/>), Markdown extensions (Section <xref ref="markdown-extensions"/>), Pandoc arguments (Section <xref ref="pandoc-arguments"/>), and shared options (Section <xref ref="shared-options"/>).</p>
 
   </subsection>
 
@@ -1179,7 +1183,7 @@ output:
   <subsection>
     <title>Other features</title>
 
-  <p>Refer to Section \@ref(html-document) for the documentation of most features of ODT documents, including figure options (Section \@ref(figure-options)), keeping Markdown (Section \@ref(keeping-markdown)), header and before/after body inclusions (Section \@ref(includes)), custom templates (Section \@ref(custom-templates)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+  <p>Refer to Section <xref ref="html-document"/> for the documentation of most features of ODT documents, including figure options (Section <xref ref="figure-options"/>), keeping Markdown (Section <xref ref="keeping-markdown"/>), header and before/after body inclusions (Section <xref ref="includes"/>), custom templates (Section <xref ref="custom-templates"/>), Markdown extensions (Section <xref ref="markdown-extensions"/>), Pandoc arguments (Section <xref ref="pandoc-arguments"/>), and shared options (Section <xref ref="shared-options"/>).</p>
 
   </subsection>
 
@@ -1210,7 +1214,7 @@ knitr::raw_output(readLines('table.rtf'))
   <subsection>
     <title>Other features</title>
 
-  <p>Refer to Section \@ref(html-document) for the documentation of most features of RTF documents, including table of contents (Section \@ref(table-of-contents)), figure options (Section \@ref(figure-options)), keeping Markdown (Section \@ref(keeping-markdown)), Markdown extensions (Section \@ref(markdown-extensions)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+  <p>Refer to Section <xref ref="html-document"/> for the documentation of most features of RTF documents, including table of contents (Section <xref ref="table-of-contents"/>), figure options (Section <xref ref="figure-options"/>), keeping Markdown (Section <xref ref="keeping-markdown"/>), Markdown extensions (Section <xref ref="markdown-extensions"/>), Pandoc arguments (Section <xref ref="pandoc-arguments"/>), and shared options (Section <xref ref="shared-options"/>).</p>
 
   </subsection>
 
@@ -1268,18 +1272,19 @@ output:
   <subsubsection>
     <title>Publishing formats</title>
 
-  <p>Many popular publishing systems now accept Markdown as input. Table \@ref(tab:markdown-variant) shows the correct Markdown variants to use for some popular systems.</p>
+  <p>Many popular publishing systems now accept Markdown as input. Table <xref ref="tab-markdown-variant"/> shows the correct Markdown variants to use for some popular systems.</p>
 
-  <p>Table: (\#tab:markdown-variant) Markdown variants for some popular publishing systems.</p>
-
-  <program language="text">
+  <figure xml:id="tab-markdown-variant">
+    <caption><p>Markdown variants for some popular publishing systems.</p></caption>
+    <program language="text">
     <input>System|Markdown Variant
 --------|-----------
 GitHub Wikis|`markdown_github`
 Drupal|`markdown_phpextra`
 WordPress.com|`markdown_phpextra+backtick_code_blocks`
 StackOverflow|`markdown_strict+autolink_bare_uris`</input>
-  </program>
+    </program>
+  </figure>
 
   <p>In many cases, you can simply copy and paste the Markdown generated by <c>rmarkdown::render()</c> into the editing interface of the system you are targeting. Note, however, that if you have embedded plots or other images, you will need to upload them separately and fix up their URLs to point to the uploaded location. If you intend to build websites based on R Markdown, we recommend that you use the more straightforward solutions such as <em>blogdown</em> [@xie2017; @R-blogdown] as introduced in <xref ref="ch-website"/> instead of manually copying the Markdown content.</p>
 
@@ -1290,7 +1295,7 @@ StackOverflow|`markdown_strict+autolink_bare_uris`</input>
   <subsection>
     <title>Other features</title>
 
-  <p>Refer to Section \@ref(html-document) for the documentation of other features of Markdown documents, including table of contents (Section \@ref(table-of-contents)), figure options (Section \@ref(figure-options)), header and before/after body inclusions (Section \@ref(includes)), Pandoc arguments (Section \@ref(pandoc-arguments)), and shared options (Section \@ref(shared-options)).</p>
+  <p>Refer to Section <xref ref="html-document"/> for the documentation of other features of Markdown documents, including table of contents (Section <xref ref="table-of-contents"/>), figure options (Section <xref ref="figure-options"/>), header and before/after body inclusions (Section <xref ref="includes"/>), Pandoc arguments (Section <xref ref="pandoc-arguments"/>), and shared options (Section <xref ref="shared-options"/>).</p>
 
   </subsection>
 
@@ -1299,7 +1304,7 @@ StackOverflow|`markdown_strict+autolink_bare_uris`</input>
   <section xml:id="r-package-vignette">
     <title>R package vignette</title>
 
-  <p>The <c>html_vignette</c> format provides a lightweight alternative to <c>html_document</c> suitable for inclusion in packages to be released to CRAN. It reduces the size of a basic vignette\index{R package vignette} from 600Kb to around 10Kb. The format differs from a conventional HTML document as follows:</p>
+  <p>The <c>html_vignette</c> format provides a lightweight alternative to <c>html_document</c> suitable for inclusion in packages to be released to CRAN. It reduces the size of a basic vignette<idx>R package vignette</idx> from 600Kb to around 10Kb. The format differs from a conventional HTML document as follows:</p>
 
   <ul>
     <li><p>Never uses retina figures</p></li>
@@ -1320,7 +1325,7 @@ vignette: &gt;
 
   <p>Note that you should change the <c>title</c> field and the <c>\VignetteIndexEntry{}</c> to match the title of your vignette.</p>
 
-  <p>Most options for <c>html_document</c> (Section \@ref(html-document)) also work for <c>html_vignette</c>, except <c>fig_retina</c> and <c>theme</c>, which have been set to <c>null</c> internally in this format.</p>
+  <p>Most options for <c>html_document</c> (Section <xref ref="html-document"/>) also work for <c>html_vignette</c>, except <c>fig_retina</c> and <c>theme</c>, which have been set to <c>null</c> internally in this format.</p>
 
   <p>The <c>html_vignette</c> template includes a basic CSS theme. To override this theme, you can specify your own CSS in the document metadata as follows:</p>
 

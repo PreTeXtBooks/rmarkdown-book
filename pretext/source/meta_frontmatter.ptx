@@ -92,44 +92,48 @@
     <p>
       Last but not least, your computing results will be more likely to be reproducible if you use R Markdown (or other <em>knitr</em>-based source documents), compared to the manual cut-and-paste approach. This is because the results are dynamically generated from computer source code. If anything goes wrong or needs to be updated, you can simply fix or update the source code, compile the document again, and the results will be automatically updated. You can enjoy reproducibility and convenience at the same time.
     </p>
-    <section xml:id="how-to-read-this-book">
-      <title>How to read this book</title>
-      <p>
-        This book may serve you better as a reference book than a textbook. It contains a large number of technical details, and we do not expect you to read it from beginning to end, since you may easily feel overwhelmed.
-      </p>
-      <p>
-        If you are not familiar with R Markdown, we recommend that you read at least Chapter 2 (<em>Basics</em>) to learn the basics. All the rest of the chapters in this book can be read in any order you desire. They are pretty much orthogonal to each other.
-      </p>
-    </section>
-    <section xml:id="structure-of-the-book">
-      <title>Structure of the book</title>
-      <p>
-        This book consists of four parts. Part I covers the basics; Part II is the detailed documentation of built-in output formats in the <em>rmarkdown</em> package; Part III introduces major R Markdown extensions; and Part IV covers additional and advanced topics.
-      </p>
-      <p>
-        Note that this book is intended to be a guide instead of the comprehensive documentation of all topics related to R Markdown. Some chapters are only overviews, and you may need to consult the full documentation elsewhere.
-      </p>
-    </section>
-    <section xml:id="software-info">
-      <title>Software information and conventions</title>
-      <p>
-        We do not add prompts (<c>&gt;</c> and <c>+</c>) to R source code in this book, and we comment out the text output with two hashes <c>##</c> by default. Package names are in emphasized text (e.g., <em>rmarkdown</em>), and inline code and filenames are formatted in a typewriter font (e.g., <c>knitr::knit('foo.Rmd')</c>). Function names are followed by parentheses (e.g., <c>blogdown::serve_site()</c>). The double-colon operator <c>::</c> means accessing an object from a package.
-      </p>
-      <p>
-        <c>Rmd</c> is the filename extension of R Markdown files, and also a shorthand for R Markdown in this book.
-      </p>
-    </section>
-    <section xml:id="acknowledgments">
-      <title>Acknowledgments</title>
-      <p>
-        There have been a large number of contributors to the R Markdown ecosystem. More than 60 people have contributed to the core package, <em>rmarkdown</em>. Several authors have created their own R Markdown extensions, as introduced in Part III of this book. Contributing ideas is no less helpful than contributing code.
-      </p>
-      <p>
-        Lastly, I want to thank my editor, John Kimmel, for his continued help with my fourth book.
-      </p>
-      <p>Yihui Xie</p>
-      <p>Elkhorn, Nebraska</p>
-    </section>
+  </preface>
+
+  <preface xml:id="how-to-read-this-book">
+    <title>How to read this book</title>
+    <p>
+      This book may serve you better as a reference book than a textbook. It contains a large number of technical details, and we do not expect you to read it from beginning to end, since you may easily feel overwhelmed.
+    </p>
+    <p>
+      If you are not familiar with R Markdown, we recommend that you read at least Chapter 2 (<em>Basics</em>) to learn the basics. All the rest of the chapters in this book can be read in any order you desire. They are pretty much orthogonal to each other.
+    </p>
+  </preface>
+
+  <preface xml:id="structure-of-the-book">
+    <title>Structure of the book</title>
+    <p>
+      This book consists of four parts. Part I covers the basics; Part II is the detailed documentation of built-in output formats in the <em>rmarkdown</em> package; Part III introduces major R Markdown extensions; and Part IV covers additional and advanced topics.
+    </p>
+    <p>
+      Note that this book is intended to be a guide instead of the comprehensive documentation of all topics related to R Markdown. Some chapters are only overviews, and you may need to consult the full documentation elsewhere.
+    </p>
+  </preface>
+
+  <preface xml:id="software-info">
+    <title>Software information and conventions</title>
+    <p>
+      We do not add prompts (<c>&gt;</c> and <c>+</c>) to R source code in this book, and we comment out the text output with two hashes <c>##</c> by default. Package names are in emphasized text (e.g., <em>rmarkdown</em>), and inline code and filenames are formatted in a typewriter font (e.g., <c>knitr::knit('foo.Rmd')</c>). Function names are followed by parentheses (e.g., <c>blogdown::serve_site()</c>). The double-colon operator <c>::</c> means accessing an object from a package.
+    </p>
+    <p>
+      <c>Rmd</c> is the filename extension of R Markdown files, and also a shorthand for R Markdown in this book.
+    </p>
+  </preface>
+
+  <preface xml:id="acknowledgments">
+    <title>Acknowledgments</title>
+    <p>
+      There have been a large number of contributors to the R Markdown ecosystem. More than 60 people have contributed to the core package, <em>rmarkdown</em>. Several authors have created their own R Markdown extensions, as introduced in Part III of this book. Contributing ideas is no less helpful than contributing code.
+    </p>
+    <p>
+      Lastly, I want to thank my editor, John Kimmel, for his continued help with my fourth book.
+    </p>
+    <p>Yihui Xie</p>
+    <p>Elkhorn, Nebraska</p>
   </preface>
 
   <preface xml:id="note-pretext-edition">
@@ -150,39 +154,42 @@
     <p>
       This book is primarily put together by me (Yihui Xie), making use of the existing R documentation of the <em>rmarkdown</em> package and the <em>rmarkdown</em> website, which were mainly contributed by J.J. Allaire and Garrett Grolemund.
     </p>
-    <section xml:id="author-yihui-xie">
-      <title>Yihui Xie</title>
-      <p>
-        Yihui Xie (<url href="https://yihui.name"/>) is a software engineer at RStudio (<url href="https://www.rstudio.com"/>). He earned his PhD from the Department of Statistics, Iowa State University. He is interested in interactive statistical graphics and statistical computing.
-      </p>
-      <p>
-        As an active R user, he has authored several R packages, such as <em>knitr</em>, <em>bookdown</em>, <em>blogdown</em>, <em>xaringan</em>, <em>tinytex</em>, <em>animation</em>, <em>DT</em>, <em>tufte</em>, <em>formatR</em>, <em>fun</em>, <em>xfun</em>, <em>mime</em>, <em>highr</em>, <em>servr</em>, and <em>Rd2roxygen</em>, among which the <em>animation</em> package won the 2009 John M. Chambers Statistical Software Award (ASA). He also co-authored a few other R packages, including <em>shiny</em>, <em>rmarkdown</em>, and <em>leaflet</em>.
-      </p>
-      <p>
-        He has authored two books, <em>Dynamic Documents with knitr</em>, and <em>bookdown: Authoring Books and Technical Documents with R Markdown</em>, and co-authored two books, <em>blogdown: Creating Websites with R Markdown</em>, and <em>R Markdown: The Definitive Guide</em>.
-      </p>
-      <p>
-        In 2006, he founded the Capital of Statistics (<url href="https://cosx.org"/>), which has grown into a large online community on statistics in China. He initiated the Chinese R conference in 2008, and has been involved in organizing R conferences in China since then. During his PhD training at Iowa State University, he won the Vince Sposito Statistical Computing Award (2011) and the Snedecor Award (2012) in the Department of Statistics.
-      </p>
-      <p>
-        He occasionally rants on Twitter (<url href="https://twitter.com/xieyihui"/>), and most of the time you can find him on GitHub (<url href="https://github.com/yihui"/>).
-      </p>
-      <p>He enjoys spicy food as much as classical Chinese literature.</p>
-    </section>
-    <section xml:id="author-jj-allaire">
-      <title>J.J. Allaire</title>
-      <p>
-        J.J. Allaire is the founder of RStudio and the creator of the RStudio IDE. J.J. is an author of several packages in the R Markdown ecosystem including <em>rmarkdown</em>, <em>flexdashboard</em>, <em>learnr</em>, and <em>radix</em>.
-      </p>
-    </section>
-    <section xml:id="author-garrett-grolemund">
-      <title>Garrett Grolemund</title>
-      <p>
-        Garrett Grolemund is the co-author of <em>R for Data Science</em> and author of <em>Hands-On Programming with R</em>. He wrote the <em>lubridate</em> R package and works for RStudio as an advocate who trains engineers to do data science with R and the Tidyverse. If you use R yourself, you may recognize Garrett from his video courses on Datacamp.com and O'Reilly Media, or from his series of popular R cheatsheets distributed by RStudio.
-      </p>
-      <p>
-        Garrett earned his PhD in Statistics from Rice University in 2012 under the guidance of Hadley Wickham. Before that, he earned a bachelor's degree in Psychology from Harvard University and briefly attended law school. Garrett has been one of the foremost promoters of Shiny, R Markdown, and the Tidyverse, documenting and explaining each in detail.
-      </p>
-    </section>
+  </preface>
+
+  <preface xml:id="author-yihui-xie">
+    <title>Yihui Xie</title>
+    <p>
+      Yihui Xie (<url href="https://yihui.name"/>) is a software engineer at RStudio (<url href="https://www.rstudio.com"/>). He earned his PhD from the Department of Statistics, Iowa State University. He is interested in interactive statistical graphics and statistical computing.
+    </p>
+    <p>
+      As an active R user, he has authored several R packages, such as <em>knitr</em>, <em>bookdown</em>, <em>blogdown</em>, <em>xaringan</em>, <em>tinytex</em>, <em>animation</em>, <em>DT</em>, <em>tufte</em>, <em>formatR</em>, <em>fun</em>, <em>xfun</em>, <em>mime</em>, <em>highr</em>, <em>servr</em>, and <em>Rd2roxygen</em>, among which the <em>animation</em> package won the 2009 John M. Chambers Statistical Software Award (ASA). He also co-authored a few other R packages, including <em>shiny</em>, <em>rmarkdown</em>, and <em>leaflet</em>.
+    </p>
+    <p>
+      He has authored two books, <em>Dynamic Documents with knitr</em>, and <em>bookdown: Authoring Books and Technical Documents with R Markdown</em>, and co-authored two books, <em>blogdown: Creating Websites with R Markdown</em>, and <em>R Markdown: The Definitive Guide</em>.
+    </p>
+    <p>
+      In 2006, he founded the Capital of Statistics (<url href="https://cosx.org"/>), which has grown into a large online community on statistics in China. He initiated the Chinese R conference in 2008, and has been involved in organizing R conferences in China since then. During his PhD training at Iowa State University, he won the Vince Sposito Statistical Computing Award (2011) and the Snedecor Award (2012) in the Department of Statistics.
+    </p>
+    <p>
+      He occasionally rants on Twitter (<url href="https://twitter.com/xieyihui"/>), and most of the time you can find him on GitHub (<url href="https://github.com/yihui"/>).
+    </p>
+    <p>He enjoys spicy food as much as classical Chinese literature.</p>
+  </preface>
+
+  <preface xml:id="author-jj-allaire">
+    <title>J.J. Allaire</title>
+    <p>
+      J.J. Allaire is the founder of RStudio and the creator of the RStudio IDE. J.J. is an author of several packages in the R Markdown ecosystem including <em>rmarkdown</em>, <em>flexdashboard</em>, <em>learnr</em>, and <em>radix</em>.
+    </p>
+  </preface>
+
+  <preface xml:id="author-garrett-grolemund">
+    <title>Garrett Grolemund</title>
+    <p>
+      Garrett Grolemund is the co-author of <em>R for Data Science</em> and author of <em>Hands-On Programming with R</em>. He wrote the <em>lubridate</em> R package and works for RStudio as an advocate who trains engineers to do data science with R and the Tidyverse. If you use R yourself, you may recognize Garrett from his video courses on Datacamp.com and O'Reilly Media, or from his series of popular R cheatsheets distributed by RStudio.
+    </p>
+    <p>
+      Garrett earned his PhD in Statistics from Rice University in 2012 under the guidance of Hadley Wickham. Before that, he earned a bachelor's degree in Psychology from Harvard University and briefly attended law school. Garrett has been one of the foremost promoters of Shiny, R Markdown, and the Tidyverse, documenting and explaining each in detail.
+    </p>
   </preface>
 </frontmatter>

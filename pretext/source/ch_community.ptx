@@ -9,7 +9,7 @@
 
     <p>When designing the <em>rmarkdown</em> package, we wished it could produce output documents that look pleasant by default, especially for HTML documents. Pandoc does not really style the HTML documents when converting Markdown to HTML, but <em>rmarkdown</em> does. As we mentioned in <xref ref="appearance-and-style"/>, the themes of HTML documents are based on Bootswatch, which actually relies on the Bootstrap library (<url href="https://getbootstrap.com">https://getbootstrap.com</url>). Although these themes look pretty, the major disadvantage is that their file sizes are relatively large. The size of an HTML document created from an empty R Markdown document with the <c>html_document</c> format is about 600Kb, which is roughly the total size of all CSS, JavaScript, and font files in the default theme.</p>
 
-    <p>If you are concerned about the file size but still want a fancy theme, you may consider the <em>prettydoc</em> package (R-prettydoc), which has bundled a few pretty themes (yet small in size). This package provides an output format <c>prettydoc::html_pretty</c>. An empty R Markdown document with this format generates an HTML file of about 70Kb.</p>
+    <p>If you are concerned about the file size but still want a fancy theme, you may consider the <em>prettydoc</em> package <xref ref="R-prettydoc"/>, which has bundled a few pretty themes (yet small in size). This package provides an output format <c>prettydoc::html_pretty</c>. An empty R Markdown document with this format generates an HTML file of about 70Kb.</p>
 
     <subsection>
       <title>Usage</title>
@@ -65,7 +65,7 @@ vignette: >
   <section>
     <title>The rmdformats package</title>
 
-    <p>The <em>rmdformats</em> package (R-rmdformats) provides several HTML output formats of unique and attractive styles, including:</p>
+    <p>The <em>rmdformats</em> package <xref ref="R-rmdformats"/> provides several HTML output formats of unique and attractive styles, including:</p>
 
     <ul>
       <li><p><c>material</c>: A format based on the <url href="https://github.com/FezVrasta/bootstrap-material-design">Material design theme for Bootstrap 3</url>. With this format, every first-level section will become a separate page. See <xref ref="fig-rmdformats-material"/> for what this format looks like ("Introduction" and "Including Plots" are two first-level sections).</p></li>

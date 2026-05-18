@@ -2,7 +2,7 @@
 <chapter xml:id="ch-revealjs" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>reveal.js Presentations</title>
 
-  <p>The <em>revealjs</em> package (R-revealjs) provides an output format <c>revealjs::revealjs_presentation</c> that can be used to create yet another style of HTML5 slides<idx>HTML5 slides</idx> based on the JavaScript library <url href="https://revealjs.com">reveal.js</url>. You may install the R package from CRAN:</p>
+  <p>The <em>revealjs</em> package <xref ref="R-revealjs"/> provides an output format <c>revealjs::revealjs_presentation</c> that can be used to create yet another style of HTML5 slides<idx>HTML5 slides</idx> based on the JavaScript library <url href="https://revealjs.com">reveal.js</url>. You may install the R package from CRAN:</p>
 
   <program language="r">
     <input>install.packages("revealjs")</input>

@@ -2,7 +2,7 @@
 <chapter xml:id="ch-xaringan" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>xaringan Presentations</title>
 
-  <p>We have introduced a few HTML5 presentation formats in <xref ref="ch-presentations"/>. The <em>xaringan</em> package (R-xaringan)<idx>xaringan</idx> is an R Markdown extension based on the JavaScript library remark.js (<url href="https://remarkjs.com"/>) to generate HTML5 presentations<idx>HTML5 slides</idx> of a different style. See <xref ref="fig-xaringan-sample"/> for two sample slides.</p>
+  <p>We have introduced a few HTML5 presentation formats in <xref ref="ch-presentations"/>. The <em>xaringan</em> package <xref ref="R-xaringan"/><idx>xaringan</idx> is an R Markdown extension based on the JavaScript library remark.js (<url href="https://remarkjs.com"/>) to generate HTML5 presentations<idx>HTML5 slides</idx> of a different style. See <xref ref="fig-xaringan-sample"/> for two sample slides.</p>
 
   <program language="r">
     <input>```{r xaringan-sample, echo=FALSE, fig.cap='Two sample slides created from the xaringan package.', out.width='49%', fig.show='hold'}
@@ -315,7 +315,7 @@ output:
   <section xml:id="xaringan-preview">
     <title>Build and preview slides</title>
 
-    <p>You can knit the source document like other Rmd documents to view the output, but it may be tedious to have to knit it over and over again whenever you make changes. The other way to preview the slides is the RStudio addin "Infinite Moon Reader" or the function <c>xaringan::inf_mr()</c>, as mentioned in Section <xref ref="compile"/>. With this way, you can continuously preview your slides just by saving the source document. The continuous preview is achieved via a local web server launched by the <em>servr</em> package (R-servr).</p>
+    <p>You can knit the source document like other Rmd documents to view the output, but it may be tedious to have to knit it over and over again whenever you make changes. The other way to preview the slides is the RStudio addin "Infinite Moon Reader" or the function <c>xaringan::inf_mr()</c>, as mentioned in Section <xref ref="compile"/>. With this way, you can continuously preview your slides just by saving the source document. The continuous preview is achieved via a local web server launched by the <em>servr</em> package <xref ref="R-servr"/>.</p>
 
     <p>One distinction of <c>xaringan::moon_reader</c> when compared to other R Markdown output formats is that it does not generate self-contained HTML documents by default (see Section <xref ref="document-dependencies"/>). This means none of the external dependencies such as images or JavaScript libraries will be embedded in the HTML output file by default. You can turn the self-contained mode on via:</p>
 

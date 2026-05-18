@@ -336,7 +336,7 @@ This is my *note*.
 
       <p>You can print an ioslides presentation from within browsers that have good support for print CSS (as of this writing, Google Chrome has the best support). Printing maintains most of the visual styles of the HTML version of the presentation.</p>
 
-      <p>To create a PDF version of a presentation, you can use the menu <c>Print to PDF</c> from Google Chrome. Alternatively, you can use the function <c>pagedown::chrome_print()</c> from the **pagedown** package [@R-pagedown], which calls Chrome to print an Rmd or HTML file to PDF.</p>
+      <p>To create a PDF version of a presentation, you can use the menu <c>Print to PDF</c> from Google Chrome. Alternatively, you can use the function <c>pagedown::chrome_print()</c> from the **pagedown** package <xref ref="R-pagedown"/>, which calls Chrome to print an Rmd or HTML file to PDF.</p>
     </subsection>
 
     <subsection>

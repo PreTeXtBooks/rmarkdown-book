@@ -2,6 +2,119 @@
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="meta-back">
   <references xml:id="references">
     <title>References</title>
+
+    <biblio xml:id="bion2018" type="raw">
+      Ricardo Bion, Robert Chang, and Jason Goodman (2018). How R Helps Airbnb Make the Most of its Data. <em>The American Statistician</em>, 72(1), 46–52. <url href="https://doi.org/10.1080/00031305.2017.1392362"/>
+    </biblio>
+
+    <biblio xml:id="hartgerink2017" type="raw">
+      Chris H.J. Hartgerink, Jelte M. Wicherts, and Marcel A.L.M. van Assen (2017). Too good to be false: Nonsignificant results revisited. <em>Collabra: Psychology</em>, 3(1). <url href="https://doi.org/10.1525/collabra.71"/>
+    </biblio>
+
+    <biblio xml:id="knuth1984" type="raw">
+      Donald E. Knuth (1984). Literate programming. <em>The Computer Journal</em>, 27(2), 97–111.
+    </biblio>
+
+    <biblio xml:id="lowndes2017" type="raw">
+      Julia S.S. Lowndes et al. (2017). Our path to better science in less time using open data science tools. <em>Nature Ecology &amp; Evolution</em>, 1(6). <url href="https://doi.org/10.1038/s41559-017-0160"/>
+    </biblio>
+
+    <biblio xml:id="xie2015" type="raw">
+      Yihui Xie (2015). <em>Dynamic Documents with R and knitr</em>, 2nd ed. Chapman and Hall/CRC. ISBN 978-1498716963. <url href="https://yihui.name/knitr/"/>
+    </biblio>
+
+    <biblio xml:id="xie2016" type="raw">
+      Yihui Xie (2016). <em>bookdown: Authoring Books and Technical Documents with R Markdown</em>. Chapman and Hall/CRC. ISBN 978-1138700109. <url href="https://bookdown.org/yihui/bookdown"/>
+    </biblio>
+
+    <biblio xml:id="xie2017" type="raw">
+      Yihui Xie, Alison Presmanes Hill, and Amber Thomas (2017). <em>blogdown: Creating Websites with R Markdown</em>. Chapman and Hall/CRC. ISBN 978-0815363729. <url href="https://bookdown.org/yihui/blogdown"/>
+    </biblio>
+
+    <biblio xml:id="R-base" type="raw">
+      R Core Team. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing, Vienna, Austria. <url href="https://www.r-project.org/"/>
+    </biblio>
+
+    <biblio xml:id="R-blogdown" type="raw">
+      Yihui Xie, Alison Presmanes Hill, and Amber Thomas. <em>blogdown: Create Blogs and Websites with R Markdown</em>. R package. <url href="https://github.com/rstudio/blogdown"/>
+    </biblio>
+
+    <biblio xml:id="R-bookdown" type="raw">
+      Yihui Xie. <em>bookdown: Authoring Books and Technical Documents with R Markdown</em>. R package. <url href="https://github.com/rstudio/bookdown"/>
+    </biblio>
+
+    <biblio xml:id="R-DT" type="raw">
+      Yihui Xie, Joe Cheng, and Xianying Tan. <em>DT: A Wrapper of the JavaScript Library DataTables</em>. R package. <url href="https://github.com/rstudio/DT"/>
+    </biblio>
+
+    <biblio xml:id="R-dygraphs" type="raw">
+      Dan Vanderkam, JJ Allaire, Jonathan Owen, Daniel Gromer, and Benoit Thieurmel. <em>dygraphs: Interface to Dygraphs Interactive Time Series Charting Library</em>. R package. <url href="https://github.com/rstudio/dygraphs"/>
+    </biblio>
+
+    <biblio xml:id="R-htmltools" type="raw">
+      Joe Cheng, Carson Sievert, Winston Chang, Yihui Xie, and Jeff Allen. <em>htmltools: Tools for HTML</em>. R package. <url href="https://github.com/rstudio/htmltools"/>
+    </biblio>
+
+    <biblio xml:id="R-htmlwidgets" type="raw">
+      Ramnath Vaidyanathan, Yihui Xie, JJ Allaire, Joe Cheng, and Kenton Russell. <em>htmlwidgets: HTML Widgets for R</em>. R package. <url href="https://www.htmlwidgets.org"/>
+    </biblio>
+
+    <biblio xml:id="R-JuliaCall" type="raw">
+      Changcheng Li. <em>JuliaCall: Seamless Integration Between R and Julia</em>. R package. <url href="https://github.com/Non-Contradiction/JuliaCall"/>
+    </biblio>
+
+    <biblio xml:id="R-leaflet" type="raw">
+      Joe Cheng, Bhaskar Karambelkar, and Yihui Xie. <em>leaflet: Create Interactive Web Maps with the JavaScript Leaflet Library</em>. R package. <url href="https://rstudio.github.io/leaflet/"/>
+    </biblio>
+
+    <biblio xml:id="R-markdown" type="raw">
+      JJ Allaire, Jeffrey Horner, Yihui Xie, Vicent Marti, and Natacha Porte. <em>markdown: Render Markdown with the C Library Discount</em>. R package. <url href="https://github.com/rstudio/markdown"/>
+    </biblio>
+
+    <biblio xml:id="R-pagedown" type="raw">
+      Yihui Xie and Romain Lesur. <em>pagedown: Paginate the HTML Output of R Markdown with CSS for Print</em>. R package. <url href="https://github.com/rstudio/pagedown"/>
+    </biblio>
+
+    <biblio xml:id="R-pkgdown" type="raw">
+      Hadley Wickham and Jay Hesselberth. <em>pkgdown: Make Static HTML Documentation for a Package</em>. R package. <url href="https://pkgdown.r-lib.org"/>
+    </biblio>
+
+    <biblio xml:id="R-prettydoc" type="raw">
+      Yixuan Qiu. <em>prettydoc: Creating Pretty Documents from R Markdown</em>. R package. <url href="https://github.com/yixuan/prettydoc"/>
+    </biblio>
+
+    <biblio xml:id="R-reticulate" type="raw">
+      Kevin Ushey, JJ Allaire, and Yuan Tang. <em>reticulate: Interface to Python</em>. R package. <url href="https://github.com/rstudio/reticulate"/>
+    </biblio>
+
+    <biblio xml:id="R-revealjs" type="raw">
+      JJ Allaire, Christopher Gandrud, Kenton Russell, and CJ Yetman. <em>revealjs: R Markdown Format for reveal.js Presentations</em>. R package. <url href="https://github.com/rstudio/revealjs"/>
+    </biblio>
+
+    <biblio xml:id="R-rmdformats" type="raw">
+      Julien Barnier. <em>rmdformats: HTML Output Formats and Templates for Rmarkdown Documents</em>. R package. <url href="https://github.com/juba/rmdformats"/>
+    </biblio>
+
+    <biblio xml:id="R-servr" type="raw">
+      Yihui Xie. <em>servr: A Simple HTTP Server to Serve Static Files or Dynamic Documents</em>. R package. <url href="https://github.com/yihui/servr"/>
+    </biblio>
+
+    <biblio xml:id="R-shiny" type="raw">
+      Winston Chang, Joe Cheng, JJ Allaire, Yihui Xie, and Jonathan McPherson. <em>shiny: Web Application Framework for R</em>. R package. <url href="https://shiny.rstudio.com"/>
+    </biblio>
+
+    <biblio xml:id="R-tinytex" type="raw">
+      Yihui Xie. <em>tinytex: Helper Functions to Install and Maintain TeX Live, and Compile LaTeX Documents</em>. R package. <url href="https://github.com/rstudio/tinytex"/>
+    </biblio>
+
+    <biblio xml:id="R-webshot" type="raw">
+      Winston Chang. <em>webshot: Take Screenshots of Web Pages</em>. R package. <url href="https://github.com/wch/webshot"/>
+    </biblio>
+
+    <biblio xml:id="R-xaringan" type="raw">
+      Yihui Xie. <em>xaringan: Presentation Ninja</em>. R package. <url href="https://github.com/yihui/xaringan"/>
+    </biblio>
+
   </references>
 
   <index>

@@ -45,7 +45,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>You can create such a text file with any editor (including but not limited to RStudio). If you use RStudio, you can create a new Rmd file from the menu <c>File -&gt; New File -&gt; R Markdown</c>.</p>
 
-  <p>There are three basic components of an R Markdown document: the metadata, text, and code. The metadata is written between the pair of three dashes <c>---</c>. The syntax for the metadata is YAML (YAML Ain't Markup Language, <url href="https://en.wikipedia.org/wiki/YAML"/>),<idx>YAML</idx> so sometimes it is also called the YAML metadata or the YAML frontmatter. Before it bites you hard, we want to warn you in advance that indentation matters in YAML, so do not forget to indent the sub-fields of a top field properly. See the <url href="https://bookdown.org/yihui/bookdown/r-markdown.html">Appendix B.2</url> of @xie2016 for a few simple examples that show the YAML syntax.</p>
+  <p>There are three basic components of an R Markdown document: the metadata, text, and code. The metadata is written between the pair of three dashes <c>---</c>. The syntax for the metadata is YAML (YAML Ain't Markup Language, <url href="https://en.wikipedia.org/wiki/YAML"/>),<idx>YAML</idx> so sometimes it is also called the YAML metadata or the YAML frontmatter. Before it bites you hard, we want to warn you in advance that indentation matters in YAML, so do not forget to indent the sub-fields of a top field properly. See the <url href="https://bookdown.org/yihui/bookdown/r-markdown.html">Appendix B.2</url> of <xref ref="xie2016"/> for a few simple examples that show the YAML syntax.</p>
 
   <p>The body of a document follows the metadata. The syntax for text (also known as prose or narratives) is Markdown, which is introduced in <xref ref="markdown-syntax"/>. There are two types of computer code, which are explained in detail in <xref ref="r-code"/>:</p>
 
@@ -90,14 +90,14 @@ The slope of the regression is `r b[1]`.</input>
   <section xml:id="basics-examples">
     <title>Example applications</title>
 
-  <p>Now you have learned the very basic concepts of R Markdown. The idea should be simple enough: interweave narratives with code in a document, knit the document to dynamically generate results from the code, and you will get a report. This idea was not invented by R Markdown, but came from an early programming paradigm called "Literate Programming" [@knuth1984]<idx>Literate Programming</idx>.</p>
+  <p>Now you have learned the very basic concepts of R Markdown. The idea should be simple enough: interweave narratives with code in a document, knit the document to dynamically generate results from the code, and you will get a report. This idea was not invented by R Markdown, but came from an early programming paradigm called "Literate Programming" <xref ref="knuth1984"/><idx>Literate Programming</idx>.</p>
 
   <p>Due to the simplicity of Markdown and the powerful R language for data analysis, R Markdown has been widely used in many areas. Before we dive into the technical details, we want to show some examples to give you an idea of its possible applications.</p>
 
   <subsection>
     <title>Airbnb's knowledge repository</title>
 
-  <p>Airbnb uses R Markdown to document all their analyses in R, so they can combine code and data visualizations in a single report [@bion2018]. Eventually all reports are carefully peer-reviewed and published to a company knowledge repository, so that anyone in the company can easily find analyses relevant to their team. Data scientists are also able to learn as much as they want from previous work or reuse the code written by previous authors, because the full R Markdown source is available in the repository.</p>
+  <p>Airbnb uses R Markdown to document all their analyses in R, so they can combine code and data visualizations in a single report <xref ref="bion2018"/>. Eventually all reports are carefully peer-reviewed and published to a company knowledge repository, so that anyone in the company can easily find analyses relevant to their team. Data scientists are also able to learn as much as they want from previous work or reuse the code written by previous authors, because the full R Markdown source is available in the repository.</p>
 
   </subsection>
 
@@ -134,11 +134,11 @@ The slope of the regression is `r b[1]`.</input>
   <subsection xml:id="examples-journal">
     <title>Journal articles</title>
 
-  <p>Chris Hartgerink explained how and why he used R Markdown to write dynamic research documents in the post at <url href="https://elifesciences.org/labs/cad57bcf/composing-reproducible-manuscripts-using-r-markdown"/> He published a paper titled "Too Good to be False: Nonsignificant Results Revisited" with two co-authors [@hartgerink2017]. The manuscript was written in R Markdown, and results were dynamically generated from the code in R Markdown.</p>
+  <p>Chris Hartgerink explained how and why he used R Markdown to write dynamic research documents in the post at <url href="https://elifesciences.org/labs/cad57bcf/composing-reproducible-manuscripts-using-r-markdown"/> He published a paper titled "Too Good to be False: Nonsignificant Results Revisited" with two co-authors <xref ref="hartgerink2017"/>. The manuscript was written in R Markdown, and results were dynamically generated from the code in R Markdown.</p>
 
   <p>When checking the accuracy of P-values in the psychology literature, his colleagues and he found that P-values could be mistyped or miscalculated, which could lead to inaccurate or even wrong conclusions. If the P-values were dynamically generated and inserted instead of being manually copied from statistical programs, the chance for those problems to exist would be much lower.</p>
 
-  <p>@lowndes2017 also shows that using R Markdown (and version control) not only enhances reproducibility, but also produces better scientific research in less time.</p>
+  <p>Lowndes et al. <xref ref="lowndes2017"/> also shows that using R Markdown (and version control) not only enhances reproducibility, but also produces better scientific research in less time.</p>
 
   </subsection>
 
@@ -208,7 +208,7 @@ The slope of the regression is `r b[1]`.</input>
 
   <p>Another main way to work with Rmd documents is the R Markdown Notebooks, which will be introduced in <xref ref="notebook"/>. With notebooks, you can run code chunks individually and see results right inside the RStudio editor. This is a convenient way to interact or experiment with code in an Rmd document, because you do not have to compile the whole document. Without using the notebooks, you can still partially execute code chunks, but the execution only occurs in the R console, and the notebook interface presents results of code chunks right beneath the chunks in the editor, which can be a great advantage. Again, for the sake of reproducibility, you will need to compile the whole document eventually in a clean environment.</p>
 
-  <p>Lastly, I want to mention an "unofficial" way to compile Rmd documents: the function <c>xaringan::inf_mr()</c>, or equivalently, the RStudio addin "Infinite Moon Reader". Obviously, this requires you to install the **xaringan** package [@R-xaringan], which is available on CRAN. The main advantage of this way is LiveReload: a technology that enables you to live preview the output as soon as you save the source document, and you do not need to hit the <c>Knit</c> button. The other advantage is that it compiles the Rmd document _in the current R session_, which may or may not be what you desire. Note that this method only works for Rmd documents that output to HTML, including HTML documents and presentations.</p>
+  <p>Lastly, I want to mention an "unofficial" way to compile Rmd documents: the function <c>xaringan::inf_mr()</c>, or equivalently, the RStudio addin "Infinite Moon Reader". Obviously, this requires you to install the **xaringan** package <xref ref="R-xaringan"/>, which is available on CRAN. The main advantage of this way is LiveReload: a technology that enables you to live preview the output as soon as you save the source document, and you do not need to hit the <c>Knit</c> button. The other advantage is that it compiles the Rmd document _in the current R session_, which may or may not be what you desire. Note that this method only works for Rmd documents that output to HTML, including HTML documents and presentations.</p>
 
   <p>A few R Markdown extension packages, such as **bookdown** and **blogdown**, have their own way of compiling documents, and we will introduce them later.</p>
 
@@ -328,7 +328,7 @@ subtitle: 'hygge: a quality of coziness'
   <section xml:id="markdown-syntax">
     <title>Markdown syntax</title>
 
-  <p>The text in an R Markdown document is written with the Markdown syntax<idx>Markdown syntax</idx>. Precisely speaking, it is Pandoc's Markdown. There are many flavors of Markdown invented by different people, and Pandoc's flavor is the most comprehensive one to our knowledge. You can find the full documentation of Pandoc's Markdown at <url href="https://pandoc.org/MANUAL.html"/> We strongly recommend that you read this page at least once to know all the possibilities with Pandoc's Markdown, even if you will not use all of them. This section is adapted from <url href="https://bookdown.org/yihui/bookdown/markdown-syntax.html">Section 2.1</url> of @xie2016, and only covers a small subset of Pandoc's Markdown syntax.</p>
+  <p>The text in an R Markdown document is written with the Markdown syntax<idx>Markdown syntax</idx>. Precisely speaking, it is Pandoc's Markdown. There are many flavors of Markdown invented by different people, and Pandoc's flavor is the most comprehensive one to our knowledge. You can find the full documentation of Pandoc's Markdown at <url href="https://pandoc.org/MANUAL.html"/> We strongly recommend that you read this page at least once to know all the possibilities with Pandoc's Markdown, even if you will not use all of them. This section is adapted from <url href="https://bookdown.org/yihui/bookdown/markdown-syntax.html">Section 2.1</url> of <xref ref="xie2016"/>, and only covers a small subset of Pandoc's Markdown syntax.</p>
 
   <subsection>
     <title>Inline formatting</title>
@@ -339,7 +339,7 @@ subtitle: 'hygge: a quality of coziness'
 
   <p>Hyperlinks are created using the syntax <c>[text](link)</c>, e.g., <c>[RStudio](https://www.rstudio.com)</c>. The syntax for images is similar: just add an exclamation mark, e.g., <c>![alt text or image title](path/to/image)</c>. Footnotes are put inside the square brackets after a caret <c>^[]</c>, e.g., <c>^[This is a footnote.]</c>.</p>
 
-  <p>There are multiple ways to insert citations,<idx>citation</idx> and we recommend that you use BibTeX databases, because they work better when the output format is LaTeX/PDF. <url href="https://bookdown.org/yihui/bookdown/citations.html">Section 2.8</url> of @xie2016 has explained the details. The key idea is that when you have a BibTeX database (a plain-text file with the conventional filename extension <c>.bib</c>) that contains entries like:</p>
+  <p>There are multiple ways to insert citations,<idx>citation</idx> and we recommend that you use BibTeX databases, because they work better when the output format is LaTeX/PDF. <url href="https://bookdown.org/yihui/bookdown/citations.html">Section 2.8</url> of <xref ref="xie2016"/> has explained the details. The key idea is that when you have a BibTeX database (a plain-text file with the conventional filename extension <c>.bib</c>) that contains entries like:</p>
 
   <program language="bibtex">
     <input>@Manual{R-base,
@@ -590,7 +590,7 @@ x = rnorm(100)
     <li><p><c>child</c>: You can include a child document in the main document. This option takes a path to an external file.</p></li>
   </ul>
 
-  <p>Chunk options in **knitr** can be surprisingly powerful. For example, you can create animations from a series of plots in a code chunk. I will not explain how here because <url href="https://blogdown-demo.rbind.io/2018/01/31/gif-animations/">it requires an external software package</url>, but encourage you to read the documentation carefully to discover the possibilities. You may also read @xie2015, which is a comprehensive guide to the **knitr** package, but unfortunately biased towards LaTeX users for historical reasons (which was one of the reasons why I wanted to write this R Markdown book).</p>
+  <p>Chunk options in **knitr** can be surprisingly powerful. For example, you can create animations from a series of plots in a code chunk. I will not explain how here because <url href="https://blogdown-demo.rbind.io/2018/01/31/gif-animations/">it requires an external software package</url>, but encourage you to read the documentation carefully to discover the possibilities. You may also read <xref ref="xie2015"/>, which is a comprehensive guide to the **knitr** package, but unfortunately biased towards LaTeX users for historical reasons (which was one of the reasons why I wanted to write this R Markdown book).</p>
 
   <p>There is an optional chunk option that does not take any value, which is the chunk label. It should be the first option in the chunk header. Chunk labels are mainly used in filenames of plots and cache. If the label of a chunk is missing, a default one of the form <c>unnamed-chunk-i</c> will be generated, where <c>i</c> is incremental. I strongly recommend that you only use alphanumeric characters (<c>a-z</c>, <c>A-Z</c> and <c>0-9</c>) and dashes (<c>-</c>) in labels, because they are not special characters and will surely work for all output formats. Other characters, spaces and underscores in particular, may cause trouble in certain packages, such as **bookdown**.</p>
 
@@ -684,7 +684,7 @@ knitr::kable(iris[1:5, ], caption = 'A caption')
     <input>names(knitr::knit_engines$get())</input>
   </program>
 
-  <p>Most engines have been documented in Chapter 11 of @xie2015. The engines from <c>theorem</c> to <c>solution</c> are only available when you use the **bookdown** package, and the rest are shipped with the **knitr** package. To use a different language engine, you can change the language name in the chunk header from <c>r</c> to the engine name, e.g.,</p>
+  <p>Most engines have been documented in Chapter 11 of <xref ref="xie2015"/>. The engines from <c>theorem</c> to <c>solution</c> are only available when you use the **bookdown** package, and the rest are shipped with the **knitr** package. To use a different language engine, you can change the language name in the chunk header from <c>r</c> to the engine name, e.g.,</p>
 
   <program language="markdown">
     <input>`r ''````{python}
@@ -720,7 +720,7 @@ print(sys.version)
   <subsection>
     <title>Python</title>
 
-  <p>The <c>python</c> engine is based on the **reticulate** package [@R-reticulate], which makes it possible to execute all Python<idx>Python</idx> code chunks in the same Python session. If you actually want to execute a certain code chunk in a new Python session, you may use the chunk option <c>python.reticulate = FALSE</c>. If you are using a **knitr** version lower than 1.18, you should update your R packages.</p>
+  <p>The <c>python</c> engine is based on the **reticulate** package <xref ref="R-reticulate"/>, which makes it possible to execute all Python<idx>Python</idx> code chunks in the same Python session. If you actually want to execute a certain code chunk in a new Python session, you may use the chunk option <c>python.reticulate = FALSE</c>. If you are using a **knitr** version lower than 1.18, you should update your R packages.</p>
 
   <p>Below is a relatively simple example that shows how you can create/modify variables, and draw graphics in Python code chunks. Values can be passed to or retrieved from the Python session. To pass a value to Python, assign to <c>py$name</c>, where <c>name</c> is the variable name you want to use in the Python session; to retrieve a value from Python, also use <c>py$name</c>.</p>
 
@@ -948,7 +948,7 @@ body {
   <subsection>
     <title>Julia</title>
 
-  <p>The <url href="https://julialang.org">Julia</url> language <idx>Julia</idx> is supported through the **JuliaCall** package [@R-JuliaCall]. Similar to the <c>python</c> engine, the <c>julia</c> engine runs all Julia code chunks in the same Julia session. Below is a minimal example:</p>
+  <p>The <url href="https://julialang.org">Julia</url> language <idx>Julia</idx> is supported through the **JuliaCall** package <xref ref="R-JuliaCall"/>. Similar to the <c>python</c> engine, the <c>julia</c> engine runs all Julia code chunks in the same Julia session. Below is a minimal example:</p>
 
   <program language="markdown">
     <input>`r ''````{julia}
@@ -992,7 +992,7 @@ Test the `square()` function:
   <subsection xml:id="intro-widgets">
     <title>HTML widgets</title>
 
-  <p>The HTML Widgets<idx>HTML widgets</idx> framework is implemented in the R package **htmlwidgets** [@R-htmlwidgets], interfacing JavaScript libraries that create interactive applications, such as interactive graphics and tables. Several widget packages have been developed based on this framework, such as **DT** [@R-DT], **leaflet** [@R-leaflet], and **dygraphs** [@R-dygraphs]. Visit <url href="https://www.htmlwidgets.org"/> to know more about widget packages as well as how to develop a widget package by yourself.</p>
+  <p>The HTML Widgets<idx>HTML widgets</idx> framework is implemented in the R package **htmlwidgets** <xref ref="R-htmlwidgets"/>, interfacing JavaScript libraries that create interactive applications, such as interactive graphics and tables. Several widget packages have been developed based on this framework, such as **DT** <xref ref="R-DT"/>, **leaflet** <xref ref="R-leaflet"/>, and **dygraphs** <xref ref="R-dygraphs"/>. Visit <url href="https://www.htmlwidgets.org"/> to know more about widget packages as well as how to develop a widget package by yourself.</p>
 
   <p><xref ref="fig-leaflet"/> shows an interactive map created via the **leaflet** package, and the source document is below:</p>
 
@@ -1024,14 +1024,14 @@ leaflet() %&lt;% addTiles() %&lt;%
 
   <p>Although HTML widgets are based on JavaScript, the syntax to create them in R is often pure R syntax.</p>
 
-  <p>If you include an HTML widget in a non-HTML output format, such as a PDF, **knitr** will try to embed a screenshot of the widget if you have installed the R package **webshot** [@R-webshot] and the PhantomJS package (via <c>webshot::install_phantomjs()</c>).</p>
+  <p>If you include an HTML widget in a non-HTML output format, such as a PDF, **knitr** will try to embed a screenshot of the widget if you have installed the R package **webshot** <xref ref="R-webshot"/> and the PhantomJS package (via <c>webshot::install_phantomjs()</c>).</p>
 
   </subsection>
 
   <subsection xml:id="intro-shiny">
     <title>Shiny documents</title>
 
-  <p>The **shiny** package [@R-shiny] builds interactive web apps powered by R. To call Shiny<idx>Shiny</idx> code from an R Markdown document, add  <c>runtime: shiny</c> to the YAML metadata, like in this document:</p>
+  <p>The **shiny** package <xref ref="R-shiny"/> builds interactive web apps powered by R. To call Shiny<idx>Shiny</idx> code from an R Markdown document, add  <c>runtime: shiny</c> to the YAML metadata, like in this document:</p>
 
   <program language="markdown">
     <input>

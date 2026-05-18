@@ -4,7 +4,7 @@
 
   <p>Most R Markdown applications are single documents. That is, you have a single R Markdown source document, and it generates a single output file. However, it is also possible to work with multiple Rmd documents in a project, and organize them in a meaningful way (e.g., pages can reference each other).</p>
 
-  <p>Currently there are two major ways to build multiple Rmd documents: <em>blogdown</em> (xie2017; R-blogdown) for building websites, and <em>bookdown</em> (xie2016; R-bookdown) for authoring books. In this chapter, we briefly introduce the <em>blogdown</em> package.<idx>blogdown</idx> For the full reference, please read the official <em>blogdown</em> book by xie2017. In fact, the <em>rmarkdown</em> package also has a built-in site generator, which was not covered in detail by the <em>blogdown</em> book, so we will introduce it in <xref ref="rmarkdown-site"/>.</p>
+  <p>Currently there are two major ways to build multiple Rmd documents: <em>blogdown</em> <xref ref="xie2017"/> <xref ref="R-blogdown"/> for building websites, and <em>bookdown</em> <xref ref="xie2016"/> <xref ref="R-bookdown"/> for authoring books. In this chapter, we briefly introduce the <em>blogdown</em> package.<idx>blogdown</idx> For the full reference, please read the official <em>blogdown</em> book <xref ref="xie2017"/>. In fact, the <em>rmarkdown</em> package also has a built-in site generator, which was not covered in detail by the <em>blogdown</em> book, so we will introduce it in <xref ref="rmarkdown-site"/>.</p>
 
   <p>With <em>blogdown</em>, you can write a blog post or a general page in an Rmd document, or a plain Markdown document. These source documents will be built into a static website<idx>static website</idx>, which is essentially a folder containing static HTML files and associated assets (such as images and CSS files). You can publish this folder to any web server as a website. Because it is only a single folder, it can be easy to maintain. For example, you do not need to worry about databases as you do if you use dynamic systems like WordPress.</p>
 
@@ -403,7 +403,7 @@ navbar:
       <subsubsection>
         <title>The htmltools package</title>
 
-        <p>If the facilities described above do not meet your requirements, you can also generate custom HTML from your R code using the <em>htmltools</em> package (R-htmltools). The <em>htmltools</em> package enables you to write HTML using a convenient R based syntax (this is the same core HTML generation facility used by the <em>shiny</em> package).</p>
+        <p>If the facilities described above do not meet your requirements, you can also generate custom HTML from your R code using the <em>htmltools</em> package <xref ref="R-htmltools"/>. The <em>htmltools</em> package enables you to write HTML using a convenient R based syntax (this is the same core HTML generation facility used by the <em>shiny</em> package).</p>
 
         <p>Here is an example of an R function that creates a Bootstrap thumbnail div:</p>
 

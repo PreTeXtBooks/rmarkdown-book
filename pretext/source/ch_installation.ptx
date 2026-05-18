@@ -2,7 +2,7 @@
 <chapter xml:id="ch-installation" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Installation</title>
 
-  <p>We assume you have already installed R (<url href="https://www.r-project.org"/>) [@R-base] and the RStudio IDE (<url href="https://www.rstudio.com"/>). RStudio is not required but recommended, because it makes it easier for an average user to work with R Markdown. If you do not have RStudio IDE installed, you will have to install Pandoc (<url href="https://pandoc.org"/>), otherwise there is no need to install Pandoc separately because RStudio has bundled it. Next you can install the <em>rmarkdown</em> package in R:</p>
+  <p>We assume you have already installed R (<url href="https://www.r-project.org"/>) <xref ref="R-base"/> and the RStudio IDE (<url href="https://www.rstudio.com"/>). RStudio is not required but recommended, because it makes it easier for an average user to work with R Markdown. If you do not have RStudio IDE installed, you will have to install Pandoc (<url href="https://pandoc.org"/>), otherwise there is no need to install Pandoc separately because RStudio has bundled it. Next you can install the <em>rmarkdown</em> package in R:</p>
 
   <program language="r">
     <input># Install from CRAN
@@ -22,7 +22,7 @@ devtools::install_github('rstudio/rmarkdown')</input>
 tinytex::install_tinytex()  # install TinyTeX</input>
   </program>
 
-  <p>TinyTeX is a lightweight, portable, cross-platform, and easy-to-maintain LaTeX distribution. The R companion package <em>tinytex</em> [@R-tinytex] can help you automatically install missing LaTeX packages when compiling LaTeX or R Markdown documents to PDF, and also ensures a LaTeX document is compiled for the correct number of times to resolve all cross-references. If you do not understand what these two things mean, you should probably follow our recommendation to install TinyTeX, because these details are often not worth your time or attention.</p>
+  <p>TinyTeX is a lightweight, portable, cross-platform, and easy-to-maintain LaTeX distribution. The R companion package <em>tinytex</em> <xref ref="R-tinytex"/> can help you automatically install missing LaTeX packages when compiling LaTeX or R Markdown documents to PDF, and also ensures a LaTeX document is compiled for the correct number of times to resolve all cross-references. If you do not understand what these two things mean, you should probably follow our recommendation to install TinyTeX, because these details are often not worth your time or attention.</p>
 
   <p>With the <em>rmarkdown</em> package, RStudio/Pandoc, and LaTeX, you should be able to compile most R Markdown documents. In some cases, you may need other software packages, and we will mention them when necessary.</p>
 
